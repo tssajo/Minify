@@ -1,5 +1,5 @@
-Minify Sublime Text Package
-===========================
+Thank you for installing the `Minify` Sublime Text Package!
+===========================================================
 
 Overview
 --------

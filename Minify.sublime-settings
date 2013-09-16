@@ -1,0 +1,12 @@
+{
+	// save file before doing any action (minify or beautify)
+	"save_first": true,
+
+	// if present, use this command instead of uglifyjs
+	// e.g. "/usr/local/bin/uglifyjs"
+	"uglifyjs_command": false,
+
+	// if present, use this command instead of java
+	// e.g. "/usr/local/bin/java"
+	"java_command": false,
+}

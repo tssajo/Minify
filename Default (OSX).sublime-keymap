@@ -1,0 +1,4 @@
+[
+  {"keys": ["ctrl+alt+m"], "command": "minify"},
+  {"keys": ["ctrl+alt+b"], "command": "beautify"}
+]
