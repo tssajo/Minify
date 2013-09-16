@@ -5,7 +5,7 @@ class MinifyCommand(sublime_plugin.TextCommand):
 	def is_enabled(self):
 		# First, is this actually a file on the file system?
 		filename = self.view.file_name()
-		return bool(filename and (len(filename) > 0) and not (re.search('\.(css|js)$', filename) is None))
+		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:css|js)$', filename) is None))
 
 	def run(self, edit):
 		sublime.set_timeout_async(lambda: self.doit(), 0)
