@@ -1,5 +1,5 @@
-Minify Package for Sublime Text 2 and Sublime Text 3 to quickly minify Javascript and CSS files
-===============================================================================================
+Minify Package for Sublime Text
+===============================
 
 Overview
 --------
