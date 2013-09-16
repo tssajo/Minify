@@ -1,5 +1,5 @@
-Minify Sublime Text Package
-===========================
+Minify Package for Sublime Text 2 and Sublime Text 3 to quickly minify Javascript and CSS files
+===============================================================================================
 
 Overview
 --------
@@ -41,13 +41,13 @@ Alternatively, you may install the `Minify Package` by using git:
 
 *MacOSX*
 
-    `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Minify`
+    git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Minify
 
 Note: Replace "Sublime\ Text\ 2" with "Sublime\ Text\ 3" in the above command if you are using Sublime Text 3
 
 *Windows*
 
-    `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 2\Packages\Minify`
+    git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 2\Packages\Minify
 
 Note: Replace "Sublime Text 2" with "Sublime Text 3" in the above command if you are using Sublime Text 3
 
@@ -73,4 +73,4 @@ Beautifying of CSS files are not supported at this time. (Pull requests are welc
 
 License
 -------
-See `LICENSE.md` file for licensing information.
+See [LICENSE.md](https://github.com/tssajo/Minify/blob/master/LICENSE.md) file for licensing information.
