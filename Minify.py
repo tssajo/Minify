@@ -7,6 +7,18 @@ else:
 
 HAS_ASYNC_TIMEOUT = bool(hasattr(sublime.__class__, 'set_timeout_async') and callable(getattr(sublime.__class__, 'set_timeout_async')))
 
+# Run the shell command in a separate thread in ST2. This is not needed in ST3 because ST3 has the sublime.set_timeout_async method.
+class RunCmdInOtherThread(threading.Thread):
+
+	def __init__(self, cmdToRun):
+		self.cmdToRun = cmdToRun
+		self.result = 1
+		threading.Thread.__init__(self)
+
+	def run(self):
+		self.result = subprocess.call(self.cmdToRun, shell=True)
+
+
 class MinifyCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
@@ -54,7 +66,6 @@ class MinifyCommand(sublime_plugin.TextCommand):
 			self.doit()
 
 
-
 class BeautifyCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
@@ -93,16 +104,3 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 			sublime.set_timeout_async(lambda: self.doit(), 0)
 		else:
 			self.doit()
-
-
-
-# To run the shell command in a separate thread in ST2. This is not needed in ST3 because ST3 has the sublime.set_timeout_async method.
-class RunCmdInOtherThread(threading.Thread):
-
-	def __init__(self, cmdToRun):
-		self.cmdToRun = cmdToRun
-		self.result = 1
-		threading.Thread.__init__(self)
-
-	def run(self):
-		self.result = subprocess.call(self.cmdToRun, shell=True)
