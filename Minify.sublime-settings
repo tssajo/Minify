@@ -8,5 +8,5 @@
 
 	// if present, use this command instead of java
 	// e.g. "/usr/local/bin/java"
-	"java_command": false,
+	"java_command": false
 }
