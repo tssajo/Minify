@@ -26,7 +26,7 @@ Once you have Nodejs installed, you should install UglifyJS 2. It is recommended
 
 After this the `uglifyjs` command should be available in your system PATH.
 
-For CSS file minification, this package uses YUI Compressor and it is running in Java so you must have Java installed on your system
+For CSS file minification, this package uses `YUI Compressor` and it is running in Java so you must have Java installed on your system
 and it is recommended to have the `java` command available in your system PATH.
 
 If you do not have these commands available in your system PATH then alternatively, you can specify custom locations for both
@@ -34,8 +34,8 @@ the `uglifyjs` and `java` commands in the User Settings of this Package.
 
 Installation
 ------------
-You may install the `Minify` Sublime Text Package via the excellent [Sublime Text package manager](https://sublime.wbond.net/),
-this is the recommended way to install it.
+You may install the `Minify` Sublime Text Package via the excellent [Package Control](https://sublime.wbond.net/) package manager
+and this is the recommended way to install it.
 
 Alternatively, you may install the `Minify Package` by using git:
 
