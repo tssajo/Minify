@@ -96,7 +96,7 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 
 
 
-# We run the shell command in a separate thread in ST2. This is not needed in ST3 because ST3 has the sublime.set_timeout_async method and it's better to use that in ST3
+# To run the shell command in a separate thread in ST2. This is not needed in ST3 because ST3 has the sublime.set_timeout_async method.
 class RunCmdInOtherThread(threading.Thread):
 
 	def __init__(self, cmdToRun):
