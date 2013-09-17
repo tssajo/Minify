@@ -1,5 +1,10 @@
 import sublime, sublime_plugin, re, os, subprocess
 
+if (int(sublime.version()) >= 3000):
+	PLUGIN_DIR = os.path.dirname(__file__)
+else:
+	PLUGIN_DIR = os.getcwd()
+
 class MinifyCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
@@ -8,7 +13,10 @@ class MinifyCommand(sublime_plugin.TextCommand):
 		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:css|js)$', filename) is None))
 
 	def run(self, edit):
-		sublime.set_timeout_async(lambda: self.doit(), 0)
+		if (hasattr(sublime.__class__, 'set_timeout_async') and callable(getattr(sublime.__class__, 'set_timeout_async'))):
+			sublime.set_timeout_async(lambda: self.doit(), 0)
+		else:
+			self.doit()
 
 	def doit(self):
 		inpfile = self.view.file_name()
@@ -24,7 +32,7 @@ class MinifyCommand(sublime_plugin.TextCommand):
 				outfile = re.sub(r'(\.css)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('java_command') or 'java';
 				print('Minifying file ' + str(inpfile))
-				result = subprocess.call([cmd, '-jar', os.path.dirname(__file__) + '/bin/yuicompressor-2.4.7.jar', inpfile, '-o', outfile, '--charset', 'utf-8', '--line-break', '250'], shell=True)
+				result = subprocess.call([cmd, '-jar', PLUGIN_DIR + '/bin/yuicompressor-2.4.7.jar', inpfile, '-o', outfile, '--charset', 'utf-8', '--line-break', '250'], shell=True)
 			else:
 				result = 0
 			if (not result):
