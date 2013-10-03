@@ -1,0 +1,5 @@
+Version 1.0.2
+-------------
+
+* Added a .no-sublime-package file to force extract this package when installed via Package Control
+  (Otherwise CSS minifying would not work because the required jar file could not be accessed.)
