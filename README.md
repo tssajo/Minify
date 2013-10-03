@@ -3,7 +3,7 @@ Minify Package for Sublime Text
 
 Overview
 --------
-The `Minify Package` for Sublime Text can create a minified version of the currently open JavaScript or CSS file.
+The `Minify Package` for Sublime Text can create a minified version of a currently open JavaScript or CSS file.
 
 The plugin generates new files with the extensions `.min.js` or `.min.css`.
 
