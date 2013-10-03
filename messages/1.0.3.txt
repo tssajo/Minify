@@ -1,0 +1,4 @@
+Version 1.0.3
+-------------
+
+IMPORTANT NOTE: You may need to remove and reinstall the Minify package if you are using Sublime Text 2 and you have installed the package via Package Control!

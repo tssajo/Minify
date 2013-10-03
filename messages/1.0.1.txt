@@ -2,6 +2,6 @@ Version 1.0.1
 -------------
 
 * Changed the default keyboard shortcuts on OS X to use the Apple key instead of the Ctrl key
-* Do not import the threading module when sublime.set_timeout_async method is available.
-  (It should speed things up a bit in ST3 and use less memory.)
+* Do not import the threading module when sublime.set_timeout_async method is available
+  (this change should speed things up a bit in ST3 and use less memory)
 * Removed unneeded parentheses from if statements
