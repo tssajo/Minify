@@ -7,8 +7,8 @@ The `Minify Package` for Sublime Text can create a minified version of a current
 
 The plugin generates new files with the extensions `.min.js` or `.min.css`.
 
-Compared to other minifier packages for ST, this one is very light: The plugin itself is less than 110 lines of Python code.
-Also, once installed this Package do not need Internet access to do its job, it works offline.
+Compared to other minifier packages for ST, this one is very light: The plugin itself is less than 130 lines of Python code.
+Also, once installed, this Package do not need Internet access to do its job, it works offline.
 
 This Package has been tested with both Sublime Text 2 and Sublime Text 3 and should work fine on all platforms.
 
