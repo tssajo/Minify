@@ -1,31 +1,46 @@
 import sublime, sublime_plugin, re, os, subprocess
 
-# threading is only needed when sublime.set_timeout_async method is not available (in ST2)
-HAS_ASYNC_TIMEOUT = bool(hasattr(sublime.__class__, 'set_timeout_async') and callable(getattr(sublime.__class__, 'set_timeout_async')))
-if not HAS_ASYNC_TIMEOUT:
-	import threading
+DEBUG = True
 
+if DEBUG:
+	print('Sublime Platform: ' + str(sublime.platform()))
+	print('Sublime Version: ' + str(sublime.version()))
+
+# find out this plugin's directory
 if int(sublime.version()) >= 3000:
 	PLUGIN_DIR = os.path.dirname(__file__)
 else:
 	PLUGIN_DIR = os.getcwd()
+if DEBUG:
+	print('PLUGIN_DIR: ' + str(PLUGIN_DIR))
 
-# Run the shell command in a separate thread. This is not needed in ST3 where sublime.set_timeout_async method is available
-class RunCmdInOtherThread(threading.Thread):
+# on Windows platform run the commands in shell
+RUN_CMD_IN_SHELL = sublime.platform() == 'windows'
+if DEBUG:
+	print('RUN_CMD_IN_SHELL: ' + str(RUN_CMD_IN_SHELL))
 
-	def __init__(self, cmdToRun):
-		self.cmdToRun = cmdToRun
-		self.result = 1
-		threading.Thread.__init__(self)
+# if there is no sublime.set_timeout_async method available then run the commands in a separate thread using the threading module
+HAS_ASYNC_TIMEOUT = callable(getattr(sublime, 'set_timeout_async', None))
+if DEBUG:
+	print('HAS_ASYNC_TIMEOUT: ' + str(HAS_ASYNC_TIMEOUT))
 
-	def run(self):
-		self.result = subprocess.call(self.cmdToRun, shell=True)
+if not HAS_ASYNC_TIMEOUT:
+	import threading
+
+	class RunCmdInOtherThread(threading.Thread):
+
+		def __init__(self, cmdToRun):
+			self.cmdToRun = cmdToRun
+			self.result = 1
+			threading.Thread.__init__(self)
+
+		def run(self):
+			self.result = subprocess.call(self.cmdToRun, shell=RUN_CMD_IN_SHELL)
 
 
 class MinifyCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
-		# First, is this actually a file on the file system?
 		filename = self.view.file_name()
 		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:css|js)$', filename) is None))
 
@@ -53,8 +68,11 @@ class MinifyCommand(sublime_plugin.TextCommand):
 				cmdToRun = False
 			if cmdToRun:
 				print('Minifying file ' + str(inpfile))
+				if DEBUG:
+					print('Output file ' + str(outfile))
+					print('cmdToRun: ' + str(cmdToRun))
 				if HAS_ASYNC_TIMEOUT:
-					result = subprocess.call(cmdToRun, shell=True)
+					result = subprocess.call(cmdToRun, shell=RUN_CMD_IN_SHELL)
 					if not result:
 						sublime.active_window().open_file(outfile)
 				else:
@@ -93,8 +111,11 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs';
 				cmdToRun = [cmd, inpfile, '-b', '-o', outfile]
 				print('Beautifying file ' + str(inpfile))
+				if DEBUG:
+					print('Output file ' + str(outfile))
+					print('cmdToRun: ' + str(cmdToRun))
 				if HAS_ASYNC_TIMEOUT:
-					result = subprocess.call(cmdToRun, shell=True)
+					result = subprocess.call(cmdToRun, shell=RUN_CMD_IN_SHELL)
 					if not result:
 						sublime.active_window().open_file(outfile)
 				else:

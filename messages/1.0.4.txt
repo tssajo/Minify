@@ -1,0 +1,10 @@
+Version 1.0.4
+-------------
+
+* Fixed an issue which prevented the minification processes to run on the OSX platform
+  (The issue was caused by the fact that we must run uglifyjs in a system shell on Windows,
+  however runnning the same minification commands in a system shell simply won't work on OSX)
+* Fixed an issue which prevented the sublime.set_timeout_async method to be used when available
+  (All minification commands still run in the background using python's threading module,
+  however it is unnecessary when the sublime.set_timeout_async method is provided, e.g: in ST3)
+* Added some debug info to be displayed in the console
