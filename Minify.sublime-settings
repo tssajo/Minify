@@ -1,4 +1,12 @@
 {
+	// IMPORTANT NOTE!
+	//
+	// Please do not modify this file! This file holds the default settings of Minify.
+	// If you wish to customize these settings then create a `Settings -- User` file first
+	// and make your customization there.
+	// If you edit this file, your custom settings will be overwritten at the next release
+	// of the Minify package!
+
 	// save file before doing any action (minify or beautify)
 	"save_first": true,
 
@@ -8,5 +16,26 @@
 
 	// if present, use this command instead of java
 	// e.g. "/usr/local/bin/java"
-	"java_command": false
+	"java_command": false,
+
+	// YUI Compressor jar file
+	// "yuicompressor-2.4.8.jar" is now included and it can be used but it has a lot of issues ( https://github.com/yui/yuicompressor/issues )
+	// e.g. it does not work on Windows properly, see: https://github.com/yui/yuicompressor/issues/78
+	"yui_compressor": "yuicompressor-2.4.7.jar",
+
+	// css file charset
+	"yui_charset": "utf-8",
+
+	// maximum line length in minified css files
+	// you can set it to false to have no line breaks at all or
+	// specify it to 0 to get a line break after each each rule in CSS
+	"yui_line_break": 250,
+
+	// keep comments when minifying javascript files?
+	"keep_comments": false,
+	// you can specify which comments to keep
+	// if you set `keep_comments` to true and leave `comments_to_keep` false then uglifyjs will only keep JSDoc-style copyright comments
+	// but if you set `keep_comments` to true then you can also specify which comments to keep
+	// e.g. "all" to keep all comments or you can use a regexp such as "/!/" (this will keep only comments which contain an exclamation mark)
+	"comments_to_keep": false
 }

@@ -1,4 +1,4 @@
 [
   {"keys": ["super+alt+m"], "command": "minify"},
-  {"keys": ["super+alt+b"], "command": "beautify"}
+  {"keys": ["super+alt+shift+m"], "command": "beautify"}
 ]

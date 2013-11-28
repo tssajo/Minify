@@ -1,0 +1,16 @@
+Version 1.0.5
+-------------
+
+* Changed the keyboard shortcut for the Beautify command because on Hungarian keyboards the previous
+  keyboard shortcut ( `ctrl + alt + b` ) made typing a `}` character impossible
+  The new keyboard shortcut for Beautify is: `ctrl + alt + shift + m`
+* Beautifying now keeps all comments
+* YUI Compressor version 2.4.8 jar file is now included, however it is not used by default because it
+  has a lot of issues especially under the Windows platform. You can try experimenting with it if you
+  wish by specifying which YUI Compressor jar file to use in Minify's `Settings -- User` file.
+  See Minify's `Settings -- Default` file for more information
+* Added some YUI Compressor related configurable options to the settings file:
+  `yui_charset` to be able to specify the charset of css files (default is utf-8)
+  `yui_line_break` to be able to specify the maximum line lenght to be used inside minified css files
+* Added a new option to keep comments (all or specific ones such as copyright notices) in minified
+  javascript files. See Minify's `Settings -- Default` file for more information

@@ -59,11 +59,23 @@ class MinifyCommand(sublime_plugin.TextCommand):
 			if not (re.search('\.js$', inpfile) is None):
 				outfile = re.sub(r'(\.js)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs';
-				cmdToRun = [cmd, inpfile, '-c', '-m', '-o', outfile]
+				cmdToRun = [cmd, inpfile, '-c', '-m']
+				if sublime.load_settings('Minify.sublime-settings').get('keep_comments'):
+					cmdToRun.extend(['--comments'])
+					comments = sublime.load_settings('Minify.sublime-settings').get('comments_to_keep')
+					if comments:
+						cmdToRun.extend([str(comments)])
+				cmdToRun.extend(['-o', outfile])
 			elif not (re.search('\.css$', inpfile) is None):
 				outfile = re.sub(r'(\.css)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('java_command') or 'java';
-				cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/yuicompressor-2.4.7.jar', inpfile, '-o', outfile, '--charset', 'utf-8', '--line-break', '250']
+				cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/' + str(sublime.load_settings('Minify.sublime-settings').get('yui_compressor')), inpfile, '-o', outfile]
+				cs = sublime.load_settings('Minify.sublime-settings').get('yui_charset')
+				if cs:
+					cmdToRun.extend(['--charset', str(cs)])
+				lb = sublime.load_settings('Minify.sublime-settings').get('yui_line_break')
+				if not (type(lb) is bool):
+					cmdToRun.extend(['--line-break', str(lb)])
 			else:
 				cmdToRun = False
 			if cmdToRun:
@@ -109,7 +121,7 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 			if not (re.search('\.js$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.js)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs';
-				cmdToRun = [cmd, inpfile, '-b', '-o', outfile]
+				cmdToRun = [cmd, inpfile, '-b', '-o', outfile, '--comments', 'all']
 				print('Beautifying file ' + str(inpfile))
 				if DEBUG:
 					print('Output file ' + str(outfile))

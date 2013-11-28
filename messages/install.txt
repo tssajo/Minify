@@ -35,6 +35,18 @@ and it is recommended to have the `java` command available in your system PATH.
 If you do not have these commands available in your system PATH then alternatively, you can specify custom locations for both
 the `uglifyjs` and `java` commands in the User Settings of this Package.
 
+IMPORTANT NOTE FOR MAC USERS!
+If javascript minification does not work, the most likely reason is: Sublime Text does not search for executable files under
+the /usr/local/bin directory regardless of your system PATH setting (ST uses its own PATH settings). To solve this issue you can
+create a symlink:
+
+`cd /usr/bin && sudo ln -s /usr/local/bin/node node`
+
+Also, on OSX you must specify the full path to the `uglifyjs` executable by creating a `Settings -- User` file for Minify which should
+include at least the following setting:
+
+    "uglifyjs_command": "/usr/local/bin/uglifyjs"
+
 Installation
 ------------
 You may install the `Minify` Sublime Text Package via the excellent [Package Control](https://sublime.wbond.net/) package manager
@@ -60,19 +72,21 @@ Open a `.js` or `.css` file in your Sublime Text editor, then you can:
 
 A.  Use the Context Menu inside the Sublime Text editor window; or
 
-B.  Access the `Minify file` or `Beautify file` commands under the Tools / Minify menu in Sublime Text.
+B.  Access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text.
 
 C.  The following keyboard shortcuts are also available:
 
-`ctrl + alt + m` - attempts to minify the current buffer and save the minified version into the same directory with the
-    appropriate .min.js or .min.css file extension. It also opens the minified file on success in a new editor window.
+`ctrl + alt + m` ( `super + alt + m` on OSX ) :
+	Minifies the current buffer and saves the minified version into the same directory with the
+    appropriate .min.js or .min.css file extension, then opens the minified file in a new editor window.
 
-`ctrl + alt + b` - attempts to beautify the current buffer and save the beautified version into the same directory with the
-    appropriate .beautified.js file extension. It also opens the beautified file on success in a new editor window.
+`ctrl + alt + shift + m` ( `super + alt + shift + m` on OSX ) :
+	beautifies the current buffer and saves the beautified version into the same directory with the
+    appropriate .beautified.js file extension, then opens the beautified file in a new editor window.
 
 TODO
 ----
-Beautifying of CSS files are not supported at this time. (Pull requests are welcome!)
+Beautifying of CSS files are not supported at the moment.
 
 License
 -------
