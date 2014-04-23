@@ -33,7 +33,7 @@ minified and the original / uncompressed version of the file is unavailable.
 
 Requirements
 ------------
-Before you start, you must have Sublime Text 2 or Sublime Text 3 installed, and working properly. Then:
+Before you start, you must have Sublime Text 2 or Sublime Text 3 installed and working properly. Then:
 
 1. Nodejs -- Since this package uses Node for many of its tasks, you must have [Nodejs](http://nodejs.org/) installed on your system.
 Once you have Nodejs installed, you need to install the following programs globally for Node:
@@ -52,7 +52,7 @@ Once you have Nodejs installed, you need to install the following programs globa
 Please make sure the `java` command is available in your system PATH.
 
 If you do not have any of the above commands available in your system PATH then alternatively you can specify custom locations
-for those commands in `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` and not ``)
+for those commands in `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` and NOT `Preferences.sublime-settings` ! )
 
 IMPORTANT NOTE FOR MAC USERS!
 -----------------------------
@@ -68,7 +68,7 @@ please open its default settings ( Preferences -> Package Settings -> Minify -> 
 `Settings -- User` file ( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize `Minify` settings there.
 Please do not modify `Settings -- Default` because it will be overwritten by the next release of the `Minify` package!
 
-E.g.: To add full path to your `uglifyjs` command, change the appropriate line inside `Settings -- User` file to
+E.g.: To add full path to your `uglifyjs` command, change the appropriate line inside your `Settings -- User` file to
 
     "uglifyjs_command": "/usr/local/bin/uglifyjs",
 
