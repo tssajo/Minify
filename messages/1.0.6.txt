@@ -1,0 +1,6 @@
+Version 1.0.6
+-------------
+
+* Added CSS beautification feature using `js-beautify` ( https://www.npmjs.org/package/js-beautify )
+* Added SVG minification and prettification features using `svgo` ( https://github.com/svg/svgo )
+* Rewrote part of the README file

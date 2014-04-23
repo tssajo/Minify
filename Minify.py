@@ -42,7 +42,7 @@ class MinifyCommand(sublime_plugin.TextCommand):
 
 	def is_enabled(self):
 		filename = self.view.file_name()
-		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:css|js)$', filename) is None))
+		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:js|css|svg)$', filename) is None))
 
 	def handle_thread(self, thread, outfile):
 		if thread.is_alive():
@@ -76,6 +76,15 @@ class MinifyCommand(sublime_plugin.TextCommand):
 				lb = sublime.load_settings('Minify.sublime-settings').get('yui_line_break')
 				if not (type(lb) is bool):
 					cmdToRun.extend(['--line-break', str(lb)])
+			elif not (re.search('\.svg$', inpfile) is None):
+				outfile = re.sub(r'(\.svg)$', r'.min\1', inpfile, 1)
+				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo';
+				cmdToRun = [cmd]
+				if sublime.load_settings('Minify.sublime-settings').get('svgo_min_options'):
+					svgo_options = sublime.load_settings('Minify.sublime-settings').get('svgo_min_options')
+					if svgo_options:
+						cmdToRun.extend([str(svgo_options)])
+				cmdToRun.extend([inpfile, outfile])
 			else:
 				cmdToRun = False
 			if cmdToRun:
@@ -104,7 +113,7 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 	def is_enabled(self):
 		# First, is this actually a file on the file system?
 		filename = self.view.file_name()
-		return bool(filename and (len(filename) > 0) and not (re.search('\.js$', filename) is None))
+		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:js|css|svg)$', filename) is None))
 
 	def handle_thread(self, thread, outfile):
 		if thread.is_alive():
@@ -122,6 +131,24 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 				outfile = re.sub(r'(?:\.min)?(\.js)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs';
 				cmdToRun = [cmd, inpfile, '-b', '-o', outfile, '--comments', 'all']
+			elif not (re.search('\.css$', inpfile) is None):
+				outfile = re.sub(r'(?:\.min)?(\.css)$', r'.beautified\1', inpfile, 1)
+				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify';
+				cmdToRun = [cmd]
+				bo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_options')
+				if bo:
+					cmdToRun.extend([str(bo)])
+				cmdToRun.extend([inpfile, '-o', outfile])
+			elif not (re.search('\.svg$', inpfile) is None):
+				outfile = re.sub(r'(?:\.min)?(\.svg)$', r'.pretty\1', inpfile, 1)
+				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo';
+				cmdToRun = [cmd, '--pretty']
+				if sublime.load_settings('Minify.sublime-settings').get('svgo_pretty_options'):
+					svgo_options = sublime.load_settings('Minify.sublime-settings').get('svgo_pretty_options')
+					if svgo_options:
+						cmdToRun.extend([str(svgo_options)])
+				cmdToRun.extend([inpfile, outfile])
+			if cmdToRun:
 				print('Beautifying file ' + str(inpfile))
 				if DEBUG:
 					print('Output file ' + str(outfile))

@@ -10,7 +10,7 @@
 	// save file before doing any action (minify or beautify)
 	"save_first": true,
 
-	// if present, use this command instead of uglifyjs
+	// if present, use this command instead of uglifyjs when working with .js files
 	// e.g. "/usr/local/bin/uglifyjs"
 	"uglifyjs_command": false,
 
@@ -37,5 +37,25 @@
 	// if you set `keep_comments` to true and leave `comments_to_keep` false then uglifyjs will only keep JSDoc-style copyright comments
 	// but if you set `keep_comments` to true then you can also specify which comments to keep
 	// e.g. "all" to keep all comments or you can use a regexp such as "/!/" (this will keep only comments which contain an exclamation mark)
-	"comments_to_keep": false
+	"comments_to_keep": false,
+
+	// if present, use this command instead of js-beautify for .css beautification
+	// e.g. "/usr/local/bin/js-beautify"
+	"js-beautify_command": false,
+
+	// can specify extra command line parameters for .css beautification
+	// e.g. "--indent-size=2"
+	"js-beautify_options": false,
+
+	// if present, use this command instead of svgo when working with .svg files
+	// e.g. "/usr/local/bin/svgo"
+	"svgo_command": false,
+
+	// can specify extra command line parameters for .svg minification
+	// e.g. "--config=CONFIG"
+	"svgo_min_options": false,
+
+	// can specify extra command line parameters for .svg prettification
+	// e.g. "--config=CONFIG"
+	"svgo_pretty_options": false
 }
