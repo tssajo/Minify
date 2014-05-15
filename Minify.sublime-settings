@@ -7,6 +7,9 @@
 	// If you edit this file, your custom settings will be overwritten at the next release
 	// of the Minify package!
 
+	// Debug mode
+	"debug_mode": false,
+
 	// save file before doing any action (minify or beautify)
 	"save_first": true,
 

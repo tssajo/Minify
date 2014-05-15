@@ -1,10 +1,10 @@
 import sublime, sublime_plugin, re, os, subprocess
 
-DEBUG = True
+DEBUG = sublime.load_settings('Minify.sublime-settings').get('debug_mode')
 
 if DEBUG:
-	print('Sublime Platform: ' + str(sublime.platform()))
-	print('Sublime Version: ' + str(sublime.version()))
+	print('Minify: Sublime Platform: ' + str(sublime.platform()))
+	print('Minify: Sublime Version: ' + str(sublime.version()))
 
 # find out this plugin's directory
 if int(sublime.version()) >= 3000:
@@ -12,17 +12,17 @@ if int(sublime.version()) >= 3000:
 else:
 	PLUGIN_DIR = os.getcwd()
 if DEBUG:
-	print('PLUGIN_DIR: ' + str(PLUGIN_DIR))
+	print('Minify: PLUGIN_DIR: ' + str(PLUGIN_DIR))
 
 # on Windows platform run the commands in shell
 RUN_CMD_IN_SHELL = sublime.platform() == 'windows'
 if DEBUG:
-	print('RUN_CMD_IN_SHELL: ' + str(RUN_CMD_IN_SHELL))
+	print('Minify: RUN_CMD_IN_SHELL: ' + str(RUN_CMD_IN_SHELL))
 
 # if there is no sublime.set_timeout_async method available then run the commands in a separate thread using the threading module
 HAS_ASYNC_TIMEOUT = callable(getattr(sublime, 'set_timeout_async', None))
 if DEBUG:
-	print('HAS_ASYNC_TIMEOUT: ' + str(HAS_ASYNC_TIMEOUT))
+	print('Minify: SublimeText HAS_ASYNC_TIMEOUT: ' + str(HAS_ASYNC_TIMEOUT))
 
 if not HAS_ASYNC_TIMEOUT:
 	import threading
@@ -88,10 +88,10 @@ class MinifyCommand(sublime_plugin.TextCommand):
 			else:
 				cmdToRun = False
 			if cmdToRun:
-				print('Minifying file ' + str(inpfile))
+				print('Minify: Minifying file ' + str(inpfile))
 				if DEBUG:
-					print('Output file ' + str(outfile))
-					print('cmdToRun: ' + str(cmdToRun))
+					print('Minify: Output file ' + str(outfile))
+					print('Minify: cmdToRun: ' + str(cmdToRun))
 				if HAS_ASYNC_TIMEOUT:
 					result = subprocess.call(cmdToRun, shell=RUN_CMD_IN_SHELL)
 					if not result:
@@ -149,10 +149,10 @@ class BeautifyCommand(sublime_plugin.TextCommand):
 						cmdToRun.extend([str(svgo_options)])
 				cmdToRun.extend([inpfile, outfile])
 			if cmdToRun:
-				print('Beautifying file ' + str(inpfile))
+				print('Minify: Beautifying file ' + str(inpfile))
 				if DEBUG:
-					print('Output file ' + str(outfile))
-					print('cmdToRun: ' + str(cmdToRun))
+					print('Minify: Output file ' + str(outfile))
+					print('Minify: cmdToRun: ' + str(cmdToRun))
 				if HAS_ASYNC_TIMEOUT:
 					result = subprocess.call(cmdToRun, shell=RUN_CMD_IN_SHELL)
 					if not result:
