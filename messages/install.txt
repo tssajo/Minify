@@ -47,7 +47,7 @@ Once you have Nodejs installed, you need to install the following programs globa
 4. Install `svgo` (it is needed for SVG minification and beautification):
 `npm -g install svgo`
 
-5. Install Java which is required for `YUI Compressor` (it is needed for CSS minification)
+5. Install Java which is required for `YUI Compressor` (which is needed for CSS minification)
 
 Please make sure the `java` command is available in your system PATH.
 
