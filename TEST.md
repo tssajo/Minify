@@ -96,26 +96,28 @@ AN IMPORTANT NOTE FOR MAC OS X USERS
 ------------------------------------
 When I installed Node.js via Homebrew on a Mac I ran into the following problem:
 
-Unfortunately, Sublime Text does not search for executable files under the `/usr/local/bin` directory regardless of your system PATH settings!
-It seems that Sublime Text uses its own PATH settings which we cannot alter... Because of this you probably need to create a symlink on your Mac:
+Unfortunately, Sublime Text did not search for executable files under `/usr/local/bin` directory regardless of my system PATH settings!
+It seemed that Sublime Text's Python used its own PATH settings which I could not alter... Because of this you probably need to create a symlink on your Mac like I did:
 
-Open a Terminal and issue the following command:
+Open a `Terminal` and issue the following command:
 
 `cd /usr/bin && sudo ln -s /usr/local/bin/node node`
 
 The above was required for me but it was not enough!
-You also need to add full path for the commands `Minify` use. After installing `Minify` please open its default settings in Sublime Text editor
-( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents to the `Settings -- User` file
+
+I also had to specify the full path for each command `Minify` uses:
+After installing `Minify` open its default settings in Sublime Text editor
+( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents of that file to the `Settings -- User` file
 ( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize your `Minify` settings there.
 Please do not modify `Settings -- Default` because it will be overwritten by the next release of `Minify`!
 
-To add full path to your `cleancss` command change the appropriate line inside your `Settings -- User` file to
+For example, to add full path to your `cleancss` command change the appropriate line inside your `Settings -- User` file to
 
     "cleancss_command": "/usr/local/bin/cleancss",
 
 How to use `Minify`
 -------------------
-Open a `.css` or `.html` or `.js` or `.svg` file in your Sublime Text editor then you can
+Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor then you can
 
   a) use the Context Menu inside the Sublime Text editor window
 
@@ -126,7 +128,7 @@ Open a `.css` or `.html` or `.js` or `.svg` file in your Sublime Text editor the
   `ctrl + alt + m` ( `super + alt + m` on OSX ) :
 
   Minifies the current buffer and saves the minified version into the same directory with the
-  appropriate .min.css or .min.html or .min.js or .min.svg file extension then it opens the minified file in a new editor window.
+  appropriate .min.css or .min.htm or .min.html or .min.js or .min.svg file extension then it opens the minified file in a new editor window.
 
   `ctrl + alt + shift + m` ( `super + alt + shift + m` on OSX ) :
 
