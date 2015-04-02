@@ -125,12 +125,12 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text 
 
   c) use one of the following keyboard shortcuts:
 
-  `ctrl + alt + m` ( `super + alt + m` on OSX ) :
+  `ctrl + alt + m` ( `super + alt + m` on Mac OS X ) :
 
   Minifies the current buffer and saves the minified version into the same directory with the
   appropriate .min.css or .min.htm or .min.html or .min.js or .min.svg file extension then it opens the minified file in a new editor window.
 
-  `ctrl + alt + shift + m` ( `super + alt + shift + m` on OSX ) :
+  `ctrl + alt + shift + m` ( `super + alt + shift + m` on Mac OS X ) :
 
   Beautifies the current buffer and saves the beautified version into the same directory with the
   appropriate .beautified.css or .beautified.html or .beautified.js or .pretty.svg file extension then it opens the beautified file in a new editor window.
