@@ -70,7 +70,7 @@ Installation in Three Easy Steps
     then the `cleancss` command is not available on your system and you must fix this!
 
     You might be able to work around path issues by specifying the full path for each Node.js CLI apps in your Sublime Text editor under
-    `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` ) after you have performed the installation step 3 below.
+    `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` ) after you have performed step 3 below.
 
 3. Install `Minify` for Sublime Text:
 
