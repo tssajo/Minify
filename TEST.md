@@ -43,8 +43,8 @@ Installation in Three Easy Steps
 
     `node --version`
 
-    If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar
-    then the `node` command is not available on your system and you must fix this.
+    If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
+    then the `node` command is not available on your system and you must fix this!
 
 2. Install required Node.js CLI apps:
 
@@ -60,25 +60,34 @@ Installation in Three Easy Steps
 
     `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
-3. Install `Minify` for Sublime Text
+    Please test that the installed Node.js CLI apps are available:
 
-  a) install via [Package Control](https://sublime.wbond.net/) (this is the recommended method)
+    Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command, for example:
+
+    `cleancss --version`
+
+    If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
+    then the `cleancss` command is not available on your system and you must fix this!
+
+3. Install `Minify` for Sublime Text:
+
+  a) install `Minify` via [Package Control](https://sublime.wbond.net/) (this is the recommended method)
 
     https://packagecontrol.io/packages/Minify
 
-  b) or install from GitHub directly (not recommended)
+  b) or you can install `Minify` from GitHub directly (this is NOT recommended)
 
     on Mac OS X:
 
-      git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Minify
+    `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`
 
-      Note: Replace "Sublime\ Text\ 2" with "Sublime\ Text\ 3" in the above command if you are using Sublime Text 3
+    Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2
 
     on Windows:
 
-      git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 2\Packages\Minify
+    `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`
 
-      Note: Replace "Sublime Text 2" with "Sublime Text 3" in the above command if you are using Sublime Text 3
+    Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2
 
 Requirements
 ------------
