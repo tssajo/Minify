@@ -37,9 +37,10 @@ Installation in Three Easy Steps
 
     Please make sure that the command `node` is available in your `PATH`.
     Here is how you can test if the `node` command is available in your `PATH`:
-    Open up a shell window (it is called Terminal on Mac OS X and CMD window on Windows) and then issue the following command:
+    Open up a shell window (it is called Terminal on Mac OS X and CMD window on Windows) then issue the following command:
     `node --version`
-    If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar then the `node` command is not available on your system.
+    If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar
+    then the `node` command is not available on your system and you must fix this.
 
 2. Install some Node.js CLI apps globally
 
