@@ -35,14 +35,20 @@ Installation in Three Easy Steps
 
     On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the nodejs.org web site.
 
-    Please make sure that the command `node` is available in your `PATH`.
+    Please make sure that `node` is available in your `PATH`!
+
     Here is how you can test if the `node` command is available in your `PATH`:
-    Open up a shell window (it is called Terminal on Mac OS X and CMD window on Windows) then issue the following command:
+
+    Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command:
+
     `node --version`
+
     If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar
     then the `node` command is not available on your system and you must fix this.
 
-2. Install required Node.js CLI apps globally:
+2. Install required Node.js CLI apps:
+
+  Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command:
 
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
@@ -54,7 +60,25 @@ Installation in Three Easy Steps
 
     `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
-3. Install `Minify` for Sublime Text via [Package Control](https://sublime.wbond.net/): https://packagecontrol.io/packages/Minify
+3. Install `Minify` for Sublime Text
+
+  a) install via [Package Control](https://sublime.wbond.net/) (this is the recommended method)
+
+    https://packagecontrol.io/packages/Minify
+
+  b) or install from GitHub directly (not recommended)
+
+    on Mac OS X:
+
+      git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Minify
+
+      Note: Replace "Sublime\ Text\ 2" with "Sublime\ Text\ 3" in the above command if you are using Sublime Text 3
+
+    on Windows:
+
+      git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 2\Packages\Minify
+
+      Note: Replace "Sublime Text 2" with "Sublime Text 3" in the above command if you are using Sublime Text 3
 
 Requirements
 ------------
