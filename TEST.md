@@ -14,8 +14,8 @@ Once installed `Minify` does not need Internet access to do its job: it works of
 
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those dependencies are provided below.
 
-Which 3rd party programs are being used by `Minify`
----------------------------------------------------
+Which 3rd party programs are required by `Minify`
+-------------------------------------------------
 
 |            | Minify | Beautify |
 | ---------- | ------ | -------- |
@@ -27,7 +27,7 @@ Which 3rd party programs are being used by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Please install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+1. Install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 
   Notes:
 
@@ -42,7 +42,7 @@ Installation in Three Easy Steps
     If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar
     then the `node` command is not available on your system and you must fix this.
 
-2. Install some Node.js CLI apps globally
+2. Install the required Node.js CLI apps globally
 
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
