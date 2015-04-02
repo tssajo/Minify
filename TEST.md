@@ -31,7 +31,7 @@ Installation in Three Easy Steps
 
   Notes:
 
-    On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command `brew install node`
+    On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command: `brew install node`
 
     On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the nodejs.org web site.
 
@@ -69,7 +69,7 @@ Installation in Three Easy Steps
     If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
     then the `cleancss` command is not available on your system and you must fix this!
 
-    You might be able to work around path issues by specifying the full path for each Node.js CLI apps in your Sublime Text editor under
+    You might be able to work around path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
     `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` ) after you have performed step 3 below.
 
 3. Install `Minify` for Sublime Text:
@@ -78,23 +78,23 @@ Installation in Three Easy Steps
 
     https://packagecontrol.io/packages/Minify
 
-  b) or you can install `Minify` from GitHub directly (this is NOT recommended)
+  b) you can install `Minify` from GitHub directly (this is NOT recommended)
 
     on Mac OS X:
 
     `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`
 
-    Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2
+    Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2.
 
     on Windows:
 
     `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`
 
-    Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2
+    Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
 
 AN IMPORTANT NOTE FOR MAC OS X USERS
 ------------------------------------
-When I installed Node.js from Homebrew on a Mac I ran into the following problem:
+When I installed Node.js via Homebrew on a Mac I ran into the following problem:
 
 Unfortunately, Sublime Text does not search for executable files under the `/usr/local/bin` directory regardless of your system PATH settings!
 It seems that Sublime Text uses its own PATH settings which we cannot alter... Because of this you probably need to create a symlink on your Mac:
@@ -117,9 +117,9 @@ How to use `Minify`
 -------------------
 Open a `.css` or `.html` or `.js` or `.svg` file in your Sublime Text editor then you can
 
-  a) use the Context Menu inside the Sublime Text editor window or
+  a) use the Context Menu inside the Sublime Text editor window
 
-  b) access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text; or
+  b) access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text
 
   c) use one of the following keyboard shortcuts:
 
