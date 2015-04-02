@@ -92,12 +92,12 @@ Installation in Three Easy Steps
 
     Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
 
-AN IMPORTANT NOTE FOR MAC OS X USERS
-------------------------------------
-When I installed Node.js via Homebrew on a Mac I ran into the following problem:
+IMPORTANT NOTE FOR MAC OS X USERS
+---------------------------------
+When I installed Node.js via Homebrew on a Mac, I ran into the following problem:
 
 Unfortunately, Sublime Text did not search for executable files under `/usr/local/bin` directory regardless of my system PATH settings!
-It seemed that Sublime Text's Python used its own PATH settings which I could not alter... Because of this you probably need to create a symlink on your Mac like I did:
+It seemed like Sublime Text's Python used its own PATH settings which I could not alter... Because of this you probably need to create a symlink on your Mac like I did:
 
 Open a `Terminal` and issue the following command:
 
@@ -105,15 +105,15 @@ Open a `Terminal` and issue the following command:
 
 The above was required for me but it was not enough!
 
-I also had to specify the full path for each command `Minify` uses:
+I also had to specify the full path for each Node.js CLI command `Minify` uses:
 After installing `Minify` open its default settings in Sublime Text editor
 ( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents of that file to the `Settings -- User` file
 ( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize your `Minify` settings there.
 Please do not modify `Settings -- Default` because it will be overwritten by the next release of `Minify`!
 
-For example, to add full path to your `cleancss` command change the appropriate line inside your `Settings -- User` file to
+For example, to add full path to your `cleancss` command uncomment the following line inside your `Settings -- User` file
 
-    "cleancss_command": "/usr/local/bin/cleancss",
+    // "cleancss_command": "/usr/local/bin/cleancss",
 
 How to use `Minify`
 -------------------
@@ -132,8 +132,9 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text 
 
   `ctrl + alt + shift + m` ( `super + alt + shift + m` on Mac OS X ) :
 
-  Beautifies the current buffer and saves the beautified version into the same directory with the
-  appropriate .beautified.css or .beautified.html or .beautified.js or .pretty.svg file extension then it opens the beautified file in a new editor window.
+  Beautifies the current buffer and saves the beautified version into the same directory with the appropriate
+  .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file extension then
+  it opens the beautified file in a new editor tab.
 
 License
 -------
