@@ -27,11 +27,11 @@ Which 3rd party programs are being used by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Please install Node.js [See installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+1. Please install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 
   Notes:
 
-    On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js with the following command `brew install node`
+    On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command `brew install node`
 
     On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the nodejs.org web site.
 
