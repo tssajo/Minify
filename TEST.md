@@ -42,7 +42,7 @@ Installation in Three Easy Steps
     If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar
     then the `node` command is not available on your system and you must fix this.
 
-2. Install the required Node.js CLI apps globally
+2. Install required Node.js CLI apps globally:
 
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
@@ -50,7 +50,8 @@ Installation in Three Easy Steps
 
     If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, etc.
 
-    If you already have some or all of the above Node.js CLI apps installed on your computer then you can update them to the latest version with the following command:
+    If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:
+
     `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
 3. Install `Minify` for Sublime Text via [Package Control](https://sublime.wbond.net/): https://packagecontrol.io/packages/Minify
