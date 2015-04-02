@@ -103,7 +103,7 @@ Open a `Terminal` and issue the following command:
 
 `cd /usr/bin && sudo ln -s /usr/local/bin/node node`
 
-The above was required for me but it was not enough!
+This was definitely required but it was not enough!
 
 I also had to specify the full path for each Node.js CLI command `Minify` uses:
 After installing `Minify` open its default settings in Sublime Text editor
