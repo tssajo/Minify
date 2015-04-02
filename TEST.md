@@ -24,14 +24,10 @@ Which 3rd party programs are being used by `Minify`
 | JavaScript | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs](https://www.npmjs.com/package/uglifyjs) |
 | SVG        | [svgo](https://www.npmjs.com/package/svgo) | [svgo](https://www.npmjs.com/package/svgo) |
 
-Installation in Four Easy Steps
--------------------------------
+Installation in Three Easy Steps
+--------------------------------
 
-1. Please make sure that your Sublime Text 2 or Sublime Text 3 (recommended) editor is properly installed and working on your platform.
-
-2. Please install Node.js
-
-  [See installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+1. Please install Node.js [See installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 
   Notes:
 
@@ -45,7 +41,7 @@ Installation in Four Easy Steps
     `node --version`
     If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar then the `node` command is not available on your system.
 
-3. Install some Node.js CLI apps globally
+2. Install some Node.js CLI apps globally
 
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
@@ -56,7 +52,7 @@ Installation in Four Easy Steps
     If you already have some or all of the above Node.js CLI apps installed on your computer then you can update them to the latest version with the following command:
     `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
-4. Install `Minify` for Sublime Text via [Package Control](https://sublime.wbond.net/): https://packagecontrol.io/packages/Minify
+3. Install `Minify` for Sublime Text via [Package Control](https://sublime.wbond.net/): https://packagecontrol.io/packages/Minify
 
 Requirements
 ------------
