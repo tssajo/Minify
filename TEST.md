@@ -69,9 +69,12 @@ Installation in Three Easy Steps
     If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
     then the `cleancss` command is not available on your system and you must fix this!
 
+    You might be able to work around path issues by specifying the full path for each Node.js CLI apps in your Sublime Text editor under
+    `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` ) after you have performed the installation step 3 below.
+
 3. Install `Minify` for Sublime Text:
 
-  a) install `Minify` via [Package Control](https://sublime.wbond.net/) (this is the recommended method)
+  a) install `Minify` package via [Package Control](https://packagecontrol.io/) (this is the recommended method)
 
     https://packagecontrol.io/packages/Minify
 
@@ -89,87 +92,46 @@ Installation in Three Easy Steps
 
     Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2
 
-Requirements
-------------
-Before you start, you must have Sublime Text 2 or Sublime Text 3 installed and working properly. Then:
+AN IMPORTANT NOTE FOR MAC OS X USERS
+------------------------------------
+When I installed Node.js from Homebrew on a Mac I ran into the following problem:
 
-1. Nodejs -- Since this package uses Node for many of its tasks, you must have [Nodejs](http://nodejs.org/) installed on your system.
-Once you have Nodejs installed, you need to install the following programs globally for Node:
-
-2. Install `UglifyJS 2` (it is needed for Javascript minification and beautification):
-`npm -g install uglify-js`
-
-3. Install `js-beautify` (it is needed for CSS beautification):
-`npm -g install js-beautify`
-
-4. Install `svgo` (it is needed for SVG minification and beautification):
-`npm -g install svgo`
-
-5. Install Java which is required for `YUI Compressor` (which is needed for CSS minification)
-
-Please make sure the `java` command is available in your system PATH.
-
-If you do not have any of the above commands available in your system PATH then alternatively you can specify custom locations
-for those commands in `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` and NOT `Preferences.sublime-settings` ! )
-
-IMPORTANT NOTE FOR MAC USERS!
------------------------------
-Unfortunately, Sublime Text does not search for executable files under /usr/local/bin directory regardless of your system PATH setting.
-(It seems, ST uses its own PATH setting which we cannot change.) Because of this, you probably need to create a symlink on your Mac:
+Unfortunately, Sublime Text does not search for executable files under the `/usr/local/bin` directory regardless of your system PATH settings!
+It seems that Sublime Text uses its own PATH settings which we cannot alter... Because of this you probably need to create a symlink on your Mac:
 
 Open a Terminal and issue the following command:
 
 `cd /usr/bin && sudo ln -s /usr/local/bin/node node`
 
-But it is not enough! You also need to add full path for the commands `Minify` uses. After installing the `Minify` package in ST,
-please open its default settings ( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents to the
-`Settings -- User` file ( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize `Minify` settings there.
-Please do not modify `Settings -- Default` because it will be overwritten by the next release of the `Minify` package!
+The above was required for me but it was not enough!
+You also need to add full path for the commands `Minify` use. After installing `Minify` please open its default settings in Sublime Text editor
+( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents to the `Settings -- User` file
+( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize your `Minify` settings there.
+Please do not modify `Settings -- Default` because it will be overwritten by the next release of `Minify`!
 
-E.g.: To add full path to your `uglifyjs` command, change the appropriate line inside your `Settings -- User` file to
+To add full path to your `cleancss` command change the appropriate line inside your `Settings -- User` file to
 
-    "uglifyjs_command": "/usr/local/bin/uglifyjs",
+    "cleancss_command": "/usr/local/bin/cleancss",
 
-Installation
-------------
-Please install the `Minify` Sublime Text Package via the [Package Control](https://sublime.wbond.net/) package manager.
+How to use `Minify`
+-------------------
+Open a `.css` or `.html` or `.js` or `.svg` file in your Sublime Text editor then you can
 
-Alternatively, you may install the `Minify Package` by using git:
+  a) use the Context Menu inside the Sublime Text editor window or
 
-*MacOSX*
+  b) access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text; or
 
-    git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Minify
+  c) use one of the following keyboard shortcuts:
 
-Note: Replace "Sublime\ Text\ 2" with "Sublime\ Text\ 3" in the above command if you are using Sublime Text 3
+  `ctrl + alt + m` ( `super + alt + m` on OSX ) :
 
-*Windows*
+  Minifies the current buffer and saves the minified version into the same directory with the
+  appropriate .min.css or .min.html or .min.js or .min.svg file extension then it opens the minified file in a new editor window.
 
-    git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 2\Packages\Minify
+  `ctrl + alt + shift + m` ( `super + alt + shift + m` on OSX ) :
 
-Note: Replace "Sublime Text 2" with "Sublime Text 3" in the above command if you are using Sublime Text 3
-
-How to use
-----------
-Open a `.js` or `.css` or `.svg` file in your Sublime Text editor and you can:
-
-A.  Use the Context Menu inside the Sublime Text editor window; or
-
-B.  Access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text.
-
-C.  The following keyboard shortcuts are also available:
-
-`ctrl + alt + m` ( `super + alt + m` on OSX ) :
-	Minifies the current buffer and saves the minified version into the same directory with the
-    appropriate .min.js or .min.css or .min.svg file extension, then opens the minified file in a new editor window.
-
-`ctrl + alt + shift + m` ( `super + alt + shift + m` on OSX ) :
-	beautifies the current buffer and saves the beautified version into the same directory with the
-    appropriate .beautified.js or .beautified.css or .pretty.svg file extension, then opens the beautified
-    file in a new editor window.
-
-TODO
-----
-Adding HTML minification feature.
+  Beautifies the current buffer and saves the beautified version into the same directory with the
+  appropriate .beautified.css or .beautified.html or .beautified.js or .pretty.svg file extension then it opens the beautified file in a new editor window.
 
 License
 -------
