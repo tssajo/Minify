@@ -113,7 +113,7 @@ Please do not modify `Settings -- Default` because it will be overwritten by the
 
 For example, to add full path to your `cleancss` command uncomment the following line inside your `Settings -- User` file
 
-    // "cleancss_command": "/usr/local/bin/cleancss",
+    "cleancss_command": "/usr/local/bin/cleancss",
 
 How to use `Minify`
 -------------------
