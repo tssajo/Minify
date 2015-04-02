@@ -10,7 +10,7 @@ The plugin generates a new file with an altered file extension such as `.min.css
 Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 170 lines of Python code.
 Once installed `Minify` does not need Internet access to do its job: it works offline.
 
-`Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported platforms (Linux, OS X and Windows).
+`Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported platforms (Linux, Mac OS X and Windows).
 
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those dependencies are provided below.
 
@@ -37,7 +37,7 @@ Installation in Three Easy Steps
 
     Please make sure that the command `node` is available in your `PATH`.
     Here is how you can test if the `node` command is available in your `PATH`:
-    Open up a shell window (it is called Terminal on OS X and CMD window on Windows) and then issue the following command:
+    Open up a shell window (it is called Terminal on Mac OS X and CMD window on Windows) and then issue the following command:
     `node --version`
     If you get a version number displayed then you are probably fine. If you get an error message such as `command not found` or something similar then the `node` command is not available on your system.
 
