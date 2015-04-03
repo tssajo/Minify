@@ -17,12 +17,12 @@ Once installed `Minify` does not need Internet access to do its job: it works of
 Which 3rd party programs are required by `Minify`
 -------------------------------------------------
 
-|                  | Minify | Beautify |
-| ---------------- | ------ | -------- |
-| ** CSS **        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
-| ** HTML **       | [html-minifier](https://www.npmjs.com/package/html-minifier) | [js-beautify --html](https://www.npmjs.org/package/js-beautify) |
-| ** JavaScript ** | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs --beautify](https://www.npmjs.com/package/uglifyjs) |
-| ** SVG **        | [svgo](https://www.npmjs.com/package/svgo) | [svgo --pretty](https://www.npmjs.com/package/svgo) |
+|                | Minify | Beautify |
+| -------------- |:------:|:--------:|
+| **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
+| **HTML**       | [html-minifier](https://www.npmjs.com/package/html-minifier) | [js-beautify --html](https://www.npmjs.org/package/js-beautify) |
+| **JavaScript** | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs --beautify](https://www.npmjs.com/package/uglifyjs) |
+| **SVG**        | [svgo](https://www.npmjs.com/package/svgo) | [svgo --pretty](https://www.npmjs.com/package/svgo) |
 
 Installation in Three Easy Steps
 --------------------------------
