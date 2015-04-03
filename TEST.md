@@ -33,7 +33,7 @@ Installation in Three Easy Steps
 
     On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command: `brew install node`
 
-    On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the nodejs.org web site.
+    On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the [nodejs.org](https://nodejs.org/) web site.
 
     Please make sure that `node` is available in your `PATH`!
 
