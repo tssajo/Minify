@@ -35,16 +35,16 @@ Installation in Three Easy Steps
 
     On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the [nodejs.org](https://nodejs.org/) web site.
 
-    Please make sure that `node` is available in your `PATH`!
+    Please make sure that `node` is in your system `PATH`!
 
-    Here is how you can test if the `node` command is available in your `PATH`:
+    Here is how you can test if `node` is in your `PATH`:
 
     Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command:
 
     `node --version`
 
     If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
-    then the `node` command is not available on your system and you must fix this!
+    then `node` is not available via your `PATH` and you must fix this!
 
 2. Install required Node.js CLI apps:
 
@@ -54,23 +54,23 @@ Installation in Three Easy Steps
 
   Notes:
 
-    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, etc.
+    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command and so on.
 
     If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:
 
     `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
-    Please test that the installed Node.js CLI apps are available:
+    Please test that the installed Node.js CLI apps are available via your `PATH`:
 
     Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command, for example:
 
     `cleancss --version`
 
     If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
-    then the `cleancss` command is not available on your system and you must fix this!
+    then the `cleancss` command is not available via your `PATH` and you must fix this!
 
-    You might be able to work around path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
-    `Settings -- User` of the `Minify Package` ( `Minify.sublime-settings` ) after you have performed step 3 below.
+    You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
+    `Settings -- User` of `Minify` ( `Minify.sublime-settings` ). You can try to do this after you have performed step 3 below.
 
 3. Install `Minify` for Sublime Text:
 
@@ -105,36 +105,37 @@ Open a `Terminal` and issue the following command:
 
 This was definitely required but it was not enough!
 
-I also had to specify the full path for each Node.js CLI command `Minify` uses:
+I also had to specify the full path for each Node.js CLI command which used by `Minify`:
 After installing `Minify` open its default settings in Sublime Text editor
 ( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents of that file to the `Settings -- User` file
 ( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize your `Minify` settings there.
-Please do not modify `Settings -- Default` because it will be overwritten by the next release of `Minify`!
+Please do not modify `Settings -- Default` because it will be overwritten by the next update of `Minify`!
 
-For example, to add full path to your `cleancss` command uncomment the following line inside your `Settings -- User` file
+For example, to add full path to your `cleancss` command, uncomment the following line inside your `Settings -- User` file:
 
     "cleancss_command": "/usr/local/bin/cleancss",
 
 How to use `Minify`
 -------------------
-Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor then you can
+Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
 
-  a) use the Context Menu inside the Sublime Text editor window
+  a) use the Context Menu inside the Sublime Text editor window,
 
-  b) access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text
+  b) access the `Minify file` or `Beautify file` commands under Tools / Minify menu in Sublime Text,
 
   c) use one of the following keyboard shortcuts:
 
-  `ctrl + alt + m` ( `super + alt + m` on Mac OS X ) :
+  `ctrl + alt + m` ( `super + alt + m` on Mac OS X )
 
-  Minifies the current buffer and saves the minified version into the same directory with the
-  appropriate .min.css or .min.htm or .min.html or .min.js or .min.svg file extension then it opens the minified file in a new editor window.
+  This minifies the current buffer and saves the minified version into the same directory with the
+  appropriate .min.css or .min.htm or .min.html or .min.js or .min.svg file extension
+  then it opens the minified file in a new editor window.
 
   `ctrl + alt + shift + m` ( `super + alt + shift + m` on Mac OS X ) :
 
-  Beautifies the current buffer and saves the beautified version into the same directory with the appropriate
-  .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file extension then
-  it opens the beautified file in a new editor tab.
+  This beautifies the current buffer and saves the beautified version into the same directory with the appropriate
+  .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file extension
+  then it opens the beautified file in a new editor tab.
 
 License
 -------
