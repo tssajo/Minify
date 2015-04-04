@@ -5,9 +5,9 @@ Overview
 --------
 `Minify` for Sublime Text can create a minified version of a currently opened CSS, HTML, JavaScript or SVG file.
 
-The plugin generates a new file with an altered file extension such as `.min.css`, `.min.htm` or `.min.html`, `.min.js`, `.min.svg`.
+`Minify` generates a new file with an altered file extension such as `.min.css`, `.min.htm` or `.min.html`, `.min.js`, `.min.svg`.
 
-Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 170 lines of Python code.
+Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 150 lines of Python code.
 Once installed `Minify` does not need Internet access to do its job: it works offline.
 
 `Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported platforms (Linux, Mac OS X and Windows).
@@ -105,7 +105,7 @@ Open a `Terminal` and issue the following command:
 
 This was definitely required but it was not enough!
 
-I also had to specify the full path for each Node.js CLI command which used by `Minify`:
+I also had to specify the full path for each Node.js CLI command:
 After installing `Minify` open its default settings in Sublime Text editor
 ( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents of that file to the `Settings -- User` file
 ( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize your `Minify` settings there.
