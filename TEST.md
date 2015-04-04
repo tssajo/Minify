@@ -8,7 +8,7 @@ Overview
 `Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
 
 Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 170 lines of Python code.
-Once installed `Minify` does not need Internet access to do its job: it works offline.
+Once installed `Minify` does not need Internet access to do its job, it works offline.
 
 `Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported platforms (Linux, Mac OS X and Windows).
 
