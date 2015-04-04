@@ -86,6 +86,7 @@ Installation in Three Easy Steps
     `cleancss --version`
 
     If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!
+    You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).
 
     You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
     `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
