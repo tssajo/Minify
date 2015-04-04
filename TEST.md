@@ -27,7 +27,27 @@ Which 3rd party programs are required by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+1. Install `Minify` for Sublime Text:
+
+  a) install `Minify` package via [Package Control](https://packagecontrol.io/) (this is the recommended method)
+
+    https://packagecontrol.io/packages/Minify
+
+  b) you can install `Minify` from GitHub directly (this is NOT recommended)
+
+    on Mac OS X:
+
+    `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`
+
+    Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2.
+
+    on Windows:
+
+    `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`
+
+    Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
+
+2. Install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 
   Notes:
 
@@ -46,7 +66,7 @@ Installation in Three Easy Steps
     If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
     then `node` is not available via your `PATH` and you must fix this!
 
-2. Install required Node.js CLI apps:
+3. Install required Node.js CLI apps:
 
   Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command:
 
@@ -70,27 +90,7 @@ Installation in Three Easy Steps
     then the `cleancss` command is not available via your `PATH` and you must fix this!
 
     You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
-    `Settings -- User` of `Minify` ( `Minify.sublime-settings` ). You can try to do this after you have performed step 3 below.
-
-3. Install `Minify` for Sublime Text:
-
-  a) install `Minify` package via [Package Control](https://packagecontrol.io/) (this is the recommended method)
-
-    https://packagecontrol.io/packages/Minify
-
-  b) you can install `Minify` from GitHub directly (this is NOT recommended)
-
-    on Mac OS X:
-
-    `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`
-
-    Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2.
-
-    on Windows:
-
-    `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`
-
-    Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
+    `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
 
 IMPORTANT NOTE FOR MAC OS X USERS
 ---------------------------------
