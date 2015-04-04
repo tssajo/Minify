@@ -27,9 +27,9 @@ Which 3rd party programs are required by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Install `Minify` for Sublime Text:
+1. Install `Minify` package for Sublime Text:
 
-  a) install `Minify` package via [Package Control](https://packagecontrol.io/) (this is the recommended method)
+  a) install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)
 
     https://packagecontrol.io/packages/Minify
 
