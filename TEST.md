@@ -63,8 +63,7 @@ Installation in Three Easy Steps
 
     `node --version`
 
-    If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
-    then `node` is not available via your `PATH` and you must fix this!
+    If instead of a version number you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:
 
@@ -86,8 +85,7 @@ Installation in Three Easy Steps
 
     `cleancss --version`
 
-    If you get a version number displayed then you are in good shape. But if you get an error message such as `command not found` or something similar
-    then the `cleancss` command is not available via your `PATH` and you must fix this!
+    If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!
 
     You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
     `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
