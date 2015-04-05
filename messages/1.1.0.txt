@@ -1,0 +1,20 @@
+Version 1.1.0
+-------------
+
+* Added HTML minification feature using `html-minifier` ( https://www.npmjs.com/package/html-minifier )
+* Added HTML prettification feature using `js-beautify --html` ( https://www.npmjs.com/package/js-beautify )
+* Added support for `clean-css` and `uglifycss` CSS minifiers, `clean-css` is the default now (Java is no longer needed!)
+    Note: If you wish to continue using `YUI compressor` for CSS minification then you still
+          must have Java installed and add the following line to your `Minify` User Settings:
+            "cssminifier": "yui",
+* Reworked the README file to give better installation instructions
+
+################
+#  IMPORTANT!  #
+################
+
+Please open up a shell window (Terminal on Mac OS X, CMD window on Windows) and issue the following commands:
+
+npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
+
+npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo

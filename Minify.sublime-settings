@@ -1,64 +1,92 @@
 {
-	// IMPORTANT NOTE!
+	// #####################
+	// #  IMPORTANT NOTE!  #
+	// #####################
 	//
 	// Please do not modify this file! This file holds the default settings of Minify.
+	//
 	// If you wish to customize these settings then create a `Settings -- User` file first
 	// and make your customization there.
-	// If you edit this file, your custom settings will be overwritten at the next release
-	// of the Minify package!
+	//
+	// If you edit this file, your custom settings get overwritten at the next update of the Minify package!
+
+	// #####################
+	// #  Global Settings  #
+	// #####################
 
 	// Debug mode
 	"debug_mode": false,
 
-	// save file before doing any action (minify or beautify)
+	// Save file before doing any action (minify or beautify) ?
 	"save_first": true,
 
-	// if present, use this command instead of uglifyjs when working with .js files
-	// e.g. "/usr/local/bin/uglifyjs"
-	"uglifyjs_command": false,
+	// ############################
+	// #  CSS Processing Options  #
+	// ############################
 
-	// if present, use this command instead of java
-	// e.g. "/usr/local/bin/java"
-	"java_command": false,
+	// you can specify which CSS minifier to use such as "clean-css", "uglifycss" or "yui"
+	// notes: the default is "clean-css"; you must have java installed for "yui"
+	// "cssminifier": "clean-css",
 
-	// YUI Compressor jar file
-	// "yuicompressor-2.4.8.jar" is now included and it can be used but it has a lot of issues ( https://github.com/yui/yuicompressor/issues )
-	// e.g. it does not work on Windows properly, see: https://github.com/yui/yuicompressor/issues/78
-	"yui_compressor": "yuicompressor-2.4.7.jar",
+	// you may want to define the cleancss command with an absolute path
+	// "cleancss_command": "/usr/local/bin/cleancss",
 
-	// css file charset
-	"yui_charset": "utf-8",
+	// you can specify command line parameters for cleancss
+	"cleancss_options": "--s1 -s --skip-rebase",
 
-	// maximum line length in minified css files
-	// you can set it to false to have no line breaks at all or
-	// specify it to 0 to get a line break after each each rule in CSS
-	"yui_line_break": 250,
+	// you may want to define the uglifycss command with an absolute path
+	// "uglifycss_command": "/usr/local/bin/uglifycss",
 
-	// keep comments when minifying javascript files?
+	// you can specify command line parameters for uglifycss
+	// "uglifycss_options": "--max-line-len 250",
+
+	// you may want to define the js-beautify command with an absolute path
+	// "js-beautify_command": "/usr/local/bin/js-beautify",
+
+	// you can specify command line parameters for .css beautification
+	// "js-beautify_options": "--indent-size=2",
+
+	// ###################################
+	// #  JavaScript Processing Options  #
+	// ###################################
+
+	// you may want to define the uglifyjs command with an absolute path
+	// "uglifyjs_command": "/usr/local/bin/uglifyjs",
+
+	// do you wamt to keep comments when minifying javascript files?
 	"keep_comments": false,
-	// you can specify which comments to keep
+	// you can also specify which comments to keep
 	// if you set `keep_comments` to true and leave `comments_to_keep` false then uglifyjs will only keep JSDoc-style copyright comments
-	// but if you set `keep_comments` to true then you can also specify which comments to keep
-	// e.g. "all" to keep all comments or you can use a regexp such as "/!/" (this will keep only comments which contain an exclamation mark)
+	// but if you set `keep_comments` to true then you can also specify which comments to keep: set `comments_to_keep` to "all" to keep
+	// all comments or you can provide a regexp such as "/!/" (this will keep only comments which contain an exclamation mark)
 	"comments_to_keep": false,
 
-	// if present, use this command instead of js-beautify for .css beautification
-	// e.g. "/usr/local/bin/js-beautify"
-	"js-beautify_command": false,
+	// you can specify command line parameters for .js beautification
+	// "uglifyjs_pretty_options": "indent-level=2",
 
-	// can specify extra command line parameters for .css beautification
-	// e.g. "--indent-size=2"
-	"js-beautify_options": false,
+	// #############################
+	// #  HTML Processing Options  #
+	// #############################
 
-	// if present, use this command instead of svgo when working with .svg files
-	// e.g. "/usr/local/bin/svgo"
-	"svgo_command": false,
+	// you may want to define the html-minifier command with an absolute path
+	// "html-minifier_command": "/usr/local/bin/html-minifier",
 
-	// can specify extra command line parameters for .svg minification
-	// e.g. "--config=CONFIG"
-	"svgo_min_options": false,
+	// you can specify command line parameters for .html minification
+	"html-minifier_options": "--remove-comments --remove-comments-from-cdata --collapse-whitespace --conservative-collapse --collapse-boolean-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-js --minify-css",
 
-	// can specify extra command line parameters for .svg prettification
-	// e.g. "--config=CONFIG"
-	"svgo_pretty_options": false
+	// you can specify command line parameters for .html beautification
+	// "js-beautify_html_options": "--indent-size=2",
+
+	// ############################
+	// #  SVG Processing Options  #
+	// ############################
+
+	// you may want to define the svgo command with an absolute path
+	// "svgo_command": "/usr/local/bin/svgo",
+
+	// you can specify command line parameters for .svg minification
+	// "svgo_min_options": "--precision=4",
+
+	// you can specify command line parameters for .svg prettification
+	// "svgo_pretty_options": "--precision=4"
 }
