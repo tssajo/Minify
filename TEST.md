@@ -31,7 +31,9 @@ Installation in Three Easy Steps
 
   a) install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)
 
-    https://packagecontrol.io/packages/Minify
+    First install Package Control - [see installation instructions](https://packagecontrol.io/installation)
+
+    Then inside Sublime Text press CTRL + SHIFT + P and find Package Control: Install Package and press Enter. You can search for the `Minify` pacakge by the name Minify
 
   b) you can install `Minify` from GitHub directly (this is NOT recommended)
 
@@ -59,7 +61,7 @@ Installation in Three Easy Steps
 
     Here is how you can test if `node` is in your `PATH`:
 
-    Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command:
+    Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:
 
     `node --version`
 
@@ -67,7 +69,7 @@ Installation in Three Easy Steps
 
 3. Install required Node.js CLI apps:
 
-  Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command:
+  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:
 
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
 
@@ -81,7 +83,7 @@ Installation in Three Easy Steps
 
     Please test that the installed Node.js CLI apps are available via your `PATH`:
 
-    Open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) then issue the following command, for example:
+    Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command, for example:
 
     `cleancss --version`
 
