@@ -32,7 +32,7 @@ Installation in Three Easy Steps
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)
 
     First install Package Control - [see installation instructions](https://packagecontrol.io/installation)
-    Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` and press Enter.
+    Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
     You can search for the `Minify` pacakge by the name Minify
 
   b) You can install `Minify` from GitHub directly (this is NOT recommended)
