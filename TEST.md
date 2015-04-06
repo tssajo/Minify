@@ -14,8 +14,8 @@ Once installed `Minify` does not need Internet access to do its job, it works of
 
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those dependencies are provided below.
 
-Which 3rd party programs are required by `Minify`
--------------------------------------------------
+Which 3rd party programs are used by `Minify`
+---------------------------------------------
 
 |                | Minify | Beautify |
 | -------------- |:------:|:--------:|
@@ -27,7 +27,7 @@ Which 3rd party programs are required by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Install `Minify` package for Sublime Text:<br>
+1. Install `Minify` package for Sublime Text:<br style="margin-top:10px">
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)<br>
   First install Package Control - [see installation instructions](https://packagecontrol.io/installation)
   Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
