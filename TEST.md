@@ -27,7 +27,7 @@ Which 3rd party programs are used by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Install `Minify` package for Sublime Text:<br style="margin-top:10px">
+1. Install `Minify` package for Sublime Text:<br><br>
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)<br>
   First install Package Control - [see installation instructions](https://packagecontrol.io/installation)
   Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
