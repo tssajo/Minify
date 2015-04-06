@@ -29,7 +29,7 @@ Installation in Three Easy Steps
 
 1. Install `Minify` package for Sublime Text:<br><br>
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)<br><br>
-  First install Package Control - [see installation instructions](https://packagecontrol.io/installation)
+  First install Package Control - [see installation instructions](https://packagecontrol.io/installation)<br><br>
   Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
   You can search for the `Minify` pacakge by the name Minify<br><br>
   b) You can install `Minify` from GitHub directly (this is NOT recommended)<br><br>
@@ -62,8 +62,7 @@ Installation in Three Easy Steps
   `cleancss --version`<br><br>
   If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).<br><br>
-
-  You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under<br><br>
+  You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
   `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
 
 IMPORTANT NOTE FOR MAC OS X USERS
