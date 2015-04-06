@@ -14,8 +14,8 @@ Once installed `Minify` does not need Internet access to do its job, it works of
 
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those dependencies are provided below.
 
-Which 3rd party programs are required by `Minify`
--------------------------------------------------
+Which 3rd party programs are used by `Minify`
+---------------------------------------------
 
 |                | Minify | Beautify |
 | -------------- |:------:|:--------:|
@@ -27,71 +27,43 @@ Which 3rd party programs are required by `Minify`
 Installation in Three Easy Steps
 --------------------------------
 
-1. Install `Minify` package for Sublime Text:
+1. Install `Minify` package for Sublime Text:<br><br>
+  a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)<br><br>
+  First install Package Control - [see installation instructions](https://packagecontrol.io/installation)<br><br>
+  Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
+  You can search for the `Minify` pacakge by the name Minify<br><br>
+  b) You can install `Minify` from GitHub directly (this is NOT recommended)<br><br>
+  _on Mac OS X:_<br><br>
+  `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`<br><br>
+  Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2.<br><br>
+  _on Windows:_<br><br>
+  `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`<br><br>
+  Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
 
-  a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method)
+2. Install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)<br><br>
+  Notes:<br><br>
+  On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command: `brew install node`<br><br>
+  On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the [nodejs.org](https://nodejs.org/) web site.<br><br>
+  Please make sure that `node` is in your system `PATH`!<br><br>
+  Here is how you can test if `node` is in your `PATH`:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:<br><br>
+  `node --version`<br><br>
+  If instead of a version number you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
 
-    First install Package Control - [see installation instructions](https://packagecontrol.io/installation)
-    Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
-    You can search for the `Minify` pacakge by the name Minify
-
-  b) You can install `Minify` from GitHub directly (this is NOT recommended)
-
-    on Mac OS X:
-
-      git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify
-
-    Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2.
-
-    on Windows:
-
-      git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify
-
-    Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
-
-2. Install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
-
-  Notes:
-
-    On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command: `brew install node`
-
-    On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the [nodejs.org](https://nodejs.org/) web site.
-
-    Please make sure that `node` is in your system `PATH`!
-
-    Here is how you can test if `node` is in your `PATH`:
-
-    Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:
-
-    `node --version`
-
-    If instead of a version number you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
-
-3. Install required Node.js CLI apps:
-
-  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:
-
-  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
-
-  Notes:
-
-    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command and so on.
-
-    If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:
-
-    `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`
-
-    Please test that the installed Node.js CLI apps are available via your `PATH`:
-
-    Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command, for example:
-
-    `cleancss --version`
-
-    If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!
-    You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).
-
-    You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
-    `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
+3. Install required Node.js CLI apps:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:<br><br>
+  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
+  Notes:<br><br>
+  If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command and so on.<br><br>
+  If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:<br><br>
+  `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
+  Please test that the installed Node.js CLI apps are available via your `PATH`:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command, for example:<br><br>
+  `cleancss --version`<br><br>
+  If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
+  You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).<br><br>
+  You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
+  `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
 
 IMPORTANT NOTE FOR MAC OS X USERS
 ---------------------------------

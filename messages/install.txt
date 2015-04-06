@@ -92,8 +92,8 @@ Once installed `Minify` does not need Internet access to do its job, it works of
 
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those dependencies are provided below.
 
-Which 3rd party programs are required by `Minify`
--------------------------------------------------
+Which 3rd party programs are used by `Minify`
+---------------------------------------------
 
 |-----------------------------------------------------------|
 |            |         Minify         |      Beautify       |
