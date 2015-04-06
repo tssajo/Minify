@@ -89,8 +89,8 @@ class MinifyCommand(MinifyBase, sublime_plugin.TextCommand):
 					cmdToRun.extend([inpfile, '>', outfile])
 				elif minifier == 'yui':
 					cmd = sublime.load_settings('Minify.sublime-settings').get('java_command') or 'java'
-					yui_compressor = str(sublime.load_settings('Minify.sublime-settings').get('yui_compressor') or 'yuicompressor-2.4.7.jar'
-					cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/' + yui_compressor), inpfile, '-o', outfile]
+					yui_compressor = sublime.load_settings('Minify.sublime-settings').get('yui_compressor') or 'yuicompressor-2.4.7.jar'
+					cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), inpfile, '-o', outfile]
 					eo = sublime.load_settings('Minify.sublime-settings').get('yui_charset')
 					if eo:
 						cmdToRun.extend(['--charset', str(eo)])

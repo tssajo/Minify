@@ -1,0 +1,15 @@
+Version 1.1.1
+-------------
+
+* Fixed a critical bug which prevented Minify to work
+* Reworked the README.md file
+
+################
+#  IMPORTANT!  #
+################
+
+Please open up a shell window (Terminal on Mac OS X, CMD window on Windows) and issue the following commands:
+
+npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
+
+npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
