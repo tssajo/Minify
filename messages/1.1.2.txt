@@ -1,0 +1,18 @@
+Version 1.1.2
+-------------
+
+* Fixed a syntax error in `Minify.sublime-settings` file (thanks to `handycomm` for reporting it!)
+* Added new setting: `auto_minify_on_save`
+* Added new setting: `open_file`
+    Note: It is advised to set `open_file` to false when you set `auto_minify_on_save` to true.
+
+
+################
+#  IMPORTANT!  #
+################
+
+Please open up a shell window (Terminal on `Mac OS X`, `CMD window` on Windows) and issue the following commands:
+
+npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
+
+npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo

@@ -14,11 +14,14 @@
 	// #  Global Settings  #
 	// #####################
 
-	// Debug mode
-	"debug_mode": false,
-
-	// Save file before doing any action (minify or beautify) ?
+	// Save file before doing any action (minify or beautify)?
 	"save_first": true,
+
+	// Auto-minify files on save?
+	"auto_minify_on_save": false,
+
+	// Open resulting file (minified or beautified)?
+	"open_file": true,
 
 	// ############################
 	// #  CSS Processing Options  #
@@ -32,7 +35,7 @@
 	// "cleancss_command": "/usr/local/bin/cleancss",
 
 	// you can specify command line parameters for cleancss
-	"cleancss_options": "--s1 -s --skip-rebase",
+	"cleancss_options": "--s0 -s --skip-rebase",
 
 	// you may want to define the uglifycss command with an absolute path
 	// "uglifycss_command": "/usr/local/bin/uglifycss",
@@ -89,4 +92,11 @@
 
 	// you can specify command line parameters for .svg prettification
 	// "svgo_pretty_options": "--precision=4"
+
+	// ###############
+	// #  Debugging  #
+	// ###############
+
+	// Enable debug mode?
+	"debug_mode": false
 }

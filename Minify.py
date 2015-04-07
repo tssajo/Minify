@@ -1,26 +1,22 @@
 import sublime, sublime_plugin, re, os, subprocess
 
 PLUGIN_DIR = os.path.dirname(__file__) if int(sublime.version()) >= 3000 else os.getcwd()
-
 # on Windows platform run the commands in a shell
 RUN_IN_SHELL = sublime.platform() == 'windows'
-
 # if there is no sublime.set_timeout_async method available then run the commands in a separate thread using the threading module
 HAS_ASYNC = callable(getattr(sublime, 'set_timeout_async', None))
 
-DEBUG = sublime.load_settings('Minify.sublime-settings').get('debug_mode')
-if DEBUG:
+if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 	print('Minify: Sublime Platform: ' + str(sublime.platform()))
 	print('Minify: Sublime Version: ' + str(sublime.version()))
 	print('Minify: PLUGIN_DIR: ' + str(PLUGIN_DIR))
 	print('Minify: RUN_IN_SHELL: ' + str(RUN_IN_SHELL))
-	print('Minify: SublimeText HAS_ASYNC: ' + str(HAS_ASYNC))
+	print('Minify: Sublime Text HAS_ASYNC: ' + str(HAS_ASYNC))
 
 if not HAS_ASYNC:
 	import threading
 
 	class RunCmdInOtherThread(threading.Thread):
-
 		def __init__(self, cmdToRun):
 			self.cmdToRun = cmdToRun
 			self.result = 1
@@ -29,31 +25,33 @@ if not HAS_ASYNC:
 		def run(self):
 			self.result = subprocess.call(self.cmdToRun, shell=RUN_IN_SHELL)
 
-class MinifyBase():
-
-	def is_enabled(self):
-		filename = self.view.file_name()
-		return bool(filename and (len(filename) > 0) and not (re.search('\.(?:js|css|html?|svg)$', filename) is None))
+class ThreadHandling():
+	def handle_result(self, result, outfile):
+		if (not result) and sublime.load_settings('Minify.sublime-settings').get('open_file'):
+			sublime.active_window().open_file(outfile)
 
 	def handle_thread(self, thread, outfile):
 		if thread.is_alive():
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 		else:
-			if not thread.result:
-				sublime.active_window().open_file(outfile)
+			self.handle_result(thread.result, outfile)
 
 	def run_cmd(self, cmdToRun, outfile):
-		if DEBUG:
+		if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 			print('Minify: Output file ' + str(outfile))
 			print('Minify: cmdToRun: ' + str(cmdToRun))
 		if HAS_ASYNC:
 			result = subprocess.call(cmdToRun, shell=RUN_IN_SHELL)
-			if not result:
-				sublime.active_window().open_file(outfile)
+			self.handle_result(result, outfile)
 		else:
 			thread = RunCmdInOtherThread(cmdToRun)
 			thread.start()
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
+
+class PluginBase(ThreadHandling):
+	def is_enabled(self):
+		filename = self.view.file_name()
+		return bool(filename and (len(filename) > 0) and not (re.search('.+\.(?:js|css|html?|svg)$', filename) is None))
 
 	def run(self, edit):
 		if HAS_ASYNC:
@@ -61,13 +59,14 @@ class MinifyBase():
 		else:
 			self.do_action()
 
-class MinifyCommand(MinifyBase, sublime_plugin.TextCommand):
-
-	def do_action(self):
-		inpfile = self.view.file_name()
+class MinifyClass():
+	def minify(self, view):
+		inpfile = view.file_name()
 		if inpfile and (len(inpfile) > 0):
-			if sublime.load_settings('Minify.sublime-settings').get('save_first') and self.view.is_dirty():
-				self.view.run_command('save')
+			if view.is_dirty() and sublime.load_settings('Minify.sublime-settings').get('save_first'):
+				view.run_command('save')
+				if sublime.load_settings('Minify.sublime-settings').get('auto_minify_on_save'):
+					return
 			if not (re.search('\.js$', inpfile) is None):
 				outfile = re.sub(r'(\.js)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
@@ -100,7 +99,7 @@ class MinifyCommand(MinifyBase, sublime_plugin.TextCommand):
 				else:
 					cmd = sublime.load_settings('Minify.sublime-settings').get('cleancss_command') or 'cleancss'
 					cmdToRun = [cmd]
-					eo = sublime.load_settings('Minify.sublime-settings').get('cleancss_options') or '--s1 -s --skip-rebase'
+					eo = sublime.load_settings('Minify.sublime-settings').get('cleancss_options') or '--s0 -s --skip-rebase'
 					if eo:
 						cmdToRun.extend(str(eo).split())
 					cmdToRun.extend(['-o', outfile, inpfile])
@@ -126,13 +125,12 @@ class MinifyCommand(MinifyBase, sublime_plugin.TextCommand):
 				print('Minify: Minifying file ' + str(inpfile))
 				self.run_cmd(cmdToRun, outfile)
 
-class BeautifyCommand(MinifyBase, sublime_plugin.TextCommand):
-
-	def do_action(self):
-		inpfile = self.view.file_name()
+class BeautifyClass():
+	def beautify(self, view):
+		inpfile = view.file_name()
 		if inpfile and (len(inpfile) > 0):
-			if sublime.load_settings('Minify.sublime-settings').get('save_first') and self.view.is_dirty():
-				self.view.run_command('save')
+			if sublime.load_settings('Minify.sublime-settings').get('save_first') and view.is_dirty():
+				view.run_command('save')
 			if not (re.search('\.js$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.js)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
@@ -167,3 +165,16 @@ class BeautifyCommand(MinifyBase, sublime_plugin.TextCommand):
 			if cmdToRun:
 				print('Minify: Beautifying file ' + str(inpfile))
 				self.run_cmd(cmdToRun, outfile)
+
+class MinifyCommand(PluginBase, MinifyClass, sublime_plugin.TextCommand):
+	def do_action(self):
+		self.minify(self.view)
+
+class BeautifyCommand(PluginBase, BeautifyClass, sublime_plugin.TextCommand):
+	def do_action(self):
+		self.beautify(self.view)
+
+class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
+	def on_post_save(self, view):
+		if sublime.load_settings('Minify.sublime-settings').get('auto_minify_on_save'):
+			self.minify(view)
