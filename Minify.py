@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, re, os, subprocess
+import sublime, sublime_plugin, re, os, subprocess, platform
 
 PLUGIN_DIR = os.path.dirname(__file__) if int(sublime.version()) >= 3000 else os.getcwd()
 # on Windows platform run the commands in a shell
@@ -9,6 +9,7 @@ HAS_ASYNC = callable(getattr(sublime, 'set_timeout_async', None))
 if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 	print('Minify: Sublime Platform: ' + str(sublime.platform()))
 	print('Minify: Sublime Version: ' + str(sublime.version()))
+	print('Minify: Python v' + platform.python_version())
 	print('Minify: PLUGIN_DIR: ' + str(PLUGIN_DIR))
 	print('Minify: RUN_IN_SHELL: ' + str(RUN_IN_SHELL))
 	print('Minify: Sublime Text HAS_ASYNC: ' + str(HAS_ASYNC))
@@ -20,29 +21,38 @@ if not HAS_ASYNC:
 		def __init__(self, cmdToRun):
 			self.cmdToRun = cmdToRun
 			self.result = 1
+			self.err = ''
 			threading.Thread.__init__(self)
 
 		def run(self):
-			self.result = subprocess.call(self.cmdToRun, shell=RUN_IN_SHELL)
+			p = subprocess.Popen(self.cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
+			self.err = p.communicate()[1]
+			self.result = p.returncode
 
 class ThreadHandling():
-	def handle_result(self, result, outfile):
-		if (not result) and sublime.load_settings('Minify.sublime-settings').get('open_file'):
-			sublime.active_window().open_file(outfile)
+	def handle_result(self, result, outfile, err, cmdstr):
+		if result:
+			if err:
+				sublime.error_message(cmdstr + '\r\n\r\n' + err.decode('utf-8'))
+		else:
+			if sublime.load_settings('Minify.sublime-settings').get('open_file'):
+				sublime.active_window().open_file(outfile)
 
 	def handle_thread(self, thread, outfile):
 		if thread.is_alive():
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 		else:
-			self.handle_result(thread.result, outfile)
+			self.handle_result(thread.result, outfile, thread.err, ' '.join(thread.cmdToRun))
 
 	def run_cmd(self, cmdToRun, outfile):
 		if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 			print('Minify: Output file ' + str(outfile))
 			print('Minify: cmdToRun: ' + str(cmdToRun))
 		if HAS_ASYNC:
-			result = subprocess.call(cmdToRun, shell=RUN_IN_SHELL)
-			self.handle_result(result, outfile)
+			p = subprocess.Popen(cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
+			err = p.communicate()[1]
+			result = p.returncode
+			self.handle_result(result, outfile, err, ' '.join(cmdToRun))
 		else:
 			thread = RunCmdInOtherThread(cmdToRun)
 			thread.start()
