@@ -9,7 +9,7 @@ HAS_ASYNC = callable(getattr(sublime, 'set_timeout_async', None))
 if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 	print('Minify: Sublime Platform: ' + str(sublime.platform()))
 	print('Minify: Sublime Version: ' + str(sublime.version()))
-	print('Minify: Python v' + platform.python_version())
+	print('Minify: Python Version: ' + platform.python_version())
 	print('Minify: PLUGIN_DIR: ' + str(PLUGIN_DIR))
 	print('Minify: RUN_IN_SHELL: ' + str(RUN_IN_SHELL))
 	print('Minify: Sublime Text HAS_ASYNC: ' + str(HAS_ASYNC))
@@ -30,10 +30,10 @@ if not HAS_ASYNC:
 			self.result = p.returncode
 
 class ThreadHandling():
-	def handle_result(self, result, outfile, err, cmdstr):
+	def handle_result(self, result, outfile, err, cmdToRun):
 		if result:
 			if err:
-				sublime.error_message(cmdstr + '\r\n\r\n' + err.decode('utf-8'))
+				sublime.error_message(' '.join(cmdToRun) + '\r\n\r\n' + err.decode('utf-8'))
 		else:
 			if sublime.load_settings('Minify.sublime-settings').get('open_file'):
 				sublime.active_window().open_file(outfile)
@@ -42,7 +42,7 @@ class ThreadHandling():
 		if thread.is_alive():
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 		else:
-			self.handle_result(thread.result, outfile, thread.err, ' '.join(thread.cmdToRun))
+			self.handle_result(thread.result, outfile, thread.err, thread.cmdToRun)
 
 	def run_cmd(self, cmdToRun, outfile):
 		if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
@@ -52,7 +52,7 @@ class ThreadHandling():
 			p = subprocess.Popen(cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
 			err = p.communicate()[1]
 			result = p.returncode
-			self.handle_result(result, outfile, err, ' '.join(cmdToRun))
+			self.handle_result(result, outfile, err, cmdToRun)
 		else:
 			thread = RunCmdInOtherThread(cmdToRun)
 			thread.start()
