@@ -84,7 +84,7 @@ class MinifyClass():
 				if sublime.load_settings('Minify.sublime-settings').get('keep_comments'):
 					cmdToRun.extend(['--comments'])
 					eo = sublime.load_settings('Minify.sublime-settings').get('comments_to_keep')
-					if not (eo is None) and not (type(eo) is bool):
+					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend([str(eo)])
 			elif not (re.search('\.css$', inpfile) is None):
 				outfile = re.sub(r'(\.css)$', r'.min\1', inpfile, 1)
@@ -93,7 +93,7 @@ class MinifyClass():
 					cmd = sublime.load_settings('Minify.sublime-settings').get('uglifycss_command') or 'uglifycss'
 					cmdToRun = [cmd]
 					eo = sublime.load_settings('Minify.sublime-settings').get('uglifycss_options')
-					if not (eo is None) and not (type(eo) is bool):
+					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend(str(eo).split())
 					cmdToRun.extend([inpfile, '>', outfile])
 				elif minifier == 'yui':
@@ -101,16 +101,16 @@ class MinifyClass():
 					yui_compressor = sublime.load_settings('Minify.sublime-settings').get('yui_compressor') or 'yuicompressor-2.4.7.jar'
 					cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), inpfile, '-o', outfile]
 					eo = sublime.load_settings('Minify.sublime-settings').get('yui_charset')
-					if not (eo is None) and not (type(eo) is bool):
+					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend(['--charset', str(eo)])
 					eo = sublime.load_settings('Minify.sublime-settings').get('yui_line_break')
-					if not (eo is None) and not (type(eo) is bool):
+					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend(['--line-break', str(eo)])
 				else:
 					cmd = sublime.load_settings('Minify.sublime-settings').get('cleancss_command') or 'cleancss'
 					cmdToRun = [cmd]
 					eo = sublime.load_settings('Minify.sublime-settings').get('cleancss_options') or '--s0 -s --skip-rebase'
-					if not (eo is None) and not (type(eo) is bool):
+					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend(str(eo).split())
 					cmdToRun.extend(['-o', outfile, inpfile])
 			elif not (re.search('\.html?$', inpfile) is None):
@@ -118,7 +118,7 @@ class MinifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('html-minifier_command') or 'html-minifier'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('html-minifier_options') or '--remove-comments --remove-comments-from-cdata --collapse-whitespace --conservative-collapse --collapse-boolean-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-js --minify-css'
-				if not (eo is None) and not (type(eo) is bool):
+				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['-o', outfile, inpfile])
 			elif not (re.search('\.svg$', inpfile) is None):
@@ -126,7 +126,7 @@ class MinifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('svgo_min_options')
-				if not (eo is None) and not (type(eo) is bool):
+				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend([inpfile, outfile])
 			else:
@@ -146,14 +146,14 @@ class BeautifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
 				cmdToRun = [cmd, inpfile, '-o', outfile, '--comments', 'all', '-b']
 				eo = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_pretty_options')
-				if not (eo is None) and not (type(eo) is bool):
+				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 			elif not (re.search('\.css$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.css)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_options')
-				if not (eo is None) and not (type(eo) is bool):
+				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['--css', '-o', outfile, inpfile])
 			elif not (re.search('\.html?$', inpfile) is None):
@@ -161,7 +161,7 @@ class BeautifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_html_options')
-				if not (eo is None) and not (type(eo) is bool):
+				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['--html', '-o', outfile, inpfile])
 			elif not (re.search('\.svg$', inpfile) is None):
@@ -169,7 +169,7 @@ class BeautifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('svgo_pretty_options')
-				if not (eo is None) and not (type(eo) is bool):
+				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['--pretty', inpfile, outfile])
 			if cmdToRun:
