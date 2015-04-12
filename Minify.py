@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, re, os, subprocess, platform
+import sublime, sublime_plugin, re, os, subprocess, platform, ntpath
 
 PLUGIN_DIR = os.path.dirname(__file__) if int(sublime.version()) >= 3000 else os.getcwd()
 # on Windows platform run the commands in a shell
