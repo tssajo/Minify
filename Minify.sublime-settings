@@ -8,7 +8,7 @@
 	// If you wish to customize these settings then create a `Settings -- User` file first
 	// and make your customization there.
 	//
-	// If you edit this file, your custom settings get overwritten at the next update of the Minify package!
+	// If you edit this file, your custom settings will be overwritten at the next update of Minify!
 
 	// #####################
 	// #  Global Settings  #
@@ -48,6 +48,9 @@
 
 	// you can specify command line parameters for .css beautification
 	// "js-beautify_options": "--indent-size=2",
+
+	// if you need a CSS source map (supported by clean-css only) in the destination directory (same as original source), enable this option
+	"css_source_map": false,
 
 	// ###################################
 	// #  JavaScript Processing Options  #

@@ -77,7 +77,7 @@ class MinifyClass():
 				view.run_command('save')
 				if sublime.load_settings('Minify.sublime-settings').get('auto_minify_on_save'):
 					return
-			if not (re.search('\.js$', inpfile) is None):
+			if not (re.search('.+\.js$', inpfile) is None):
 				outfile = re.sub(r'(\.js)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
 				cmdToRun = [cmd, inpfile, '-o', outfile, '-m', '-c']
@@ -90,7 +90,7 @@ class MinifyClass():
 					eo = sublime.load_settings('Minify.sublime-settings').get('comments_to_keep')
 					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend([str(eo)])
-			elif not (re.search('\.css$', inpfile) is None):
+			elif not (re.search('.+\.css$', inpfile) is None):
 				outfile = re.sub(r'(\.css)$', r'.min\1', inpfile, 1)
 				minifier = sublime.load_settings('Minify.sublime-settings').get('cssminifier') or 'clean-css'
 				if minifier == 'uglifycss':
@@ -116,8 +116,10 @@ class MinifyClass():
 					eo = sublime.load_settings('Minify.sublime-settings').get('cleancss_options') or '--s0 -s --skip-rebase'
 					if not ((eo is None) or (type(eo) is bool)):
 						cmdToRun.extend(str(eo).split())
+					if sublime.load_settings('Minify.sublime-settings').get('css_source_map'):
+						cmdToRun.extend(['--source-map'])
 					cmdToRun.extend(['-o', outfile, inpfile])
-			elif not (re.search('\.html?$', inpfile) is None):
+			elif not (re.search('.+\.html?$', inpfile) is None):
 				outfile = re.sub(r'(\.html?)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('html-minifier_command') or 'html-minifier'
 				cmdToRun = [cmd]
@@ -125,7 +127,7 @@ class MinifyClass():
 				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['-o', outfile, inpfile])
-			elif not (re.search('\.svg$', inpfile) is None):
+			elif not (re.search('.+\.svg$', inpfile) is None):
 				outfile = re.sub(r'(\.svg)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
 				cmdToRun = [cmd]
@@ -145,14 +147,14 @@ class BeautifyClass():
 		if inpfile and (len(inpfile) > 0):
 			if sublime.load_settings('Minify.sublime-settings').get('save_first') and view.is_dirty():
 				view.run_command('save')
-			if not (re.search('\.js$', inpfile) is None):
+			if not (re.search('.+\.js$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.js)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
 				cmdToRun = [cmd, inpfile, '-o', outfile, '--comments', 'all', '-b']
 				eo = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_pretty_options')
 				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
-			elif not (re.search('\.css$', inpfile) is None):
+			elif not (re.search('.+\.css$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.css)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
 				cmdToRun = [cmd]
@@ -160,7 +162,7 @@ class BeautifyClass():
 				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['--css', '-o', outfile, inpfile])
-			elif not (re.search('\.html?$', inpfile) is None):
+			elif not (re.search('.+\.html?$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.html?)$', r'.pretty\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
 				cmdToRun = [cmd]
@@ -168,7 +170,7 @@ class BeautifyClass():
 				if not ((eo is None) or (type(eo) is bool)):
 					cmdToRun.extend(str(eo).split())
 				cmdToRun.extend(['--html', '-o', outfile, inpfile])
-			elif not (re.search('\.svg$', inpfile) is None):
+			elif not (re.search('.+\.svg$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.svg)$', r'.pretty\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
 				cmdToRun = [cmd]
