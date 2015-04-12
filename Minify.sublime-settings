@@ -67,6 +67,9 @@
 	// you can specify command line parameters for .js beautification
 	// "uglifyjs_pretty_options": "indent-level=2",
 
+	// if you need a source map in the destination directory (same as original source), enable this option
+	"source_map": false,
+
 	// #############################
 	// #  HTML Processing Options  #
 	// #############################
