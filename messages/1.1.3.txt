@@ -1,0 +1,9 @@
+Version 1.1.3
+-------------
+
+* Added new option to generate source-map files for minified CSS and JavaScript files (thanks to mike-anthony)
+    See Package Settings of Minify for details
+* Error output is now displayed in an alert box
+    E.g: when attempting to minify a JavaScript file containing syntax errors
+* Fixed a bug where someone would still try to use the Java-based `YUI compressor` and the `yui_line_break` option
+    was not present in Minify's settings file
