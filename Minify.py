@@ -81,6 +81,10 @@ class MinifyClass():
 				outfile = re.sub(r'(\.js)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
 				cmdToRun = [cmd, inpfile, '-o', outfile, '-m', '-c']
+				if sublime.load_settings('Minify.sublime-settings').get('source_map'):
+					head, tail = ntpath.split(outfile)
+					mapfile = tail or ntpath.basename(head)
+					cmdToRun.extend(['--source-map', outfile + '.map', '--source-map-url', mapfile + '.map', '--source-map-root', './', '-p', 'relative'])
 				if sublime.load_settings('Minify.sublime-settings').get('keep_comments'):
 					cmdToRun.extend(['--comments'])
 					eo = sublime.load_settings('Minify.sublime-settings').get('comments_to_keep')
