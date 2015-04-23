@@ -63,7 +63,7 @@ class ThreadHandling(MinifyUtils):
 class PluginBase(ThreadHandling):
 	def is_enabled(self):
 		filename = self.view.file_name()
-		return bool(filename and (len(filename) > 0) and not (re.search('.+\.(?:js|css|html?|svg)$', filename) is None))
+		return bool(type(filename).__name__ == 'str' and (re.search(r'\.(?:css|js|html?|svg)$', filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(r'/(?:CSS|JavaScript|HTML)\.tmLanguage$', self.view.settings().get('syntax'))))
 	def run(self, edit):
 		if HAS_ASYNC:
 			sublime.set_timeout_async(lambda: self.do_action(), 0)
@@ -73,15 +73,16 @@ class PluginBase(ThreadHandling):
 class MinifyClass():
 	def minify(self, view):
 		inpfile = view.file_name()
-		if inpfile and (len(inpfile) > 0):
+		if type(inpfile).__name__ == 'str' and re.search(r'\.[^\.]+$', inpfile):
 			if view.is_dirty() and sublime.load_settings('Minify.sublime-settings').get('save_first'):
 				view.run_command('save')
 				if sublime.load_settings('Minify.sublime-settings').get('auto_minify_on_save'):
 					return
-			if not (re.search('.+\.js$', inpfile) is None):
-				outfile = re.sub(r'(\.js)$', r'.min\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
-				cmdToRun = [cmd, inpfile, '-o', outfile, '-m', '-c']
+			outfile = re.sub(r'(\.[^\.]+)$', r'.min\1', inpfile, 1)
+			syntax = view.settings().get('syntax')
+			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs')
+				cmdToRun.extend([inpfile, '-o', outfile, '-m', '-c'])
 				if sublime.load_settings('Minify.sublime-settings').get('source_map'):
 					head, tail = ntpath.split(outfile)
 					mapfile = tail or ntpath.basename(head)
@@ -91,20 +92,18 @@ class MinifyClass():
 					eo = sublime.load_settings('Minify.sublime-settings').get('comments_to_keep')
 					if type(eo).__name__ == 'str':
 						cmdToRun.extend([eo])
-			elif not (re.search('.+\.css$', inpfile) is None):
-				outfile = re.sub(r'(\.css)$', r'.min\1', inpfile, 1)
+			elif re.search(r'\.css$', inpfile) or re.search(r'/CSS\.tmLanguage$', syntax):
 				minifier = sublime.load_settings('Minify.sublime-settings').get('cssminifier') or 'clean-css'
 				if minifier == 'uglifycss':
-					cmd = sublime.load_settings('Minify.sublime-settings').get('uglifycss_command') or 'uglifycss'
-					cmdToRun = [cmd]
+					cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('uglifycss_command') or 'uglifycss')
 					eo = sublime.load_settings('Minify.sublime-settings').get('uglifycss_options')
 					if type(eo).__name__ == 'str':
 						cmdToRun.extend(shlex.split(eo))
 					cmdToRun.extend([inpfile, '>', outfile])
 				elif minifier == 'yui':
-					cmd = sublime.load_settings('Minify.sublime-settings').get('java_command') or 'java'
+					cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('java_command') or 'java')
 					yui_compressor = sublime.load_settings('Minify.sublime-settings').get('yui_compressor') or 'yuicompressor-2.4.7.jar'
-					cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), inpfile, '-o', outfile]
+					cmdToRun.extend(['-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), inpfile, '-o', outfile])
 					eo = sublime.load_settings('Minify.sublime-settings').get('yui_charset')
 					if type(eo).__name__ == 'str':
 						cmdToRun.extend(['--charset', eo])
@@ -112,26 +111,21 @@ class MinifyClass():
 					if type(eo).__name__ in ('int', 'str'):
 						cmdToRun.extend(['--line-break', str(eo)])
 				else:
-					cmd = sublime.load_settings('Minify.sublime-settings').get('cleancss_command') or 'cleancss'
-					cmdToRun = [cmd]
+					cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('cleancss_command') or 'cleancss')
 					eo = sublime.load_settings('Minify.sublime-settings').get('cleancss_options') or '--s0 -s --skip-rebase'
 					if type(eo).__name__ == 'str':
 						cmdToRun.extend(shlex.split(eo))
 					if sublime.load_settings('Minify.sublime-settings').get('css_source_map'):
 						cmdToRun.extend(['--source-map'])
 					cmdToRun.extend(['-o', outfile, inpfile])
-			elif not (re.search('.+\.html?$', inpfile) is None):
-				outfile = re.sub(r'(\.html?)$', r'.min\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('html-minifier_command') or 'html-minifier'
-				cmdToRun = [cmd]
+			elif re.search(r'\.html?$', inpfile) or re.search(r'/HTML\.tmLanguage$', syntax):
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('html-minifier_command') or 'html-minifier')
 				eo = sublime.load_settings('Minify.sublime-settings').get('html-minifier_options') or '--remove-comments --remove-comments-from-cdata --collapse-whitespace --conservative-collapse --collapse-boolean-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-js --minify-css'
 				if type(eo).__name__ == 'str':
 					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['-o', outfile, inpfile])
-			elif not (re.search('.+\.svg$', inpfile) is None):
-				outfile = re.sub(r'(\.svg)$', r'.min\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
-				cmdToRun = [cmd]
+			elif re.search(r'\.svg$', inpfile):
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo')
 				eo = sublime.load_settings('Minify.sublime-settings').get('svgo_min_options')
 				if type(eo).__name__ == 'str':
 					cmdToRun.extend(shlex.split(eo))
@@ -139,48 +133,45 @@ class MinifyClass():
 			else:
 				cmdToRun = False
 			if cmdToRun:
-				print('Minify: Minifying file ' + str(inpfile))
+				print('Minify: Minifying file ' + inpfile)
 				self.run_cmd(cmdToRun, outfile)
 
 class BeautifyClass():
 	def beautify(self, view):
 		inpfile = view.file_name()
-		if inpfile and (len(inpfile) > 0):
+		if type(inpfile).__name__ == 'str' and re.search(r'\.[^\.]+$', inpfile):
 			if sublime.load_settings('Minify.sublime-settings').get('save_first') and view.is_dirty():
 				view.run_command('save')
-			if not (re.search('.+\.js$', inpfile) is None):
-				outfile = re.sub(r'(?:\.min)?(\.js)$', r'.beautified\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
-				cmdToRun = [cmd, inpfile, '-o', outfile, '--comments', 'all', '-b']
+			outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.beautified\1', inpfile, 1)
+			syntax = view.settings().get('syntax')
+			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs')
+				cmdToRun.extend([inpfile, '-o', outfile, '--comments', 'all', '-b'])
 				eo = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_pretty_options')
 				if type(eo).__name__ == 'str':
 					cmdToRun.extend(shlex.split(eo))
-			elif not (re.search('.+\.css$', inpfile) is None):
-				outfile = re.sub(r'(?:\.min)?(\.css)$', r'.beautified\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
-				cmdToRun = [cmd]
+			elif re.search(r'\.css$', inpfile) or re.search(r'/CSS\.tmLanguage$', syntax):
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify')
 				eo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_options')
 				if type(eo).__name__ == 'str':
 					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['--css', '-o', outfile, inpfile])
-			elif not (re.search('.+\.html?$', inpfile) is None):
-				outfile = re.sub(r'(?:\.min)?(\.html?)$', r'.pretty\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
-				cmdToRun = [cmd]
+			elif re.search(r'\.html?$', inpfile) or re.search(r'/HTML\.tmLanguage$', syntax):
+				outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.pretty\1', inpfile, 1)
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify')
 				eo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_html_options')
 				if type(eo).__name__ == 'str':
 					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['--html', '-o', outfile, inpfile])
-			elif not (re.search('.+\.svg$', inpfile) is None):
-				outfile = re.sub(r'(?:\.min)?(\.svg)$', r'.pretty\1', inpfile, 1)
-				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
-				cmdToRun = [cmd]
+			elif re.search(r'\.svg$', inpfile):
+				outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.pretty\1', inpfile, 1)
+				cmdToRun = shlex.split(sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo')
 				eo = sublime.load_settings('Minify.sublime-settings').get('svgo_pretty_options')
 				if type(eo).__name__ == 'str':
 					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['--pretty', inpfile, outfile])
 			if cmdToRun:
-				print('Minify: Beautifying file ' + str(inpfile))
+				print('Minify: Beautifying file ' + inpfile)
 				self.run_cmd(cmdToRun, outfile)
 
 class MinifyCommand(PluginBase, MinifyClass, sublime_plugin.TextCommand):
