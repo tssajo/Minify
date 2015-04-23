@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, re, os, subprocess, platform, ntpath
+import sublime, sublime_plugin, re, os, subprocess, platform, ntpath, shlex
 
 PLUGIN_DIR = os.path.dirname(__file__) if int(sublime.version()) >= 3000 else os.getcwd()
 # on Windows platform run the commands in a shell
@@ -14,45 +14,47 @@ if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 	print('Minify: RUN_IN_SHELL: ' + str(RUN_IN_SHELL))
 	print('Minify: Sublime Text HAS_ASYNC: ' + str(HAS_ASYNC))
 
+class MinifyUtils():
+	def runProgram(self, cmdToRun):
+		if '>' in cmdToRun:
+			p = subprocess.Popen(cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
+			output = p.communicate()[1]
+		else:
+			p = subprocess.Popen(cmdToRun, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=RUN_IN_SHELL)
+			output = p.communicate()[0]
+		return p.returncode, output
+
 if not HAS_ASYNC:
 	import threading
-
-	class RunCmdInOtherThread(threading.Thread):
+	class RunCmdInOtherThread(MinifyUtils, threading.Thread):
 		def __init__(self, cmdToRun):
 			self.cmdToRun = cmdToRun
-			self.result = 1
-			self.err = ''
+			self.retCode = 1
+			self.output = ''
 			threading.Thread.__init__(self)
-
 		def run(self):
-			p = subprocess.Popen(self.cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
-			self.err = p.communicate()[1]
-			self.result = p.returncode
+			self.retCode, self.output = self.runProgram(self.cmdToRun)
 
-class ThreadHandling():
-	def handle_result(self, result, outfile, err, cmdToRun):
-		if result:
-			if err:
-				sublime.error_message(' '.join(cmdToRun) + '\r\n\r\n' + err.decode('utf-8'))
+class ThreadHandling(MinifyUtils):
+	def handle_result(self, cmdToRun, outfile, retCode, output):
+		if retCode:
+			if output:
+				sublime.error_message(' '.join(cmdToRun) + '\r\n\r\n' + output.decode('utf-8'))
 		else:
 			if sublime.load_settings('Minify.sublime-settings').get('open_file'):
 				sublime.active_window().open_file(outfile)
-
 	def handle_thread(self, thread, outfile):
 		if thread.is_alive():
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 		else:
-			self.handle_result(thread.result, outfile, thread.err, thread.cmdToRun)
-
+			self.handle_result(thread.cmdToRun, outfile, thread.retCode, thread.output)
 	def run_cmd(self, cmdToRun, outfile):
 		if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 			print('Minify: Output file ' + str(outfile))
 			print('Minify: cmdToRun: ' + str(cmdToRun))
 		if HAS_ASYNC:
-			p = subprocess.Popen(cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
-			err = p.communicate()[1]
-			result = p.returncode
-			self.handle_result(result, outfile, err, cmdToRun)
+			retCode, output = self.runProgram(cmdToRun)
+			self.handle_result(cmdToRun, outfile, retCode, output)
 		else:
 			thread = RunCmdInOtherThread(cmdToRun)
 			thread.start()
@@ -62,7 +64,6 @@ class PluginBase(ThreadHandling):
 	def is_enabled(self):
 		filename = self.view.file_name()
 		return bool(filename and (len(filename) > 0) and not (re.search('.+\.(?:js|css|html?|svg)$', filename) is None))
-
 	def run(self, edit):
 		if HAS_ASYNC:
 			sublime.set_timeout_async(lambda: self.do_action(), 0)
@@ -88,8 +89,8 @@ class MinifyClass():
 				if sublime.load_settings('Minify.sublime-settings').get('keep_comments'):
 					cmdToRun.extend(['--comments'])
 					eo = sublime.load_settings('Minify.sublime-settings').get('comments_to_keep')
-					if not ((eo is None) or (type(eo) is bool)):
-						cmdToRun.extend([str(eo)])
+					if type(eo).__name__ == 'str':
+						cmdToRun.extend([eo])
 			elif not (re.search('.+\.css$', inpfile) is None):
 				outfile = re.sub(r'(\.css)$', r'.min\1', inpfile, 1)
 				minifier = sublime.load_settings('Minify.sublime-settings').get('cssminifier') or 'clean-css'
@@ -97,25 +98,25 @@ class MinifyClass():
 					cmd = sublime.load_settings('Minify.sublime-settings').get('uglifycss_command') or 'uglifycss'
 					cmdToRun = [cmd]
 					eo = sublime.load_settings('Minify.sublime-settings').get('uglifycss_options')
-					if not ((eo is None) or (type(eo) is bool)):
-						cmdToRun.extend(str(eo).split())
+					if type(eo).__name__ == 'str':
+						cmdToRun.extend(shlex.split(eo))
 					cmdToRun.extend([inpfile, '>', outfile])
 				elif minifier == 'yui':
 					cmd = sublime.load_settings('Minify.sublime-settings').get('java_command') or 'java'
 					yui_compressor = sublime.load_settings('Minify.sublime-settings').get('yui_compressor') or 'yuicompressor-2.4.7.jar'
 					cmdToRun = [cmd, '-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), inpfile, '-o', outfile]
 					eo = sublime.load_settings('Minify.sublime-settings').get('yui_charset')
-					if not ((eo is None) or (type(eo) is bool)):
-						cmdToRun.extend(['--charset', str(eo)])
+					if type(eo).__name__ == 'str':
+						cmdToRun.extend(['--charset', eo])
 					eo = sublime.load_settings('Minify.sublime-settings').get('yui_line_break')
-					if not ((eo is None) or (type(eo) is bool)):
+					if type(eo).__name__ in ('int', 'str'):
 						cmdToRun.extend(['--line-break', str(eo)])
 				else:
 					cmd = sublime.load_settings('Minify.sublime-settings').get('cleancss_command') or 'cleancss'
 					cmdToRun = [cmd]
 					eo = sublime.load_settings('Minify.sublime-settings').get('cleancss_options') or '--s0 -s --skip-rebase'
-					if not ((eo is None) or (type(eo) is bool)):
-						cmdToRun.extend(str(eo).split())
+					if type(eo).__name__ == 'str':
+						cmdToRun.extend(shlex.split(eo))
 					if sublime.load_settings('Minify.sublime-settings').get('css_source_map'):
 						cmdToRun.extend(['--source-map'])
 					cmdToRun.extend(['-o', outfile, inpfile])
@@ -124,16 +125,16 @@ class MinifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('html-minifier_command') or 'html-minifier'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('html-minifier_options') or '--remove-comments --remove-comments-from-cdata --collapse-whitespace --conservative-collapse --collapse-boolean-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-js --minify-css'
-				if not ((eo is None) or (type(eo) is bool)):
-					cmdToRun.extend(str(eo).split())
+				if type(eo).__name__ == 'str':
+					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['-o', outfile, inpfile])
 			elif not (re.search('.+\.svg$', inpfile) is None):
 				outfile = re.sub(r'(\.svg)$', r'.min\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('svgo_min_options')
-				if not ((eo is None) or (type(eo) is bool)):
-					cmdToRun.extend(str(eo).split())
+				if type(eo).__name__ == 'str':
+					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend([inpfile, outfile])
 			else:
 				cmdToRun = False
@@ -152,31 +153,31 @@ class BeautifyClass():
 				cmd = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_command') or 'uglifyjs'
 				cmdToRun = [cmd, inpfile, '-o', outfile, '--comments', 'all', '-b']
 				eo = sublime.load_settings('Minify.sublime-settings').get('uglifyjs_pretty_options')
-				if not ((eo is None) or (type(eo) is bool)):
-					cmdToRun.extend(str(eo).split())
+				if type(eo).__name__ == 'str':
+					cmdToRun.extend(shlex.split(eo))
 			elif not (re.search('.+\.css$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.css)$', r'.beautified\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_options')
-				if not ((eo is None) or (type(eo) is bool)):
-					cmdToRun.extend(str(eo).split())
+				if type(eo).__name__ == 'str':
+					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['--css', '-o', outfile, inpfile])
 			elif not (re.search('.+\.html?$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.html?)$', r'.pretty\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('js-beautify_command') or 'js-beautify'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('js-beautify_html_options')
-				if not ((eo is None) or (type(eo) is bool)):
-					cmdToRun.extend(str(eo).split())
+				if type(eo).__name__ == 'str':
+					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['--html', '-o', outfile, inpfile])
 			elif not (re.search('.+\.svg$', inpfile) is None):
 				outfile = re.sub(r'(?:\.min)?(\.svg)$', r'.pretty\1', inpfile, 1)
 				cmd = sublime.load_settings('Minify.sublime-settings').get('svgo_command') or 'svgo'
 				cmdToRun = [cmd]
 				eo = sublime.load_settings('Minify.sublime-settings').get('svgo_pretty_options')
-				if not ((eo is None) or (type(eo) is bool)):
-					cmdToRun.extend(str(eo).split())
+				if type(eo).__name__ == 'str':
+					cmdToRun.extend(shlex.split(eo))
 				cmdToRun.extend(['--pretty', inpfile, outfile])
 			if cmdToRun:
 				print('Minify: Beautifying file ' + str(inpfile))
