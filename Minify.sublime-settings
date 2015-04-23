@@ -94,10 +94,10 @@
 	// "svgo_command": "/usr/local/bin/svgo",
 
 	// you can specify command line parameters for .svg minification
-	// "svgo_min_options": "--precision=4",
+	// "svgo_min_options": "--multipass",
 
 	// you can specify command line parameters for .svg prettification
-	// "svgo_pretty_options": "--precision=4"
+	// "svgo_pretty_options": "--multipass"
 
 	// ###############
 	// #  Debugging  #
