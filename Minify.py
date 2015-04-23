@@ -26,12 +26,14 @@ class MinifyUtils():
 
 if not HAS_ASYNC:
 	import threading
+
 	class RunCmdInOtherThread(MinifyUtils, threading.Thread):
 		def __init__(self, cmdToRun):
 			self.cmdToRun = cmdToRun
 			self.retCode = 1
 			self.output = ''
 			threading.Thread.__init__(self)
+
 		def run(self):
 			self.retCode, self.output = self.runProgram(self.cmdToRun)
 
@@ -43,11 +45,13 @@ class ThreadHandling(MinifyUtils):
 		else:
 			if sublime.load_settings('Minify.sublime-settings').get('open_file'):
 				sublime.active_window().open_file(outfile)
+
 	def handle_thread(self, thread, outfile):
 		if thread.is_alive():
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 		else:
 			self.handle_result(thread.cmdToRun, outfile, thread.retCode, thread.output)
+
 	def run_cmd(self, cmdToRun, outfile):
 		if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
 			print('Minify: Output file ' + str(outfile))
@@ -64,6 +68,7 @@ class PluginBase(ThreadHandling):
 	def is_enabled(self):
 		filename = self.view.file_name()
 		return bool(type(filename).__name__ == 'str' and (re.search(r'\.(?:css|js|html?|svg)$', filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(r'/(?:CSS|JavaScript|HTML)\.tmLanguage$', self.view.settings().get('syntax'))))
+
 	def run(self, edit):
 		if HAS_ASYNC:
 			sublime.set_timeout_async(lambda: self.do_action(), 0)
