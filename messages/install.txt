@@ -19,7 +19,7 @@ You must complete the installation by installing the required dependencies
 
     Here is how you can test if `node` is in your `PATH`:
 
-    Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:
+    Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:
 
     node --version
 
@@ -28,7 +28,7 @@ You must complete the installation by installing the required dependencies
 
 3. Install required Node.js CLI apps:
 
-  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:
 
   npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
 
@@ -42,7 +42,7 @@ You must complete the installation by installing the required dependencies
 
     Please test that the installed Node.js CLI apps are available via your `PATH`:
 
-    Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command, for example:
+    Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command, for example:
 
     cleancss --version
 

@@ -1,8 +1,10 @@
-Version 1.1.1
+Version 1.1.4
 -------------
 
-* Fixed a critical bug which prevented Minify to work
-* Reworked the README.md file
+* Added support for syntax-based minifying/beautifying
+* Fixed a bug which caused SVG file minification not to work on Windows
+* Lots of improvements and optimizations in the plugin's source code
+
 
 ################
 #  IMPORTANT!  #

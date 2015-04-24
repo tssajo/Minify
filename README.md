@@ -46,19 +46,19 @@ Installation in Three Easy Steps
   On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the [nodejs.org](https://nodejs.org/) web site.<br><br>
   Please make sure that `node` is in your system `PATH`!<br><br>
   Here is how you can test if `node` is in your `PATH`:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:<br><br>
   `node --version`<br><br>
   If instead of a version number you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:<br><br>
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
   If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command and so on.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:<br><br>
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X or `CMD window` on Windows) then issue the following command, for example:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command, for example:<br><br>
   `cleancss --version`<br><br>
   If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).<br><br>

@@ -13,7 +13,7 @@ Version 1.1.0
 #  IMPORTANT!  #
 ################
 
-Please open up a shell window (Terminal on Mac OS X, CMD window on Windows) and issue the following commands:
+Please open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following commands:
 
 npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
 
