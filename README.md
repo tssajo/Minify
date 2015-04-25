@@ -54,7 +54,7 @@ Installation in Three Easy Steps
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:<br><br>
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
-  If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command and so on.<br><br>
+  If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, the same applies to `uglifycss`, etc.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:<br><br>
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`:<br><br>

@@ -34,7 +34,7 @@ You must complete the installation by installing the required dependencies
 
   Notes:
 
-    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command and so on.
+    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, the same applies to `uglifycss`, etc.
 
     If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:
 
