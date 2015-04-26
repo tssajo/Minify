@@ -4,7 +4,8 @@ Thank you for installing `Minify` for Sublime Text
 You must complete the installation by installing the required dependencies
 --------------------------------------------------------------------------
 
-1. If you see this message in your Sublime Text editor then you have already installed `Minify` package.
+1. If you see this message in your Sublime Text editor then you have already installed the `Minify` package.
+    Please proceed to step 2:
 
 2. Install Node.js:
 
