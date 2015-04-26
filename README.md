@@ -1,8 +1,8 @@
 `Minify` for Sublime Text
 =========================
 
-Overview
---------
+What is `Minify`
+----------------
 `Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript or SVG file.
 
 `Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
@@ -85,7 +85,7 @@ You should see the following line:
 
 `setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin`
 
-If you do, you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
+If you do then you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
 
 How to use `Minify`
 -------------------

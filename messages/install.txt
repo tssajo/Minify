@@ -75,7 +75,7 @@ You should see the following line:
 
 setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
-If you do, you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
+If you do then you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
 
 
 What is `Minify`
