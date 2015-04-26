@@ -46,7 +46,7 @@ Installation in Three Easy Steps
   After successful installation, please make sure that `node` is in your `PATH`, here is how to test it:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
   `node --version`<br><br>
-  You should see a version number. However, if you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
+  You should see a version number. But if you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
@@ -58,7 +58,7 @@ Installation in Three Easy Steps
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command, for example:<br><br>
   `cleancss --version`<br><br>
-  If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
+  You should see a version number. But if you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).<br><br>
 
 IMPORTANT NOTE FOR MAC OS X USERS

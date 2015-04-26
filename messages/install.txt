@@ -17,8 +17,8 @@ You must complete the installation by installing the required dependencies
 
   node --version
 
-  You should see a version number. However, if you see an error message such as `command not found` or
-  something similar then `node` is not available via your `PATH` and you must fix this!
+  You should see a version number. But if you see an error message such as `command not found` or something
+  similar then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:
 
@@ -43,9 +43,8 @@ You must complete the installation by installing the required dependencies
 
   cleancss --version
 
-  If you see a version number then the command is available. But if you see an error message such as
-  `command not found` or something similar then `cleancss` is not available via your `PATH` and you must
-  fix this!
+  You should see a version number. But if you see an error message such as `command not found` or something
+  similar then `cleancss` is not available via your `PATH` and you must fix this!
 
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `uglifyjs`,
   `html-minifier` and `svgo`).
