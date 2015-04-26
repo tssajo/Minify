@@ -92,7 +92,7 @@ of Python code. Once installed `Minify` does not need Internet access to do its 
 platforms (Linux, Mac OS X and Windows).
 
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those
-dependencies are provided below.
+dependencies were provided above.
 
 Which 3rd party programs are used by `Minify`
 ---------------------------------------------
