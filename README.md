@@ -74,10 +74,10 @@ Open up a `Terminal` and issue the following commands:
 (at this point you need to enter your OS X user password)
 
 `echo "setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" >> /etc/launchd.conf`
+
 `exit`
 
-At this point please verify the contents of your `/etc/launchd.conf` file.
-To do that, while still in `Terminal` issue the following command:
+Please verify the contents of your `/etc/launchd.conf` file. To do that, while still in `Terminal`, issue the following command:
 
 `cat /etc/launchd.conf`
 
