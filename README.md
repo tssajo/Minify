@@ -3,7 +3,7 @@
 
 Overview
 --------
-`Minify` for Sublime Text can create a minified version of a currently opened CSS, HTML, JavaScript or SVG file.
+`Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript or SVG file.
 
 `Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
 
@@ -32,7 +32,7 @@ Installation in Three Easy Steps
   First install Package Control - [see installation instructions](https://packagecontrol.io/installation)<br><br>
   Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
   You can search for the `Minify` pacakge by entering its name `Minify`<br><br>
-  b) You can install `Minify` from GitHub directly (this is NOT recommended) :<br><br>
+  b) Alternatively, you can install `Minify` from GitHub directly (this is NOT recommended) :<br><br>
   _on Mac OS X:_<br><br>
   `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`<br><br>
   Note: Replace "Sublime\ Text\ 3" with "Sublime\ Text\ 2" in the above command if you are using Sublime Text 2.<br><br>
@@ -53,7 +53,7 @@ Installation in Three Easy Steps
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
   If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, the same applies to `uglifycss`, etc.<br><br>
-  If you already have some or all of the above Node.js CLI apps installed on your system then it is recommended to update them to the latest version with the following command:<br><br>
+  If you already have some or all of the above Node.js CLI apps installed on your system then it is recommended to update them all to the latest version with the following command:<br><br>
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command, for example:<br><br>
