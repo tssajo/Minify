@@ -40,8 +40,8 @@ Installation in Three Easy Steps
   `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`<br><br>
   Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
 
-2. Install Node.js<br><br>
-  Windows and Mac OS X users should just visit [nodejs.org](https://nodejs.org/) and click on the INSTALL button,
+2. Install Node.js:<br><br>
+  Windows and Mac OS X users should just visit [nodejs.org](https://nodejs.org/) and click on the INSTALL button,<br>
   Linux users can download pre-compiled binary files from [https://nodejs.org/download/](https://nodejs.org/download/)<br><br>
   After successful installation, please make sure that `node` is in your `PATH`, here is how to test it:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
