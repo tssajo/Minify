@@ -40,53 +40,52 @@ Installation in Three Easy Steps
   `git clone git://github.com/tssajo/Minify.git %APPDATA%\Sublime Text 3\Packages\Minify`<br><br>
   Note: Replace "Sublime Text 3" with "Sublime Text 2" in the above command if you are using Sublime Text 2.
 
-2. Install Node.js - [see installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)<br><br>
-  Notes:<br><br>
-  On Mac OS X I usually use [Homebrew](http://brew.sh/) to install Node.js: First I install Homebrew then I install Node.js with the following command: `brew install node`<br><br>
-  On Windows I simply download the [Windows Installer](https://nodejs.org/#download) directly from the [nodejs.org](https://nodejs.org/) web site.<br><br>
-  Please make sure that `node` is in your system `PATH`!<br><br>
-  Here is how you can test if `node` is in your `PATH`:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:<br><br>
+2. Install Node.js<br><br>
+  Windows and Mac OS X users should just visit [nodejs.org](https://nodejs.org/) and click on the INSTALL button,
+  Linux users can download pre-compiled binary files from [https://nodejs.org/download/](https://nodejs.org/download/)<br><br>
+  After successful installation, please make sure that `node` is in your `PATH`, here is how you can test it:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
   `node --version`<br><br>
-  If instead of a version number you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
+  You should see a version number. However, if you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
   If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, the same applies to `uglifycss`, etc.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then you can update them to the latest version with the following command:<br><br>
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) then issue the following command, for example:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command, for example:<br><br>
   `cleancss --version`<br><br>
   If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).<br><br>
-  You might be able to work around some path issues by specifying the full path for each Node.js CLI app in your Sublime Text editor under
-  `Settings -- User` of `Minify` ( `Minify.sublime-settings` )
 
 IMPORTANT NOTE FOR MAC OS X USERS
 ---------------------------------
-When I installed Node.js via Homebrew on a Mac, I ran into the following problem:
+You need to add `/usr/local/bin` directory to your system `PATH` !
 
-Unfortunately, Sublime Text did not search for executable files under `/usr/local/bin` directory regardless of my system PATH settings!
-It seemed like Sublime Text's Python used its own PATH settings which I could not alter... Because of this you probably need to create a symlink on your Mac like I did:
+Here is how to do it properly. Note: You only need to do it once.
 
-Open a `Terminal` and issue the following command:
+Open up a `Terminal` and issue the following commands:
 
-`cd /usr/bin && sudo ln -s /usr/local/bin/node node`
+`sudo su`
 
-This was definitely required but it was not enough!
+(at this point you need to enter your OS X user password)
 
-I also had to specify the full path for each Node.js CLI command:
-After installing `Minify` open its default settings in Sublime Text editor
-( Preferences -> Package Settings -> Minify -> Settings -- Default ) and copy the contents of that file to the `Settings -- User` file
-( Preferences -> Package Settings -> Minify -> Settings -- User ) then you can customize your `Minify` settings there.
-Please do not modify `Settings -- Default` because it will be overwritten by the next update of `Minify`!
+`echo "setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" >> /etc/launchd.conf`
+`exit`
 
-For example, to add full path to your `cleancss` command, uncomment the following line inside your `Settings -- User` file:
+At this point please verify the contents of your `/etc/launchd.conf` file.
+To do that, while still in `Terminal` issue the following command:
 
-    "cleancss_command": "/usr/local/bin/cleancss",
+`cat /etc/launchd.conf`
+
+You should see the following line:
+
+`setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin`
+
+If you do, you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
 
 How to use `Minify`
 -------------------

@@ -19,12 +19,11 @@ class MinifyUtils():
 		return s.encode('utf8') if (type(s).__name__ == 'unicode') else s
 
 	def runProgram(self, cmdToRun):
-		cmd = cmdToRun if RUN_IN_SHELL else ['/usr/bin/env'] + cmdToRun
 		if '>' in cmdToRun:
-			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
+			p = subprocess.Popen(cmdToRun, stderr=subprocess.PIPE, shell=RUN_IN_SHELL)
 			output = p.communicate()[1]
 		else:
-			p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=RUN_IN_SHELL)
+			p = subprocess.Popen(cmdToRun, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=RUN_IN_SHELL)
 			output = p.communicate()[0]
 		return p.returncode, output
 
