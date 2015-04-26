@@ -69,7 +69,7 @@ exit
 Please verify the contents of your `/etc/launchd.conf` file. To do that, while still in `Terminal`, issue
 the following command:
 
-`cat /etc/launchd.conf`
+cat /etc/launchd.conf
 
 You should see the following line:
 
