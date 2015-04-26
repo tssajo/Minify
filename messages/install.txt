@@ -36,7 +36,7 @@ You must complete the installation by installing the required dependencies
 
     npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
 
-  Please test that the installed Node.js CLI apps are available via your `PATH`:
+  Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:
 
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command,
   for example:

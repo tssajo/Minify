@@ -55,7 +55,7 @@ Installation in Three Easy Steps
   If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, the same applies to `uglifycss`, etc.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then it is recommended to update them to the latest version with the following command:<br><br>
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
-  Please test that the installed Node.js CLI apps are available via your `PATH`:<br><br>
+  Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command, for example:<br><br>
   `cleancss --version`<br><br>
   If instead of a version number you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
