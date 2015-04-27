@@ -6,13 +6,13 @@ USE_SHELL = sublime.platform() == 'windows'
 POPEN_ENV = ({'PATH': ':'.join(['/usr/local/bin', os.environ['PATH']])}) if sublime.platform() == 'osx' and os.path.isdir('/usr/local/bin') else None
 
 if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
-	print('Minify: Sublime Platform: ', sublime.platform())
-	print('Minify: Sublime Version: ', sublime.version())
-	print('Minify: Python Version: ', platform.python_version())
-	print('Minify: PLUGIN_DIR: ', PLUGIN_DIR)
-	print('Minify: SUBL_ASYNC: ', SUBL_ASYNC)
-	print('Minify: USE_SHELL: ', USE_SHELL)
-	print('Minify: POPEN_ENV: ', POPEN_ENV)
+	print('Minify: Sublime Platform:', sublime.platform())
+	print('Minify: Sublime Version:', sublime.version())
+	print('Minify: Python Version:', platform.python_version())
+	print('Minify: PLUGIN_DIR:', PLUGIN_DIR)
+	print('Minify: SUBL_ASYNC:', SUBL_ASYNC)
+	print('Minify: USE_SHELL:', USE_SHELL)
+	print('Minify: POPEN_ENV:', POPEN_ENV)
 
 class MinifyUtils():
 	def fixStr(self, s):
@@ -57,8 +57,8 @@ class ThreadHandling(MinifyUtils):
 
 	def run_cmd(self, cmd, outfile):
 		if sublime.load_settings('Minify.sublime-settings').get('debug_mode'):
-			print('Minify: Output file ', outfile)
-			print('Minify: cmd: ', cmd)
+			print('Minify: Output file:', outfile)
+			print('Minify: Command:', cmd)
 		if SUBL_ASYNC:
 			retCode, output = self.runProgram(cmd)
 			self.handle_result(cmd, outfile, retCode, output)
@@ -141,7 +141,7 @@ class MinifyClass(MinifyUtils):
 			else:
 				cmd = False
 			if cmd:
-				print('Minify: Minifying file ', inpfile)
+				print('Minify: Minifying file:', inpfile)
 				self.run_cmd(cmd, outfile)
 
 class BeautifyClass(MinifyUtils):
@@ -179,7 +179,7 @@ class BeautifyClass(MinifyUtils):
 					cmd.extend(shlex.split(self.fixStr(eo)))
 				cmd.extend(['--pretty', inpfile, outfile])
 			if cmd:
-				print('Minify: Beautifying file ', inpfile)
+				print('Minify: Beautifying file:', inpfile)
 				self.run_cmd(cmd, outfile)
 
 class MinifyCommand(PluginBase, MinifyClass, sublime_plugin.TextCommand):
