@@ -7,12 +7,14 @@ What is `Minify`
 
 `Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
 
-Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 200 lines of Python code.
-Once installed `Minify` does not need Internet access to do its job, it works offline.
+Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 200 lines of
+Python code. Once installed `Minify` does not need Internet access to do its job, it works offline.
 
-`Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported platforms (Linux, Mac OS X and Windows).
+`Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported
+platforms (Linux, Mac OS X and Windows).
 
-`Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those dependencies are provided below.
+`Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those
+dependencies are provided below.
 
 Which 3rd party programs are used by `Minify`
 ---------------------------------------------
@@ -30,8 +32,9 @@ Installation in Three Easy Steps
 1. Install `Minify` package for Sublime Text:<br><br>
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method) :<br><br>
   First install Package Control - [see installation instructions](https://packagecontrol.io/installation)<br><br>
-  Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find `Package Control: Install Package` then press Enter.
-  You can search for the `Minify` pacakge by entering its name `Minify`<br><br>
+  Then inside Sublime Text press `ctrl + shift + p` ( `super + shift + p` on Mac OS X ) and find
+  `Package Control: Install Package` then press Enter.
+  You can search for the `Minify` package by entering its name `Minify`<br><br>
   b) Alternatively, you can install `Minify` from GitHub directly (this is NOT recommended) :<br><br>
   _on Mac OS X:_<br><br>
   `git clone git://github.com/tssajo/Minify.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Minify`<br><br>
@@ -46,20 +49,28 @@ Installation in Three Easy Steps
   After successful installation, please make sure that `node` is in your `PATH`, here is how to test it:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
   `node --version`<br><br>
-  You should see a version number. But if you see an error message such as `command not found` or something similar then `node` is not available via your `PATH` and you must fix this!
+  You should see a version number. But if you see an error message such as `command not found` or something similar
+  then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:<br><br>
   Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
-  If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command, the same applies to `uglifycss`, etc.<br><br>
-  If you already have some or all of the above Node.js CLI apps installed on your system then it is recommended to update them all to the latest version with the following command:<br><br>
+  If you are on Mac OS X and you get an error here then issue the following command from `Terminal`:
+  `sudo chown -R $USER /usr/local` and then try to issue the npm install command from above again.<br><br>
+  If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above npm
+  install command. You can also leave out `uglifycss`, etc.<br><br>
+  If you already have some or all of the above Node.js CLI apps installed on your system then it is
+  recommended to update them all to the latest version with the following command:
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command, for example:<br><br>
+  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command,
+  for example:<br><br>
   `cleancss --version`<br><br>
-  You should see a version number. But if you see an error message such as `command not found` or something similar then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
-  You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`, `uglifyjs` and `svgo`).<br><br>
+  You should see a version number. But if you see an error message such as `command not found` or something similar
+  then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
+  You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`,
+  `uglifyjs` and `svgo`).<br><br>
 
 IMPORTANT NOTE FOR MAC OS X USERS
 ---------------------------------
@@ -77,7 +88,8 @@ Open up a `Terminal` and issue the following commands:
 
 `exit`
 
-Please verify the contents of your `/etc/launchd.conf` file. To do that, while still in `Terminal`, issue the following command:
+Please verify the contents of your `/etc/launchd.conf` file. To do that, while still in `Terminal`, issue the
+following command:
 
 `cat /etc/launchd.conf`
 

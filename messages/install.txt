@@ -29,11 +29,14 @@ You must complete the installation by installing the required dependencies
 
   Notes:
 
-    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above command,
-    the same applies to `uglifycss`, etc.
+    If you are on Mac OS X and you get an error here then issue the following command from `Terminal`:
+    `sudo chown -R $USER /usr/local` and then try to issue the npm install command from above again.
+
+    If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above npm
+    install command. You can also leave out `uglifycss`, etc.
 
     If you already have some or all of the above Node.js CLI apps installed on your system then it is
-    recommended to update them to the latest version with the following command:
+    recommended to update them all to the latest version with the following command:
 
     npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
 
@@ -49,33 +52,6 @@ You must complete the installation by installing the required dependencies
 
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `uglifyjs`,
   `html-minifier` and `svgo`).
-
-IMPORTANT NOTE FOR MAC OS X USERS
----------------------------------
-
-You need to add `/usr/local/bin` directory to your system `PATH` !
-
-Here is how to do it properly. Note: You only need to do it once.
-Open up a `Terminal` and issue the following commands:
-
-sudo su
-
-(at this point you need to enter your OS X user password)
-
-echo "setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" >> /etc/launchd.conf
-
-exit
-
-Please verify the contents of your `/etc/launchd.conf` file. To do that, while still in `Terminal`, issue
-the following command:
-
-cat /etc/launchd.conf
-
-You should see the following line:
-
-setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
-
-If you do then you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
 
 
 What is `Minify`
