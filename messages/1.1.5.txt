@@ -1,0 +1,5 @@
+Version 1.1.5
+-------------
+
+* No longer need to make PATH related configuration changes from `Terminal` on Mac OS X
+    This will certainly make installation of the plugin much simpler for OS X users.
