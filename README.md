@@ -72,7 +72,7 @@ Installation in Three Easy Steps
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`,
   `uglifyjs` and `svgo`).<br><br>
 
-  How to use `Minify`
+How to use `Minify`
 -------------------
 Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
 
