@@ -53,7 +53,7 @@ Installation in Three Easy Steps
   then `node` is not available via your `PATH` and you must fix this!
 
 3. Install required Node.js CLI apps:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command:<br><br>
+  From a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command:<br><br>
   `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
   If you are on Mac OS X and you get an error here then issue the following command from `Terminal`:
@@ -61,10 +61,10 @@ Installation in Three Easy Steps
   If you are never going to work with e.g. SVG files then you can leave out `svgo` from the above npm
   install command. You can also leave out `uglifycss`, etc.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then it is
-  recommended to update them all to the latest version with the following command:
+  recommended to update them all to the latest version with the following command:<br><br>
   `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
-  Open up a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) and issue the following command,
+  Still from a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command,
   for example:<br><br>
   `cleancss --version`<br><br>
   You should see a version number. But if you see an error message such as `command not found` or something similar
@@ -72,34 +72,7 @@ Installation in Three Easy Steps
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`,
   `uglifyjs` and `svgo`).<br><br>
 
-IMPORTANT NOTE FOR MAC OS X USERS
----------------------------------
-You need to add `/usr/local/bin` directory to your system `PATH` !
-
-Here is how to do it properly. Note: You only need to do it once.
-
-Open up a `Terminal` and issue the following commands:
-
-`sudo su`
-
-(at this point you need to enter your OS X user password)
-
-`echo "setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" >> /etc/launchd.conf`
-
-`exit`
-
-Please verify the contents of your `/etc/launchd.conf` file. To do that, while still in `Terminal`, issue the
-following command:
-
-`cat /etc/launchd.conf`
-
-You should see the following line:
-
-`setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin`
-
-If you do then you're all set. But it is IMPORTANT to restart your computer for this change to take effect!
-
-How to use `Minify`
+  How to use `Minify`
 -------------------
 Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
 
