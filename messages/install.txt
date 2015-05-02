@@ -60,6 +60,7 @@ What is `Minify`
 `Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript or SVG file.
 
 `Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
+It can be easily configured to generate .map files too for minified CSS and JavaScript files.
 
 Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 200 lines
 of Python code. Once installed `Minify` does not need Internet access to do its job, it works offline.
