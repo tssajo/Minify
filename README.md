@@ -111,12 +111,12 @@ in the project's .sublime-project file containing your [project specific setting
 
 ```json
 {
-  "settings": {
-    "Minify": {
-      "auto_minify_on_save": true,
-      "open_file": false
+    "settings": {
+        "Minify": {
+            "auto_minify_on_save": true,
+            "open_file": false
+        }
     }
-  }
 }
 ```
 
