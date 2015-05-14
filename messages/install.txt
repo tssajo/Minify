@@ -68,8 +68,8 @@ of Python code. Once installed `Minify` does not need Internet access to do its 
 `Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported
 platforms (Linux, Mac OS X and Windows).
 
-`Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those
-dependencies were provided above.
+`Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for
+those dependencies are provided above.
 
 Which 3rd party programs are used by `Minify`
 ---------------------------------------------
@@ -102,9 +102,35 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text 
 
   `ctrl + alt + shift + m` ( `super + alt + shift + m` on Mac OS X )
 
-  This beautifies the current buffer and saves the beautified version into the same directory with the appropriate
-  .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file extension
-  then it opens the beautified file in a new editor tab.
+  This beautifies the current buffer and saves the beautified version into the same directory with the
+  appropriate .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file
+  extension then it opens the beautified file in a new editor tab.
+
+User settings
+-------------
+Please place your customized settings into:
+
+  Preferences > Package Settings > Minify > Settings - User
+
+To find out what the possible options are please see:
+
+  Preferences > Package Settings > Minify > Settings - Default
+
+Project settings
+----------------
+You can override the default and user settings for individual projects. Just add a "Minify" object to
+the "settings" object in the project's .sublime-project file containing your project specific settings.
+
+Example:
+
+  {
+    "settings": {
+      "Minify": {
+        "auto_minify_on_save": true,
+        "open_file": false
+      }
+    }
+  }
 
 License
 -------

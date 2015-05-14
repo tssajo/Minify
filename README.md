@@ -95,6 +95,33 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text 
   .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file extension
   then it opens the beautified file in a new editor tab.
 
+User settings
+-------------
+
+Please place your customized settings into:
+
+*(Preferences > Package Settings > Minify > Settings - User)*
+
+To find out what the possible options are please see:
+
+*(Preferences > Package Settings > Minify > Settings - Default)*
+
+Project settings
+----------------
+
+You can override the default and user settings for individual projects. Just add a "Minify" object to the "settings" object in the project's .sublime-project file containing your [project specific settings](http://www.sublimetext.com/docs/3/projects.html).
+
+Example:
+
+    {
+      "settings": {
+        "Minify": {
+          "auto_minify_on_save": true,
+          "open_file": false
+        }
+      }
+    }
+
 License
 -------
 See [LICENSE.md](https://github.com/tssajo/Minify/blob/master/LICENSE.md) file for licensing information.
