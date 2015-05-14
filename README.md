@@ -19,7 +19,6 @@ dependencies are provided below.
 
 Which 3rd party programs are used by `Minify`
 ---------------------------------------------
-
 |                | Minify | Beautify |
 | -------------- |:------:|:--------:|
 | **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
@@ -29,7 +28,6 @@ Which 3rd party programs are used by `Minify`
 
 Installation in Three Easy Steps
 --------------------------------
-
 1. Install `Minify` package for Sublime Text:<br><br>
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method) :<br><br>
   First install Package Control - [see installation instructions](https://packagecontrol.io/installation)<br><br>
@@ -97,7 +95,6 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text 
 
 User settings
 -------------
-
 Please place your customized settings into:
 
 *(Preferences > Package Settings > Minify > Settings - User)*
@@ -108,18 +105,18 @@ To find out what the possible options are please see:
 
 Project settings
 ----------------
-
-You can override the default and user settings for individual projects. Just add a "Minify" object to the "settings" object in the project's .sublime-project file containing your [project specific settings](http://www.sublimetext.com/docs/3/projects.html).
+You can override the default and user settings for individual projects. Just add a "Minify" object to the "settings" object
+in the project's .sublime-project file containing your [project specific settings](http://www.sublimetext.com/docs/3/projects.html).
 
 Example:
 
     {
-      "settings": {
-        "Minify": {
-          "auto_minify_on_save": true,
-          "open_file": false
+        "settings": {
+            "Minify": {
+                "auto_minify_on_save": true,
+                "open_file": false
+            }
         }
-      }
     }
 
 License
