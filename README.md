@@ -110,14 +110,14 @@ in the project's .sublime-project file containing your [project specific setting
 ###Example:
 
 ```json
-  {
-      "settings": {
-          "Minify": {
-              "auto_minify_on_save": true,
-              "open_file": false
-          }
-      }
+{
+  "settings": {
+    "Minify": {
+      "auto_minify_on_save": true,
+      "open_file": false
+    }
   }
+}
 ```
 
 ##License
