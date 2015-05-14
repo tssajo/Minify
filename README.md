@@ -1,8 +1,7 @@
-`Minify` for Sublime Text
-=========================
+# `Minify` for Sublime Text
 
-What is `Minify`
-----------------
+## What is `Minify`
+
 `Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript or SVG file.
 
 `Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
@@ -17,8 +16,8 @@ platforms (Linux, Mac OS X and Windows).
 `Minify` depends on other programs written in Node.js to do its job. Detailed installation instructions for those
 dependencies are provided below.
 
-Which 3rd party programs are used by `Minify`
----------------------------------------------
+## Which 3rd party programs are used by `Minify`
+
 |                | Minify | Beautify |
 | -------------- |:------:|:--------:|
 | **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
@@ -26,8 +25,8 @@ Which 3rd party programs are used by `Minify`
 | **JavaScript** | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs --beautify](https://www.npmjs.com/package/uglifyjs) |
 | **SVG**        | [svgo](https://www.npmjs.com/package/svgo) | [svgo --pretty](https://www.npmjs.com/package/svgo) |
 
-Installation in Three Easy Steps
---------------------------------
+## Installation in Three Easy Steps
+
 1. Install `Minify` package for Sublime Text:<br><br>
   a) Install `Minify` via [Package Control](https://packagecontrol.io/) (this is the recommended method) :<br><br>
   First install Package Control - [see installation instructions](https://packagecontrol.io/installation)<br><br>
@@ -71,8 +70,8 @@ Installation in Three Easy Steps
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`,
   `uglifyjs` and `svgo`).<br><br>
 
-How to use `Minify`
--------------------
+##How to use `Minify`
+
 Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
 
   a) use the Context Menu inside the Sublime Text editor window,
@@ -93,8 +92,8 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text 
   .beautified.css or .beautified.htm or .beautified.html or .beautified.js or .pretty.svg file extension
   then it opens the beautified file in a new editor tab.
 
-User settings
--------------
+## User settings
+
 Please place your customized settings into:
 
 *(Preferences > Package Settings > Minify > Settings - User)*
@@ -103,22 +102,24 @@ To find out what the possible options are please see:
 
 *(Preferences > Package Settings > Minify > Settings - Default)*
 
-Project settings
-----------------
+## Project settings
+
 You can override the default and user settings for individual projects. Just add a "Minify" object to the "settings" object
 in the project's .sublime-project file containing your [project specific settings](http://www.sublimetext.com/docs/3/projects.html).
 
-Example:
+###Example:
 
-    {
-        "settings": {
-            "Minify": {
-                "auto_minify_on_save": true,
-                "open_file": false
-            }
-        }
-    }
+```json
+  {
+      "settings": {
+          "Minify": {
+              "auto_minify_on_save": true,
+              "open_file": false
+          }
+      }
+  }
+```
 
-License
--------
+##License
+
 See [LICENSE.md](https://github.com/tssajo/Minify/blob/master/LICENSE.md) file for licensing information.
