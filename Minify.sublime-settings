@@ -23,6 +23,15 @@
 	// Open resulting file (minified or beautified)?
 	"open_file": true,
 
+	// Only Minify specified file types (css,js,html,svg)
+	"allowed_file_types":
+	[
+		"css",
+		"js",
+		"html",
+		"svg"
+	],
+
 	// ############################
 	// #  CSS Processing Options  #
 	// ############################
