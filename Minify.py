@@ -200,7 +200,29 @@ class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
 	def on_post_save(self, view):
 		self.view = view
 		if self.get_setting('auto_minify_on_save'):
-			if SUBL_ASYNC:
-				sublime.set_timeout_async(lambda: self.minify(), 0)
-			else:
-				self.minify()
+			filename = self.view.file_name()
+			searchStr = ''
+			searchStr2 = ''
+			if "css" in self.get_setting('allowed_file_types'):
+				searchStr += 'css|'
+				searchStr2 += 'CSS|'
+			if "js" in self.get_setting('allowed_file_types'):
+				searchStr += 'js|'
+				searchStr2 += 'JavaScript|'
+			if "html" in self.get_setting('allowed_file_types'):
+				searchStr += 'html|'
+				searchStr2 += 'HTML|'
+			if "svg" in self.get_setting('allowed_file_types'):
+				searchStr += 'svg|'
+			searchStr = searchStr.rstrip('|')
+			searchStr2 = searchStr2.rstrip('|')
+			searchStrRegEx = r"\.(?:" + searchStr + ")$"
+			searchStrRegEx2 = r"/(?:" + searchStr2 + ")\.tmLanguage$"
+			if not re.search(searchStrRegEx, filename) and not re.search(searchStrRegEx2, self.view.settings().get('syntax')):
+				if self.get_setting('debug_mode'):
+					print('Minify: Skipping file: Not in allowed_file_types')
+			if re.search(searchStrRegEx, filename) and re.search(searchStrRegEx2, self.view.settings().get('syntax')):
+				if SUBL_ASYNC:
+					sublime.set_timeout_async(lambda: self.minify(), 0)
+				else:
+					self.minify()
