@@ -2,12 +2,13 @@
 
 ## What is `Minify`
 
-`Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript or SVG file.
+`Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript, JSON or SVG file.
 
-`Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
+`Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.json`
+or `.min.svg`.
 It can be easily configured to generate .map files too for minified CSS and JavaScript files.
 
-Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 200 lines of
+Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 240 lines of
 Python code. Once installed `Minify` does not need Internet access to do its job, it works offline.
 
 `Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported
@@ -23,6 +24,7 @@ dependencies are provided below.
 | **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
 | **HTML**       | [html-minifier](https://www.npmjs.com/package/html-minifier) | [js-beautify --html](https://www.npmjs.org/package/js-beautify) |
 | **JavaScript** | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs --beautify](https://www.npmjs.com/package/uglifyjs) |
+| **JSON**       | [minjson](https://www.npmjs.com/package/minjson) (using [uglifyjs](https://www.npmjs.com/package/uglifyjs)) | [minjson](https://www.npmjs.com/package/minjson) (using [uglifyjs](https://www.npmjs.com/package/uglifyjs)) |
 | **SVG**        | [svgo](https://www.npmjs.com/package/svgo) | [svgo --pretty](https://www.npmjs.com/package/svgo) |
 
 ## Installation in Three Easy Steps
@@ -113,8 +115,13 @@ in the project's .sublime-project file containing your [project specific setting
 {
     "settings": {
         "Minify": {
+            "open_file": false,
             "auto_minify_on_save": true,
-            "open_file": false
+            "allowed_file_types": [
+                "css",
+                "js",
+                "svg"
+            ]
         }
     }
 }

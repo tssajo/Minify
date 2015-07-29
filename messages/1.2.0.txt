@@ -1,0 +1,16 @@
+Version 1.2.0
+-------------
+
+* New feature: JSON file minification and beautification
+* New feature: You can now specify which file types are allowed to be minified when
+    the `auto-minify files on save` feature is used
+
+# IMPORTANT! #
+
+Please open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo

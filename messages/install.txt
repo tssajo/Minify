@@ -57,12 +57,13 @@ You must complete the installation by installing the required dependencies
 What is `Minify`
 ----------------
 
-`Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript or SVG file.
+`Minify` for Sublime Text can create a minified version of a currently open CSS, HTML, JavaScript, JSON or SVG file.
 
-`Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.svg`.
+`Minify` generates a new file with an altered file extension such as `.min.css`, `.min.html`, `.min.js`, `.min.json`
+or `.min.svg`.
 It can be easily configured to generate .map files too for minified CSS and JavaScript files.
 
-Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 200 lines
+Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 240 lines
 of Python code. Once installed `Minify` does not need Internet access to do its job, it works offline.
 
 `Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported
@@ -74,14 +75,15 @@ those dependencies are provided above.
 Which 3rd party programs are used by `Minify`
 ---------------------------------------------
 
-|-----------------------------------------------------------|
-|            |         Minify         |      Beautify       |
-|------------|------------------------|---------------------|
-| CSS        | clean-css or uglifycss | js-beautify --css   |
-| HTML       | html-minifier          | js-beautify --html  |
-| JavaScript | uglifyjs               | uglifyjs --beautify |
-| SVG        | svgo                   | svgo --pretty       |
-|-----------------------------------------------------------|
+|------------------------------------------------------------------|
+|            |         Minify           |      Beautify            |
+|------------|--------------------------|--------------------------|
+| CSS        | clean-css or uglifycss   | js-beautify --css        |
+| HTML       | html-minifier            | js-beautify --html       |
+| JavaScript | uglifyjs                 | uglifyjs --beautify      |
+| JSON       | minjson (using UglifyJS) | minjson (using UglifyJS) |
+| SVG        | svgo                     | svgo --pretty            |
+|------------------------------------------------------------------|
 
 How to use `Minify`
 -------------------
@@ -128,8 +130,13 @@ Example:
 {
     "settings": {
         "Minify": {
+            "open_file": false,
             "auto_minify_on_save": true,
-            "open_file": false
+            "allowed_file_types": [
+                "css",
+                "js",
+                "svg"
+            ]
         }
     }
 }

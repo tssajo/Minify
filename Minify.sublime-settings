@@ -23,11 +23,11 @@
 	// Open resulting file (minified or beautified)?
 	"open_file": true,
 
-	// Only Minify specified file types (css,js,html,svg)
-	"allowed_file_types":
-	[
+	// Only Minify specified file types (css, js, json, html, svg) when "auto_minify_on_save" is used
+	"allowed_file_types": [
 		"css",
 		"js",
+		"json",
 		"html",
 		"svg"
 	],

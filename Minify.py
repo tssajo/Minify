@@ -76,7 +76,7 @@ class ThreadHandling(MinifyUtils):
 class PluginBase(ThreadHandling):
 	def is_enabled(self):
 		filename = self.view.file_name()
-		return bool(type(filename).__name__ in ('str', 'unicode') and (re.search(r'\.(?:css|js|html?|svg)$', filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(r'/(?:CSS|JavaScript|HTML)\.tmLanguage$', self.view.settings().get('syntax'))))
+		return bool(type(filename).__name__ in ('str', 'unicode') and (re.search(r'\.(?:css|js|json|html?|svg)$', filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(r'/(?:CSS|JavaScript|JSON|HTML)\.tmLanguage$', self.view.settings().get('syntax'))))
 
 	def run(self, edit):
 		if SUBL_ASYNC:
@@ -94,6 +94,8 @@ class MinifyClass(MinifyUtils):
 					return
 			outfile = re.sub(r'(\.[^\.]+)$', r'.min\1', inpfile, 1)
 			syntax = self.view.settings().get('syntax')
+			if self.get_setting('debug_mode'):
+				print('Minify: Syntax: ' + str(syntax))
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
 				cmd = shlex.split(self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs'))
 				cmd.extend([inpfile, '-o', outfile, '-m', '-c'])
@@ -106,6 +108,9 @@ class MinifyClass(MinifyUtils):
 					eo = self.get_setting('comments_to_keep')
 					if type(eo).__name__ in ('str', 'unicode'):
 						cmd.extend([eo])
+			elif re.search(r'\.json$', inpfile) or re.search(r'/JSON\.tmLanguage$', syntax):
+				cmd = shlex.split(self.fixStr(self.get_setting('minjson_command') or 'minjson'))
+				cmd.extend([inpfile, '-o', outfile])
 			elif re.search(r'\.css$', inpfile) or re.search(r'/CSS\.tmLanguage$', syntax):
 				minifier = self.get_setting('cssminifier') or 'clean-css'
 				if minifier == 'uglifycss':
@@ -164,6 +169,9 @@ class BeautifyClass(MinifyUtils):
 				eo = self.get_setting('uglifyjs_pretty_options')
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(shlex.split(self.fixStr(eo)))
+			elif re.search(r'\.json$', inpfile) or re.search(r'/JSON\.tmLanguage$', syntax):
+				cmd = shlex.split(self.fixStr(self.get_setting('minjson_command') or 'minjson'))
+				cmd.extend([inpfile, '-o', outfile, '-b'])
 			elif re.search(r'\.css$', inpfile) or re.search(r'/CSS\.tmLanguage$', syntax):
 				cmd = shlex.split(self.fixStr(self.get_setting('js-beautify_command') or 'js-beautify'))
 				eo = self.get_setting('js-beautify_options')
@@ -203,21 +211,24 @@ class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
 			filename = self.view.file_name()
 			searchStr = ''
 			searchStr2 = ''
-			if "css" in self.get_setting('allowed_file_types'):
+			if 'css' in self.get_setting('allowed_file_types'):
 				searchStr += 'css|'
 				searchStr2 += 'CSS|'
-			if "js" in self.get_setting('allowed_file_types'):
+			if 'js' in self.get_setting('allowed_file_types'):
 				searchStr += 'js|'
 				searchStr2 += 'JavaScript|'
-			if "html" in self.get_setting('allowed_file_types'):
-				searchStr += 'html|'
+			if 'json' in self.get_setting('allowed_file_types'):
+				searchStr += 'json|'
+				searchStr2 += 'JSON|'
+			if 'html' in self.get_setting('allowed_file_types'):
+				searchStr += 'html?|'
 				searchStr2 += 'HTML|'
-			if "svg" in self.get_setting('allowed_file_types'):
+			if 'svg' in self.get_setting('allowed_file_types'):
 				searchStr += 'svg|'
 			searchStr = searchStr.rstrip('|')
 			searchStr2 = searchStr2.rstrip('|')
-			searchStrRegEx = r"\.(?:" + searchStr + ")$"
-			searchStrRegEx2 = r"/(?:" + searchStr2 + ")\.tmLanguage$"
+			searchStrRegEx = r'\.(?:' + searchStr + ')$'
+			searchStrRegEx2 = r'/(?:' + searchStr2 + ')\.tmLanguage$'
 			if not re.search(searchStrRegEx, filename) and not re.search(searchStrRegEx2, self.view.settings().get('syntax')):
 				if self.get_setting('debug_mode'):
 					print('Minify: Skipping file: Not in allowed_file_types')
