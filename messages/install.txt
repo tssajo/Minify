@@ -63,7 +63,7 @@ What is `Minify`
 or `.min.svg`.
 It can be easily configured to generate .map files too for minified CSS and JavaScript files.
 
-Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 240 lines
+Compared to other Sublime Text minifier packages `Minify` is very light: the plugin itself is less than 250 lines
 of Python code. Once installed `Minify` does not need Internet access to do its job, it works offline.
 
 `Minify` has been tested under both Sublime Text 2 and Sublime Text 3 and it should work fine on all supported

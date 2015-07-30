@@ -1,0 +1,18 @@
+Version 1.2.1
+-------------
+
+* New feature: When `auto_minify_on_save` option is used, `Minify` skips files which already have a .min file
+    extension
+* Bug fix: Under special cirmcumstances (dirty file open in editor, `save_first` option set to `true`, `Minify`
+    got invoked from the menu or keyboard shortcut and not by `auto_minify_on_save` ) `Minify` did not work
+    (Thanks to Michael Oakley for noticing and reporting the problem)
+
+# IMPORTANT! #
+
+Please open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
