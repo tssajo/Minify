@@ -213,7 +213,7 @@ class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
 		self.view = view
 		if self.get_setting('auto_minify_on_save'):
 			filename = self.view.file_name()
-			if type(filename).__name__ in ('str', 'unicode') and not re.search(r'\.min\.(?:css|js|json|html?|svg)$', filename):
+			if type(filename).__name__ in ('str', 'unicode') and not re.search(r'\.min\.[^\.]+$', filename):
 				searchFName = ''
 				searchSyntax = ''
 				if 'css' in self.get_setting('allowed_file_types'):
