@@ -95,6 +95,13 @@
 	// you can specify command line parameters for .html beautification
 	// "js-beautify_html_options": "--indent-size=2",
 
+	// #############################
+	// #  JSON Processing Options  #
+	// #############################
+
+	// you may want to define the minjson command with an absolute path
+	// "minjson_command": "/usr/local/bin/minjson",
+
 	// ############################
 	// #  SVG Processing Options  #
 	// ############################
