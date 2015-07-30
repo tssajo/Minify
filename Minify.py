@@ -88,6 +88,10 @@ class MinifyClass(MinifyUtils):
 	def minify(self):
 		inpfile = self.view.file_name()
 		if type(inpfile).__name__ in ('str', 'unicode') and re.search(r'\.[^\.]+$', inpfile):
+			if re.search(r'\.min\.[^\.]+$', inpfile):
+				if self.get_setting('debug_mode'):
+					print('Minify: Skipping file: File is already minified')
+				return
 			if self.view.is_dirty() and self.get_setting('save_first'):
 				view.run_command('save')
 				if self.get_setting('auto_minify_on_save'):
@@ -209,31 +213,30 @@ class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
 		self.view = view
 		if self.get_setting('auto_minify_on_save'):
 			filename = self.view.file_name()
-			searchStr = ''
-			searchStr2 = ''
-			if 'css' in self.get_setting('allowed_file_types'):
-				searchStr += 'css|'
-				searchStr2 += 'CSS|'
-			if 'js' in self.get_setting('allowed_file_types'):
-				searchStr += 'js|'
-				searchStr2 += 'JavaScript|'
-			if 'json' in self.get_setting('allowed_file_types'):
-				searchStr += 'json|'
-				searchStr2 += 'JSON|'
-			if 'html' in self.get_setting('allowed_file_types'):
-				searchStr += 'html?|'
-				searchStr2 += 'HTML|'
-			if 'svg' in self.get_setting('allowed_file_types'):
-				searchStr += 'svg|'
-			searchStr = searchStr.rstrip('|')
-			searchStr2 = searchStr2.rstrip('|')
-			searchStrRegEx = r'\.(?:' + searchStr + ')$'
-			searchStrRegEx2 = r'/(?:' + searchStr2 + ')\.tmLanguage$'
-			if not re.search(searchStrRegEx, filename) and not re.search(searchStrRegEx2, self.view.settings().get('syntax')):
-				if self.get_setting('debug_mode'):
-					print('Minify: Skipping file: Not in allowed_file_types')
-			if re.search(searchStrRegEx, filename) and re.search(searchStrRegEx2, self.view.settings().get('syntax')):
-				if SUBL_ASYNC:
-					sublime.set_timeout_async(lambda: self.minify(), 0)
+			if type(filename).__name__ in ('str', 'unicode') and not re.search(r'\.min\.(?:css|js|json|html?|svg)$', filename):
+				searchFName = ''
+				searchSyntax = ''
+				if 'css' in self.get_setting('allowed_file_types'):
+					searchFName += 'css|'
+					searchSyntax += 'CSS|'
+				if 'js' in self.get_setting('allowed_file_types'):
+					searchFName += 'js|'
+					searchSyntax += 'JavaScript|'
+				if 'json' in self.get_setting('allowed_file_types'):
+					searchFName += 'json|'
+					searchSyntax += 'JSON|'
+				if 'html' in self.get_setting('allowed_file_types'):
+					searchFName += 'html?|'
+					searchSyntax += 'HTML|'
+				if 'svg' in self.get_setting('allowed_file_types'):
+					searchFName += 'svg|'
+				searchFNameRegEx = r'\.(?:' + searchFName.rstrip('|') + ')$'
+				searchSyntaxRegEx = r'/(?:' + searchSyntax.rstrip('|') + ')\.tmLanguage$'
+				if re.search(searchFNameRegEx, filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(searchSyntaxRegEx, self.view.settings().get('syntax')):
+					if SUBL_ASYNC:
+						sublime.set_timeout_async(lambda: self.minify(), 0)
+					else:
+						self.minify()
 				else:
-					self.minify()
+					if self.get_setting('debug_mode'):
+						print('Minify: Skipping file: Not in allowed_file_types')
