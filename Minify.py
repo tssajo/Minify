@@ -76,7 +76,7 @@ class ThreadHandling(MinifyUtils):
 class PluginBase(ThreadHandling):
 	def is_enabled(self):
 		filename = self.view.file_name()
-		return bool(type(filename).__name__ in ('str', 'unicode') and (re.search(r'\.(?:css|js|json|html?|svg)$', filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(r'/(?:CSS|JavaScript|JSON|HTML)\.tmLanguage$', self.view.settings().get('syntax'))))
+		return bool((type(filename).__name__ in ('str', 'unicode') and (re.search(r'\.(?:css|js|json|html?|svg)$', filename)) or (re.search(r'(\.[^\.]+)$', filename) and re.search(r'/(?:CSS|JavaScript|JSON|HTML)\.tmLanguage$', self.view.settings().get('syntax')))))
 
 	def run(self, edit):
 		if SUBL_ASYNC:
@@ -88,12 +88,8 @@ class MinifyClass(MinifyUtils):
 	def minify(self):
 		inpfile = self.view.file_name()
 		if type(inpfile).__name__ in ('str', 'unicode') and re.search(r'\.[^\.]+$', inpfile):
-			if re.search(r'\.min\.[^\.]+$', inpfile):
-				if self.get_setting('debug_mode'):
-					print('Minify: Skipping file: File is already minified')
-				return
 			if self.view.is_dirty() and self.get_setting('save_first'):
-				view.run_command('save')
+				self.view.run_command('save')
 				if self.get_setting('auto_minify_on_save'):
 					return
 			outfile = re.sub(r'(\.[^\.]+)$', r'.min\1', inpfile, 1)
@@ -164,7 +160,7 @@ class BeautifyClass(MinifyUtils):
 		inpfile = self.view.file_name()
 		if type(inpfile).__name__ in ('str', 'unicode') and re.search(r'\.[^\.]+$', inpfile):
 			if self.view.is_dirty() and self.get_setting('save_first'):
-				view.run_command('save')
+				self.view.run_command('save')
 			outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.beautified\1', inpfile, 1)
 			syntax = self.view.settings().get('syntax')
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
@@ -213,7 +209,7 @@ class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
 		self.view = view
 		if self.get_setting('auto_minify_on_save'):
 			filename = self.view.file_name()
-			if type(filename).__name__ in ('str', 'unicode') and not re.search(r'\.min\.[^\.]+$', filename):
+			if type(filename).__name__ in ('str', 'unicode'):
 				searchFName = ''
 				searchSyntax = ''
 				if 'css' in self.get_setting('allowed_file_types'):
@@ -232,11 +228,15 @@ class RunAfterSave(ThreadHandling, MinifyClass, sublime_plugin.EventListener):
 					searchFName += 'svg|'
 				searchFNameRegEx = r'\.(?:' + searchFName.rstrip('|') + ')$'
 				searchSyntaxRegEx = r'/(?:' + searchSyntax.rstrip('|') + ')\.tmLanguage$'
-				if re.search(searchFNameRegEx, filename) or re.search(r'(\.[^\.]+)$', filename) and re.search(searchSyntaxRegEx, self.view.settings().get('syntax')):
-					if SUBL_ASYNC:
-						sublime.set_timeout_async(lambda: self.minify(), 0)
+				if re.search(searchFNameRegEx, filename) or (re.search(r'(\.[^\.]+)$', filename) and re.search(searchSyntaxRegEx, self.view.settings().get('syntax'))):
+					if re.search(r'\.min\.[^\.]+$', filename):
+						if self.get_setting('debug_mode'):
+							print('Minify: Skipping file: File is already minified')
 					else:
-						self.minify()
+						if SUBL_ASYNC:
+							sublime.set_timeout_async(lambda: self.minify(), 0)
+						else:
+							self.minify()
 				else:
 					if self.get_setting('debug_mode'):
 						print('Minify: Skipping file: Not in allowed_file_types')
