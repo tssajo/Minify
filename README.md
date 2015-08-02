@@ -74,7 +74,7 @@ dependencies are provided below.
 
 ##How to use `Minify`
 
-Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
+Open a `.css` or `.htm` or `.html` or `.js` or `.svg` or `.json` file in your Sublime Text editor and you can
 
   a) use the Context Menu inside the Sublime Text editor window,
 
