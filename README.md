@@ -54,7 +54,7 @@ dependencies are provided below.
 
 3. Install required Node.js CLI apps:<br><br>
   From a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command:<br><br>
-  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson`<br><br>
+  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Notes:<br><br>
   If you are on Mac OS X and you get an error here then issue the following command from `Terminal`:
   `sudo chown -R $USER /usr/local` and then try to issue the npm install command from above again.<br><br>
@@ -62,7 +62,7 @@ dependencies are provided below.
   install command. You can also leave out `uglifycss`, etc.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then it is
   recommended to update them all to the latest version with the following command:<br><br>
-  `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson`<br><br>
+  `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
   Still from a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command,
   for example:<br><br>
@@ -74,7 +74,7 @@ dependencies are provided below.
 
 ##How to use `Minify`
 
-Open a `.css` or `.htm` or `.html` or `.js` or `.svg` or `.json` file in your Sublime Text editor and you can
+Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
 
   a) use the Context Menu inside the Sublime Text editor window,
 
