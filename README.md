@@ -70,7 +70,7 @@ dependencies are provided below.
   You should see a version number. But if you see an error message such as `command not found` or something similar
   then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`,
-  `uglifyjs` and `svgo`).<br><br>
+  `uglifyjs` and `svgo` and `minjson`).<br><br>
 
 ##How to use `Minify`
 

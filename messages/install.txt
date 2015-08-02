@@ -51,7 +51,7 @@ You must complete the installation by installing the required dependencies
   similar then `cleancss` is not available via your `PATH` and you must fix this!
 
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `uglifyjs`,
-  `html-minifier` and `svgo`).
+  `html-minifier` and `svgo` and `minjson`).
 
 
 What is `Minify`
