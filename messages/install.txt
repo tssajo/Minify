@@ -25,7 +25,7 @@ You must complete the installation by installing the required dependencies
 
   From a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command:
 
-  npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
+  npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson
 
   Notes:
 
@@ -38,7 +38,7 @@ You must complete the installation by installing the required dependencies
     If you already have some or all of the above Node.js CLI apps installed on your system then it is
     recommended to update them all to the latest version with the following command:
 
-    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo
+    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson
 
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:
 
@@ -88,7 +88,7 @@ Which 3rd party programs are used by `Minify`
 How to use `Minify`
 -------------------
 
-Open a `.css` or `.htm` or `.html` or `.js` or `.svg` file in your Sublime Text editor and you can
+Open a `.css` or `.htm` or `.html` or `.js` or `.svg` or `.json` file in your Sublime Text editor and you can
 
   a) use the Context Menu inside the Sublime Text editor window,
 
