@@ -24,7 +24,7 @@ dependencies are provided below.
 | **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
 | **HTML**       | [html-minifier](https://www.npmjs.com/package/html-minifier) | [js-beautify --html](https://www.npmjs.org/package/js-beautify) |
 | **JavaScript** | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs --beautify](https://www.npmjs.com/package/uglifyjs) |
-| **JSON**       | [minjson](https://www.npmjs.com/package/minjson) (using [uglifyjs](https://www.npmjs.com/package/uglifyjs)) | [minjson](https://www.npmjs.com/package/minjson) (using [uglifyjs](https://www.npmjs.com/package/uglifyjs)) |
+| **JSON**       | [minjson](https://www.npmjs.com/package/minjson) (uses [uglifyjs](https://www.npmjs.com/package/uglifyjs)) | [minjson](https://www.npmjs.com/package/minjson) (uses [uglifyjs](https://www.npmjs.com/package/uglifyjs)) |
 | **SVG**        | [svgo](https://www.npmjs.com/package/svgo) | [svgo --pretty](https://www.npmjs.com/package/svgo) |
 
 ## Installation in Three Easy Steps
@@ -54,7 +54,7 @@ dependencies are provided below.
 
 3. Install required Node.js CLI apps:<br><br>
   From a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command:<br><br>
-  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson`<br><br>
+  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo`<br><br>
   Notes:<br><br>
   If you are on Mac OS X and you get an error here then issue the following command from `Terminal`:
   `sudo chown -R $USER /usr/local` and then try to issue the npm install command from above again.<br><br>
@@ -62,7 +62,7 @@ dependencies are provided below.
   install command. You can also leave out `uglifycss`, etc.<br><br>
   If you already have some or all of the above Node.js CLI apps installed on your system then it is
   recommended to update them all to the latest version with the following command:<br><br>
-  `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson`<br><br>
+  `npm update -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo`<br><br>
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:<br><br>
   Still from a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command,
   for example:<br><br>
@@ -70,7 +70,7 @@ dependencies are provided below.
   You should see a version number. But if you see an error message such as `command not found` or something similar
   then `cleancss` is not available via your `PATH` and you must fix this!<br><br>
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `html-minifier`,
-  `uglifyjs` and `svgo` and `minjson`).<br><br>
+  `uglifyjs`, `minjson` and `svgo`).<br><br>
 
 ##How to use `Minify`
 

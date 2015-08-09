@@ -25,7 +25,7 @@ You must complete the installation by installing the required dependencies
 
   From a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command:
 
-  npm install -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson
+  npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
 
   Notes:
 
@@ -38,7 +38,7 @@ You must complete the installation by installing the required dependencies
     If you already have some or all of the above Node.js CLI apps installed on your system then it is
     recommended to update them all to the latest version with the following command:
 
-    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js svgo minjson
+    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
 
   Please test that the installed Node.js CLI apps are available via your `PATH`, here is how:
 
@@ -51,7 +51,7 @@ You must complete the installation by installing the required dependencies
   similar then `cleancss` is not available via your `PATH` and you must fix this!
 
   You may want to do this test for all Node.js CLI apps (`cleancss`, `uglifycss`, `js-beautify`, `uglifyjs`,
-  `html-minifier` and `svgo` and `minjson`).
+  `html-minifier`, `minjson` and `svgo`).
 
 
 What is `Minify`
@@ -81,7 +81,7 @@ Which 3rd party programs are used by `Minify`
 | CSS        | clean-css or uglifycss   | js-beautify --css        |
 | HTML       | html-minifier            | js-beautify --html       |
 | JavaScript | uglifyjs                 | uglifyjs --beautify      |
-| JSON       | minjson (using UglifyJS) | minjson (using UglifyJS) |
+| JSON       | minjson (uses UglifyJS)  | minjson (uses UglifyJS)  |
 | SVG        | svgo                     | svgo --pretty            |
 |------------------------------------------------------------------|
 
