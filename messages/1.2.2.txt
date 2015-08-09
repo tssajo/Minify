@@ -1,0 +1,5 @@
+Version 1.2.2
+-------------
+
+* Bug fix: In some cases Minify flooded console with errors
+    (Thanks to Fernando Bueno for noticing and reporting the problem)
