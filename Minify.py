@@ -139,7 +139,7 @@ class MinifyClass(MinifyUtils):
 					cmd.extend(['-o', outfile, inpfile])
 			elif re.search(r'\.html?$', inpfile) or re.search(r'/HTML\.tmLanguage$', syntax):
 				cmd = shlex.split(self.fixStr(self.get_setting('html-minifier_command') or 'html-minifier'))
-				eo = self.get_setting('html-minifier_options') or '--remove-comments --remove-comments-from-cdata --collapse-whitespace --conservative-collapse --collapse-boolean-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --minify-js --minify-css'
+				eo = self.get_setting('html-minifier_options') or '--collapse-boolean-attributes --collapse-whitespace --html5 --minify-css --minify-js --preserve-line-breaks --process-conditional-comments --remove-comments --remove-empty-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --remove-tag-whitespace'
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(shlex.split(self.fixStr(eo)))
 				cmd.extend(['-o', outfile, inpfile])
