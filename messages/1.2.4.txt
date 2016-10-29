@@ -1,7 +1,7 @@
 Version 1.2.4
 -------------
 
-* Bug fix: I minor fix in Main.sublime-menu
+* Bug fix: A minor fix in Main.sublime-menu
     (Thanks to debjan for noticing and sending in a Pull Request)
 
 * Bug fix: Removed all remaining references to the obsolete "remove-comments-from-cdata"
