@@ -1,0 +1,21 @@
+Version 1.2.4
+-------------
+
+* Bug fix: I minor fix in Main.sublime-menu
+    (Thanks to debjan for noticing and sending in a Pull Request)
+
+* Bug fix: Removed all remaining references to the obsolete "remove-comments-from-cdata"
+    `html-minifier` option
+
+* Improvement: Changed the default options of `html-minifier` to slighly better ones
+
+
+# SUGGESTION: #
+
+Please open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
