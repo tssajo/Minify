@@ -90,7 +90,7 @@
 	// "html-minifier_command": "/usr/local/bin/html-minifier",
 
 	// you can specify command line parameters for .html minification
-	"html-minifier_options": "--collapse-boolean-attributes --collapse-whitespace --html5 --minify-css --minify-js --preserve-line-breaks --process-conditional-comments --remove-comments --remove-empty-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --remove-tag-whitespace",
+	"html-minifier_options": "--collapse-boolean-attributes --collapse-whitespace --html5 --minify-css --minify-js --preserve-line-breaks --process-conditional-comments --remove-comments --remove-empty-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes",
 
 	// you can specify command line parameters for .html beautification
 	// "js-beautify_html_options": "--indent-size=2",
