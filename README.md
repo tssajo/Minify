@@ -96,17 +96,19 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.json` or `.svg` file in your Su
 
 ## User settings
 
-Please place your customized settings into:
+You can put your customized settings here:
 
-*(Preferences > Package Settings > Minify > Settings - User)*
+*(Preferences > Package Settings > Minify > **Settings - User**)*
 
 To find out what the possible options are please see:
 
-*(Preferences > Package Settings > Minify > Settings - Default)*
+*(Preferences > Package Settings > Minify > **Settings - Default**)*
+
+Please do not edit the **Settings - Default** file!!
 
 ## Project settings
 
-You can override the default and user settings for individual projects. Just add a "Minify" object to the "settings" object
+Also, you can override the default and user settings for individual projects. Just add a "Minify" object to the "settings" object
 in the project's .sublime-project file containing your [project specific settings](http://www.sublimetext.com/docs/3/projects.html).
 
 ###Example:
