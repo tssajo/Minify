@@ -1,0 +1,16 @@
+Version 1.2.5
+-------------
+
+* Bug fix: Removed the "remove-tag-whitespace" option from the default `html-minifier` options
+    because it is a too aggressive optimization and it creates invalid HTML
+
+
+# SUGGESTION: #
+
+Please open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo
