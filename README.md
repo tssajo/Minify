@@ -98,11 +98,11 @@ Open a `.css` or `.htm` or `.html` or `.js` or `.json` or `.svg` file in your Su
 
 You can put your customized settings here:
 
-*(Preferences > Package Settings > Minify > **Settings - User**)*
+*(Preferences > Package Settings > Minify > Settings - User)*
 
 To find out what the possible options are please see:
 
-*(Preferences > Package Settings > Minify > **Settings - Default**)*
+*(Preferences > Package Settings > Minify > Settings - Default)*
 
 Please do not edit the **Settings - Default** file!!
 
