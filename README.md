@@ -21,7 +21,7 @@ dependencies are provided below.
 
 |                | Minify | Beautify |
 | -------------- |:------:|:--------:|
-| **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
+| **CSS**        | [clean-css](https://www.npmjs.com/package/clean-css), [clean-css-cli](https://www.npmjs.com/package/clean-css-cli) or [uglifycss](https://www.npmjs.com/package/uglifycss) | [js-beautify --css](https://www.npmjs.org/package/js-beautify) |
 | **HTML**       | [html-minifier](https://www.npmjs.com/package/html-minifier) | [js-beautify --html](https://www.npmjs.org/package/js-beautify) |
 | **JavaScript** | [uglifyjs](https://www.npmjs.com/package/uglifyjs) | [uglifyjs --beautify](https://www.npmjs.com/package/uglifyjs) |
 | **JSON**       | [minjson](https://www.npmjs.com/package/minjson) (uses [uglifyjs](https://www.npmjs.com/package/uglifyjs)) | [minjson](https://www.npmjs.com/package/minjson) (uses [uglifyjs](https://www.npmjs.com/package/uglifyjs)) |
@@ -54,7 +54,7 @@ dependencies are provided below.
 
 3. Install required Node.js CLI apps:<br><br>
   From a shell window (`Terminal` on Mac OS X, `CMD.exe` on Windows) issue the following command:<br><br>
-  `npm install -g clean-css uglifycss js-beautify html-minifier uglify-js minjson svgo`<br><br>
+  `npm install -g clean-css clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo`<br><br>
   Notes:<br><br>
   If you are on Mac OS X and you get an error here then issue the following command from `Terminal`:
   `sudo chown -R $USER /usr/local` and then try to issue the npm install command from above again.<br><br>
