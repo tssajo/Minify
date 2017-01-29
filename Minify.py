@@ -99,6 +99,9 @@ class MinifyClass(MinifyUtils):
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
 				cmd = shlex.split(self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs'))
 				cmd.extend([inpfile, '-o', outfile, '-m', '-c'])
+				eo = self.get_setting('uglifyjs_options')
+				if type(eo).__name__ in ('str', 'unicode'):
+					cmd.extend(shlex.split(self.fixStr(eo)))
 				if self.get_setting('source_map'):
 					head, tail = ntpath.split(outfile)
 					mapfile = tail or ntpath.basename(head)

@@ -1,0 +1,18 @@
+Version 1.2.6
+-------------
+
+* New feature: Added uglifyjs_options to the settings file
+    (Thanks to paponius for the suggestion)
+* Update: Updated the installation instructions because from now on we must install clean-css-cli instead of clean-css
+    (Thanks to Claude Betancourt for the headsup)
+
+
+# SUGGESTION: #
+
+Please open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo

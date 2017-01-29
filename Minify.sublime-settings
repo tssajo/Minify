@@ -68,6 +68,9 @@
 	// you may want to define the uglifyjs command with an absolute path
 	// "uglifyjs_command": "/usr/local/bin/uglifyjs",
 
+	// you can specify command line parameters for uglifyjs (for .js minification)
+	// "uglifyjs_options": "",
+
 	// do you wamt to keep comments when minifying javascript files?
 	"keep_comments": false,
 	// you can also specify which comments to keep
@@ -76,7 +79,7 @@
 	// all comments or you can provide a regexp such as "/!/" (this will keep only comments which contain an exclamation mark)
 	"comments_to_keep": false,
 
-	// you can specify command line parameters for .js beautification
+	// you can specify command line parameters for uglifyjs (for .js beautification)
 	// "uglifyjs_pretty_options": "indent-level=2",
 
 	// if you need a source map in the destination directory (same as original source), enable this option
