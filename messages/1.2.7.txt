@@ -1,0 +1,17 @@
+Version 1.2.7
+-------------
+
+* Bug fix: It fixes https://github.com/tssajo/Minify/issues/49
+    Now you can use the following in your "html-minifier_options" setting: --quote-character '
+    (Thanks to joonkui95 for noticing and reporting the issue)
+
+
+# SUGGESTION: #
+
+Please open up a shell window (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo

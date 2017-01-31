@@ -18,6 +18,9 @@ class MinifyUtils():
 	def fixStr(self, s):
 		return s.encode('utf8') if (type(s).__name__ == 'unicode') else s
 
+	def quoteChrs(self, s):
+		return s.replace("(", "^^(").replace(")", "^^)") if USE_SHELL else s
+
 	def runProgram(self, cmd):
 		if '>' in cmd:
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, shell=USE_SHELL, env=POPEN_ENV)
@@ -97,35 +100,35 @@ class MinifyClass(MinifyUtils):
 			if self.get_setting('debug_mode'):
 				print('Minify: Syntax: ' + str(syntax))
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
-				cmd = shlex.split(self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs'))
-				cmd.extend([inpfile, '-o', outfile, '-m', '-c'])
+				cmd = self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs').split()
+				cmd.extend([self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile), '-m', '-c'])
 				eo = self.get_setting('uglifyjs_options')
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
+					cmd.extend(self.fixStr(eo).split())
 				if self.get_setting('source_map'):
 					head, tail = ntpath.split(outfile)
 					mapfile = tail or ntpath.basename(head)
-					cmd.extend(['--source-map', outfile + '.map', '--source-map-url', mapfile + '.map', '--source-map-root', './', '-p', 'relative'])
+					cmd.extend(['--source-map', self.quoteChrs(outfile) + '.map', '--source-map-url', self.quoteChrs(mapfile) + '.map', '--source-map-root', './', '-p', 'relative'])
 				if self.get_setting('keep_comments'):
 					cmd.extend(['--comments'])
 					eo = self.get_setting('comments_to_keep')
 					if type(eo).__name__ in ('str', 'unicode'):
 						cmd.extend([eo])
 			elif re.search(r'\.json$', inpfile) or re.search(r'/JSON\.tmLanguage$', syntax):
-				cmd = shlex.split(self.fixStr(self.get_setting('minjson_command') or 'minjson'))
-				cmd.extend([inpfile, '-o', outfile])
+				cmd = self.fixStr(self.get_setting('minjson_command') or 'minjson').split()
+				cmd.extend([self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile)])
 			elif re.search(r'\.css$', inpfile) or re.search(r'/CSS\.tmLanguage$', syntax):
 				minifier = self.get_setting('cssminifier') or 'clean-css'
 				if minifier == 'uglifycss':
-					cmd = shlex.split(self.fixStr(self.get_setting('uglifycss_command') or 'uglifycss'))
+					cmd = self.fixStr(self.get_setting('uglifycss_command') or 'uglifycss').split()
 					eo = self.get_setting('uglifycss_options')
 					if type(eo).__name__ in ('str', 'unicode'):
-						cmd.extend(shlex.split(self.fixStr(eo)))
-					cmd.extend([inpfile, '>', outfile])
+						cmd.extend(self.fixStr(eo).split())
+					cmd.extend([self.quoteChrs(inpfile), '>', self.quoteChrs(outfile)])
 				elif minifier == 'yui':
-					cmd = shlex.split(self.fixStr(self.get_setting('java_command') or 'java'))
+					cmd = self.fixStr(self.get_setting('java_command') or 'java').split()
 					yui_compressor = self.get_setting('yui_compressor') or 'yuicompressor-2.4.7.jar'
-					cmd.extend(['-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), inpfile, '-o', outfile])
+					cmd.extend(['-jar', PLUGIN_DIR + '/bin/' + str(yui_compressor), self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile)])
 					eo = self.get_setting('yui_charset')
 					if type(eo).__name__ in ('str', 'unicode'):
 						cmd.extend(['--charset', eo])
@@ -133,25 +136,25 @@ class MinifyClass(MinifyUtils):
 					if type(eo).__name__ in ('int', 'str', 'unicode'):
 						cmd.extend(['--line-break', str(eo)])
 				else:
-					cmd = shlex.split(self.fixStr(self.get_setting('cleancss_command') or 'cleancss'))
+					cmd = self.fixStr(self.get_setting('cleancss_command') or 'cleancss').split()
 					eo = self.get_setting('cleancss_options') or '--s0 -s --skip-rebase'
 					if type(eo).__name__ in ('str', 'unicode'):
-						cmd.extend(shlex.split(self.fixStr(eo)))
+						cmd.extend(self.fixStr(eo).split())
 					if self.get_setting('css_source_map'):
 						cmd.extend(['--source-map'])
-					cmd.extend(['-o', outfile, inpfile])
+					cmd.extend(['-o', self.quoteChrs(outfile), self.quoteChrs(inpfile)])
 			elif re.search(r'\.html?$', inpfile) or re.search(r'/HTML\.tmLanguage$', syntax):
-				cmd = shlex.split(self.fixStr(self.get_setting('html-minifier_command') or 'html-minifier'))
+				cmd = self.fixStr(self.get_setting('html-minifier_command') or 'html-minifier').split()
 				eo = self.get_setting('html-minifier_options') or '--collapse-boolean-attributes --collapse-whitespace --html5 --minify-css --minify-js --preserve-line-breaks --process-conditional-comments --remove-comments --remove-empty-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes'
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
-				cmd.extend(['-o', outfile, inpfile])
+					cmd.extend(self.fixStr(eo).split())
+				cmd.extend(['-o', self.quoteChrs(outfile), self.quoteChrs(inpfile)])
 			elif re.search(r'\.svg$', inpfile):
-				cmd = shlex.split(self.fixStr(self.get_setting('svgo_command') or 'svgo'))
+				cmd = self.fixStr(self.get_setting('svgo_command') or 'svgo').split()
 				eo = self.get_setting('svgo_min_options')
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
-				cmd.extend([inpfile, outfile])
+					cmd.extend(self.fixStr(eo).split())
+				cmd.extend([self.quoteChrs(inpfile), self.quoteChrs(outfile)])
 			else:
 				cmd = False
 			if cmd:
@@ -167,34 +170,34 @@ class BeautifyClass(MinifyUtils):
 			outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.beautified\1', inpfile, 1)
 			syntax = self.view.settings().get('syntax')
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
-				cmd = shlex.split(self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs'))
-				cmd.extend([inpfile, '-o', outfile, '--comments', 'all', '-b'])
+				cmd = self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs').split()
+				cmd.extend([self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile), '--comments', 'all', '-b'])
 				eo = self.get_setting('uglifyjs_pretty_options')
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
+					cmd.extend(self.fixStr(eo).split())
 			elif re.search(r'\.json$', inpfile) or re.search(r'/JSON\.tmLanguage$', syntax):
-				cmd = shlex.split(self.fixStr(self.get_setting('minjson_command') or 'minjson'))
-				cmd.extend([inpfile, '-o', outfile, '-b'])
+				cmd = self.fixStr(self.get_setting('minjson_command') or 'minjson').split()
+				cmd.extend([self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile), '-b'])
 			elif re.search(r'\.css$', inpfile) or re.search(r'/CSS\.tmLanguage$', syntax):
-				cmd = shlex.split(self.fixStr(self.get_setting('js-beautify_command') or 'js-beautify'))
+				cmd = self.fixStr(self.get_setting('js-beautify_command') or 'js-beautify').split()
 				eo = self.get_setting('js-beautify_options')
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
-				cmd.extend(['--css', '-o', outfile, inpfile])
+					cmd.extend(self.fixStr(eo).split())
+				cmd.extend(['--css', '-o', self.quoteChrs(outfile), self.quoteChrs(inpfile)])
 			elif re.search(r'\.html?$', inpfile) or re.search(r'/HTML\.tmLanguage$', syntax):
 				outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.pretty\1', inpfile, 1)
-				cmd = shlex.split(self.fixStr(self.get_setting('js-beautify_command') or 'js-beautify'))
+				cmd = self.fixStr(self.get_setting('js-beautify_command') or 'js-beautify').split()
 				eo = self.get_setting('js-beautify_html_options')
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
-				cmd.extend(['--html', '-o', outfile, inpfile])
+					cmd.extend(self.fixStr(eo).split())
+				cmd.extend(['--html', '-o', self.quoteChrs(outfile), self.quoteChrs(inpfile)])
 			elif re.search(r'\.svg$', inpfile):
 				outfile = re.sub(r'(?:\.min)?(\.[^\.]+)$', r'.pretty\1', inpfile, 1)
-				cmd = shlex.split(self.fixStr(self.get_setting('svgo_command') or 'svgo'))
+				cmd = self.fixStr(self.get_setting('svgo_command') or 'svgo').split()
 				eo = self.get_setting('svgo_pretty_options')
 				if type(eo).__name__ in ('str', 'unicode'):
-					cmd.extend(shlex.split(self.fixStr(eo)))
-				cmd.extend(['--pretty', inpfile, outfile])
+					cmd.extend(self.fixStr(eo).split())
+				cmd.extend(['--pretty', self.quoteChrs(inpfile), self.quoteChrs(outfile)])
 			if cmd:
 				print('Minify: Beautifying file:' + str(inpfile))
 				self.run_cmd(cmd, outfile)
