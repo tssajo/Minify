@@ -154,7 +154,7 @@ class MinifyClass(MinifyUtils):
 				eo = self.get_setting('svgo_min_options')
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(self.fixStr(eo).split())
-				cmd.extend([self.quoteChrs(inpfile), self.quoteChrs(outfile)])
+				cmd.extend(['-i', self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile)])
 			else:
 				cmd = False
 			if cmd:
