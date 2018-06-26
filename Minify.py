@@ -154,7 +154,7 @@ class MinifyClass(MinifyUtils):
 				eo = self.get_setting('svgo_min_options')
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(self.fixStr(eo).split())
-				cmd.extend([self.quoteChrs(inpfile), self.quoteChrs(outfile)])
+				cmd.extend(['-i', self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile)])
 			else:
 				cmd = False
 			if cmd:
@@ -197,7 +197,7 @@ class BeautifyClass(MinifyUtils):
 				eo = self.get_setting('svgo_pretty_options')
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(self.fixStr(eo).split())
-				cmd.extend(['--pretty', self.quoteChrs(inpfile), self.quoteChrs(outfile)])
+				cmd.extend(['--pretty', '-i', self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile)])
 			if cmd:
 				print('Minify: Beautifying file:' + str(inpfile))
 				self.run_cmd(cmd, outfile)
