@@ -110,8 +110,8 @@ class MinifyClass(MinifyUtils):
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(self.fixStr(eo).split())
 				if self.get_setting('source_map'):
-					directory, file = ntpath.split(outfile)
-					mapfile = file or ntpath.basename(directory)
+					directory, rfile = ntpath.split(outfile)
+					mapfile = rfile or ntpath.basename(directory)
 					content = ''
 					if self.get_setting('js_map_content'):
 						content = ',content="' + (self.quoteChrs(inpfile + '.map') if os.path.isfile(inpfile + '.map') else 'inline') + '"'
