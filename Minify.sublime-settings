@@ -85,9 +85,9 @@
 	// if you need a source map in the destination directory (same as original source), enable this option
 	"source_map": false,
 
-    // change to true if you are using any transpiler such as Babel or Typescript that generate map files for original code
-    // map file must be present in the same directory
-    "js_map_content": false,
+	// change to true if you are using any transpiler such as Babel or Typescript that generate map files for original code
+	// map file must be present in the same directory
+	"js_map_content": false,
 
 	// #############################
 	// #  HTML Processing Options  #
