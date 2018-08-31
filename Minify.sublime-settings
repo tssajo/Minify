@@ -44,7 +44,7 @@
 	// "cleancss_command": "/usr/local/bin/cleancss",
 
 	// you can specify command line parameters for cleancss
-	"cleancss_options": "--s0 -s --skip-rebase",
+	"cleancss_options": "-O 2 --skip-rebase",
 
 	// you may want to define the uglifycss command with an absolute path
 	// "uglifycss_command": "/usr/local/bin/uglifycss",
@@ -84,6 +84,10 @@
 
 	// if you need a source map in the destination directory (same as original source), enable this option
 	"source_map": false,
+
+	// change to true if you are using any transpiler such as Babel or Typescript that generate map files for original code
+	// map file must be present in the same directory
+	"js_map_content": false,
 
 	// #############################
 	// #  HTML Processing Options  #
