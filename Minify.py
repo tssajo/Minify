@@ -43,14 +43,20 @@ if not SUBL_ASYNC:
 	import threading
 
 	class RunCmdInOtherThread(MinifyUtils, threading.Thread):
-		def __init__(self, cmd):
+		def __init__(self, cmd, cwd = False):
 			self.cmd = cmd
 			self.retCode = 1
 			self.output = ''
+			self.cwd = cwd;
 			threading.Thread.__init__(self)
 
 		def run(self):
+			if not SUBL_ASYNC and self.cwd:
+					old_cwd = os.getcwd()
+					os.chdir(self.cwd)
 			self.retCode, self.output = self.runProgram(self.cmd)
+			if not SUBL_ASYNC and self.cwd:
+					os.chdir(old_cwd)
 
 class ThreadHandling(MinifyUtils):
 	def handle_result(self, cmd, outfile, retCode, output):
@@ -75,7 +81,7 @@ class ThreadHandling(MinifyUtils):
 			retCode, output = self.runProgram(cmd, cwd)
 			self.handle_result(cmd, outfile, retCode, output)
 		else:
-			thread = RunCmdInOtherThread(cmd)
+			thread = RunCmdInOtherThread(cmd, cwd)
 			thread.start()
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 
