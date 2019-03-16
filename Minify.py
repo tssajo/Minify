@@ -150,7 +150,7 @@ class MinifyClass(MinifyUtils):
 						cmd.extend(['--line-break', str(eo)])
 				else:
 					cmd = self.fixStr(self.get_setting('cleancss_command') or 'cleancss').split()
-					eo = self.get_setting('cleancss_options') or '-O 2 --skip-rebase'
+					eo = self.get_setting('cleancss_options') or '-O2 --skip-rebase'
 					if type(eo).__name__ in ('str', 'unicode'):
 						cmd.extend(self.fixStr(eo).split())
 					if self.get_setting('css_source_map'):

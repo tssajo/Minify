@@ -14,7 +14,7 @@
 	// #  Global Settings  #
 	// #####################
 
-	// Save file before doing any action (minify or beautify)?
+	// Save the file before doing any action (minify or beautify)?
 	"save_first": true,
 
 	// Auto-minify files on save?
@@ -44,7 +44,7 @@
 	// "cleancss_command": "/usr/local/bin/cleancss",
 
 	// you can specify command line parameters for cleancss
-	"cleancss_options": "-O 2 --skip-rebase",
+	"cleancss_options": "-O2 --skip-rebase",
 
 	// you may want to define the uglifycss command with an absolute path
 	// "uglifycss_command": "/usr/local/bin/uglifycss",
@@ -71,7 +71,7 @@
 	// you can specify command line parameters for uglifyjs (for .js minification)
 	// "uglifyjs_options": "",
 
-	// do you wamt to keep comments when minifying javascript files?
+	// do you want to keep comments when minifying javascript files?
 	"keep_comments": false,
 	// you can also specify which comments to keep
 	// if you set `keep_comments` to true and leave `comments_to_keep` false then uglifyjs will only keep JSDoc-style copyright comments
@@ -97,7 +97,7 @@
 	// "html-minifier_command": "/usr/local/bin/html-minifier",
 
 	// you can specify command line parameters for .html minification
-	"html-minifier_options": "--collapse-boolean-attributes --collapse-whitespace --html5 --minify-css --minify-js --preserve-line-breaks --process-conditional-comments --remove-comments --remove-empty-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes",
+	"html-minifier_options": "--collapse-boolean-attributes --collapse-whitespace --html5 --minify-css --minify-js --preserve-line-breaks --process-conditional-comments --remove-comments --remove-empty-attributes --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --quote-character '",
 
 	// you can specify command line parameters for .html beautification
 	// "js-beautify_html_options": "--indent-size=2",
