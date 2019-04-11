@@ -110,6 +110,45 @@ class MinifyClass(MinifyUtils):
 			if self.get_setting('debug_mode'):
 				print('Minify: Syntax: ' + str(syntax))
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
+
+				# Read file line and check for inline parameters
+				if self.get_setting('js_comment'):
+					minify_inline_found = False
+					minify_inline_allowed = False
+
+					with open(inpfile) as file:
+						first_line = file.readline().rstrip()
+						regex_search = re.search('// {([a-z:, ]+)}', first_line)
+
+						if regex_search is not None:
+							raw_kv_sets = regex_search.group(1)
+							kv_list = raw_kv_sets.split(',')
+
+							for raw_kv in kv_list:
+								raw_kv = raw_kv.strip()
+								kv_array = raw_kv.split(':')
+
+								key = kv_array[0]
+								value = kv_array[1]
+
+								if key == 'minify':
+									minify_inline_found = True
+
+									if value == 'true':
+										minify_inline_allowed = True
+
+						if regex_search is None:
+							print('Minify: no inline parameters found on this file.')
+							return
+
+						if minify_inline_found is False:
+							print('Minify: inline parameter \'minify\' not found, file ignored.')
+							return
+
+						if minify_inline_allowed is False:
+							print('Minify: inline parameter \'minify\' set to false, file ignored.')
+							return
+
 				cmd = self.fixStr(self.get_setting('uglifyjs_command') or 'uglifyjs').split()
 				cmd.extend([self.quoteChrs(inpfile), '-o', self.quoteChrs(outfile), '-m', '-c'])
 				eo = self.get_setting('uglifyjs_options')
