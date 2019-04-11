@@ -112,7 +112,7 @@ class MinifyClass(MinifyUtils):
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
 
 				# Read file line and check for inline parameters
-				if self.get_setting('js_comment'):
+				if self.get_setting('js_require_comment'):
 					minify_inline_found = False
 					minify_inline_allowed = False
 

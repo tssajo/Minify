@@ -87,7 +87,7 @@
 
   // change to true to require the comment below on the first line of JS file to minify the file:
   // {minify:true}
-  "js_comment": false,
+  "js_require_comment": false,
 
 	// change to true if you are using any transpiler such as Babel or Typescript that generate map files for original code
 	// map file must be present in the same directory
