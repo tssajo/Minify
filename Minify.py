@@ -116,7 +116,7 @@ class MinifyClass(MinifyUtils):
 					minify_inline_found = False
 					minify_inline_allowed = False
 
-					with open(inpfile) as file:
+					with open(inpfile, encoding='utf8') as file:
 						first_line = file.readline().rstrip()
 						regex_search = re.search('// {([a-z:, ]+)}', first_line)
 
