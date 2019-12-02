@@ -21,12 +21,15 @@ class MinifyUtils():
 	def quoteChrs(self, s):
 		return s.replace("(", "^^(").replace(")", "^^)") if USE_SHELL else s
 
-	def runProgram(self, cmd):
+	def runProgram(self, cmd, cwd = False):
 		if '>' in cmd:
 			p = subprocess.Popen(cmd, stderr=subprocess.PIPE, shell=USE_SHELL, env=POPEN_ENV)
 			output = p.communicate()[1]
 		else:
-			p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=USE_SHELL, env=POPEN_ENV)
+			if cwd:
+				p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=USE_SHELL, env=POPEN_ENV, cwd=cwd)
+			else:
+				p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=USE_SHELL, env=POPEN_ENV)
 			output = p.communicate()[0]
 		return p.returncode, output
 
@@ -40,14 +43,20 @@ if not SUBL_ASYNC:
 	import threading
 
 	class RunCmdInOtherThread(MinifyUtils, threading.Thread):
-		def __init__(self, cmd):
+		def __init__(self, cmd, cwd = False):
 			self.cmd = cmd
 			self.retCode = 1
 			self.output = ''
+			self.cwd = cwd;
 			threading.Thread.__init__(self)
 
 		def run(self):
+			if not SUBL_ASYNC and self.cwd:
+					old_cwd = os.getcwd()
+					os.chdir(self.cwd)
 			self.retCode, self.output = self.runProgram(self.cmd)
+			if not SUBL_ASYNC and self.cwd:
+					os.chdir(old_cwd)
 
 class ThreadHandling(MinifyUtils):
 	def handle_result(self, cmd, outfile, retCode, output):
@@ -64,15 +73,15 @@ class ThreadHandling(MinifyUtils):
 		else:
 			self.handle_result(thread.cmd, outfile, thread.retCode, thread.output)
 
-	def run_cmd(self, cmd, outfile):
+	def run_cmd(self, cmd, outfile, cwd=False):
 		if self.get_setting('debug_mode'):
 			print('Minify: Output file:' + str(outfile))
 			print('Minify: Command:' + str(cmd))
 		if SUBL_ASYNC:
-			retCode, output = self.runProgram(cmd)
+			retCode, output = self.runProgram(cmd, cwd)
 			self.handle_result(cmd, outfile, retCode, output)
 		else:
-			thread = RunCmdInOtherThread(cmd)
+			thread = RunCmdInOtherThread(cmd, cwd)
 			thread.start()
 			sublime.set_timeout(lambda: self.handle_thread(thread, outfile), 100)
 
@@ -90,6 +99,7 @@ class PluginBase(ThreadHandling):
 class MinifyClass(MinifyUtils):
 	def minify(self):
 		inpfile = self.view.file_name()
+		cwd = False
 		if type(inpfile).__name__ in ('str', 'unicode') and re.search(r'\.[^\.]+$', inpfile):
 			if self.view.is_dirty() and self.get_setting('save_first'):
 				self.view.run_command('save')
@@ -106,9 +116,12 @@ class MinifyClass(MinifyUtils):
 				if type(eo).__name__ in ('str', 'unicode'):
 					cmd.extend(self.fixStr(eo).split())
 				if self.get_setting('source_map'):
-					head, tail = ntpath.split(outfile)
-					mapfile = tail or ntpath.basename(head)
-					cmd.extend(['--source-map', self.quoteChrs(outfile) + '.map', '--source-map-url', self.quoteChrs(mapfile) + '.map', '--source-map-root', './', '-p', 'relative'])
+					directory, rfile = ntpath.split(outfile)
+					mapfile = rfile or ntpath.basename(directory)
+					content = ''
+					if self.get_setting('js_map_content'):
+						content = ',content="' + (self.quoteChrs(inpfile + '.map') if os.path.isfile(inpfile + '.map') else 'inline') + '"'
+					cmd.extend(['--source-map', "url='" + self.quoteChrs(mapfile) + ".map'" + content + ",root='',base='" + self.quoteChrs(directory) + "'"])
 				if self.get_setting('keep_comments'):
 					cmd.extend(['--comments'])
 					eo = self.get_setting('comments_to_keep')
@@ -137,11 +150,12 @@ class MinifyClass(MinifyUtils):
 						cmd.extend(['--line-break', str(eo)])
 				else:
 					cmd = self.fixStr(self.get_setting('cleancss_command') or 'cleancss').split()
-					eo = self.get_setting('cleancss_options') or '--s0 -s --skip-rebase'
+					eo = self.get_setting('cleancss_options') or '-O2 --skip-rebase'
 					if type(eo).__name__ in ('str', 'unicode'):
 						cmd.extend(self.fixStr(eo).split())
 					if self.get_setting('css_source_map'):
 						cmd.extend(['--source-map'])
+					cwd = os.path.dirname(outfile)
 					cmd.extend(['-o', self.quoteChrs(outfile), self.quoteChrs(inpfile)])
 			elif re.search(r'\.html?$', inpfile) or re.search(r'/HTML\.tmLanguage$', syntax):
 				cmd = self.fixStr(self.get_setting('html-minifier_command') or 'html-minifier').split()
@@ -159,7 +173,7 @@ class MinifyClass(MinifyUtils):
 				cmd = False
 			if cmd:
 				print('Minify: Minifying file:' + str(inpfile))
-				self.run_cmd(cmd, outfile)
+				self.run_cmd(cmd, outfile, cwd)
 
 class BeautifyClass(MinifyUtils):
 	def beautify(self):

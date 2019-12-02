@@ -1,0 +1,21 @@
+Version 1.2.8
+-------------
+
+* Bug fix by : Ashutosh Sharma aka ashucg. See: https://github.com/tssajo/Minify/pull/71
+    It fixes the following issues:
+    https://github.com/tssajo/Minify/issues/56
+    https://github.com/tssajo/Minify/issues/59
+    (Thank you, ashucg!)
+
+
+# IMPORTANT! #
+
+## It is highly recommended to upgrade to the latest version of clean-css-cli !!
+
+Please open a shell (`Terminal` on Mac OS X, `CMD window` on Windows) and issue the following command:
+
+    npm install -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo
+
+followed by:
+
+    npm update -g clean-css-cli uglifycss js-beautify html-minifier uglify-js minjson svgo
