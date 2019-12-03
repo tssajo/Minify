@@ -174,7 +174,7 @@ class MinifyClass(MinifyUtils):
 			if re.search(r'\.js$', inpfile) or re.search(r'/JavaScript\.tmLanguage$', syntax):
 				cmd = self.fixStr(config.get('uglifyjs_command') or 'uglifyjs').split()
 				o_directory, rfile = ntpath.split(outfile)
-				if self.get('js_dist_directory'):
+				if config.get('js_dist_directory'):
 					o_directory = os.path.dirname(o_directory) + '/dist'
 					if not os.path.isdir(o_directory):
 						os.mkdir(o_directory)
